@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import './css/App.css'
-import Sidebar from './components/sidebar'
-import TourList from './components/tour-list'
+import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import './css/App.css';
+import Sidebar from './components/sidebar';
+import TourList from './components/tour-list';
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <MuiThemeProvider>
         <div className="App">
@@ -13,8 +13,8 @@ class App extends Component {
           <TourList />
         </div>
       </MuiThemeProvider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

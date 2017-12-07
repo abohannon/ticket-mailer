@@ -6,7 +6,6 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
 } from 'material-ui/Table';
 import TourListItem from './tour-list-item';
 
@@ -26,7 +25,7 @@ class TourList extends Component {
           <TableRow>
             <TableHeaderColumn>Artist</TableHeaderColumn>
             <TableHeaderColumn>Tour</TableHeaderColumn>
-            <TableHeaderColumn>Status</TableHeaderColumn>
+            <TableHeaderColumn>Sent</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody>
