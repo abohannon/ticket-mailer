@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 
 const SidebarStyles = () => ({
@@ -14,6 +15,9 @@ const SidebarStyles = () => ({
   },
   listStyleTop: {
     width: 180,
+  },
+  listItemStyle: {
+    color: '#ADBEE0',
   },
 });
 
@@ -30,20 +34,21 @@ class Sidebar extends Component {
     const {
       sidebar,
       listStyleTop,
+      listItemStyle,
     } = SidebarStyles();
 
     return (
       <div className="sidebar" style={sidebar}>
         <List style={listStyleTop}>
-          <ListItem primaryText="Hello, Carynn." style={{ color: '#ADBEE0' }} />
-          <ListItem primaryText="Home" style={{ color: '#ADBEE0' }} />
-          <ListItem primaryText="Tours" style={{ color: '#ADBEE0' }} />
-          <ListItem primaryText="Shows" style={{ color: '#ADBEE0' }} />
-          <ListItem primaryText="Orders" style={{ color: '#ADBEE0' }} />
+          <ListItem primaryText="Hello, Carynn." style={listItemStyle} />
+          <ListItem primaryText="Home" style={listItemStyle} />
+          <ListItem primaryText="Tours" style={listItemStyle} />
+          <ListItem primaryText="Shows" style={listItemStyle} />
+          <ListItem primaryText="Orders" style={listItemStyle} />
         </List>
         <List>
-          <ListItem primaryText="Settings" style={{ color: '#ADBEE0' }} rightIcon={<SettingsIcon color={'#ADBEE0'} />} />
-          <ListItem primaryText="Log out" style={{ color: '#ADBEE0' }} />
+          <ListItem primaryText="Settings" style={listItemStyle} rightIcon={<SettingsIcon color={'#ADBEE0'} />} />
+          <ListItem primaryText="Log out" style={listItemStyle} />
         </List>
       </div>
     );
