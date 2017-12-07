@@ -13,16 +13,17 @@ class App extends Component {
     };
   }
   render() {
-    // fetch('http://localhost:3050/api/collections')
-    //   .then((response) => {
-    //     if (response.status !== 200) {
-    //       console.log('There was a problem with the response.', response.status);
-    //     } else {
-    //       return response.json();
-    //     }
-    //   }).then((data) => {
-    //     console.log(data);
-    //   }).catch(err => console.log(err));
+    // TODO: Work on this fetch
+    fetch('http://localhost:3050/api/collections')
+      .then((response) => {
+        if (response.status !== 200) {
+          console.log('There was a problem with the response.', response.status);
+        } else {
+          return response.json();
+        }
+      }).then((data) => {
+        console.log(data);
+      }).catch(err => console.log(err));
     return (
       <MuiThemeProvider>
         <div className="App">
