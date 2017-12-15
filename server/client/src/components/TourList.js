@@ -7,7 +7,7 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
-import TourListItem from './tour-list-item';
+import TourListItem from './TourListItem';
 
 const TourListStyles = () => ({
   header: {

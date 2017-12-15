@@ -1,4 +1,11 @@
-const shopify = require('../config/config');
+const Shopify = require('shopify-api-node');
+const keys = require('./config/keys');
+
+const shopify = new Shopify({
+  shopName: keys.shopName,
+  apiKey: keys.apiKey,
+  password: keys.password,
+});
 
 module.exports = {
   greeting(req, res) {
