@@ -3,10 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../css/App.css';
-import Sidebar from './Sidebar';
-import TourList from './TourList';
 import * as actions from '../actions';
+import '../css/App.css';
+import Dashboard from './Dashboard';
+import Login from './Login';
 
 class App extends Component {
   static propTypes = {
@@ -21,8 +21,12 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <Sidebar />
-          <TourList />
+          <BrowserRouter>
+            <div>
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/login" component={Login} />
+            </div>
+          </BrowserRouter>
         </div>
       </MuiThemeProvider>
     );

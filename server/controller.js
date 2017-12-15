@@ -8,10 +8,6 @@ const shopify = new Shopify({
 })
 
 module.exports = {
-  greeting (req, res) {
-    res.send({ hello: 'world' })
-  },
-
   getCollections (req, res) {
     shopify.collectionListing.list()
       .then(collectionData => res.send(collectionData))

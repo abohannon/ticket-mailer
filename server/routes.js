@@ -1,6 +1,5 @@
-const Controller = require('./controller');
+const Controller = require('./controller')
 
 module.exports = (app) => {
-  app.get('/', Controller.greeting);
-  app.get('/api/collections', Controller.getCollections);
-};
+  app.get('/api/collections', Controller.getCollections)
+}
