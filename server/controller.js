@@ -1,4 +1,4 @@
-const shopify = require('../config');
+const shopify = require('../config/config');
 
 module.exports = {
   greeting(req, res) {

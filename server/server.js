@@ -7,6 +7,7 @@ const routes = require('./routes');
 
 app.use(bodyParser.json());
 app.use(cors());
+// TODO: Change cors call for production. Add options and whitelist single domain.
 routes(app);
 
 app.listen(3050, () => {

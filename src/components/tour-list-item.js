@@ -7,7 +7,8 @@ import {
 const TourListItem = () => (
   <TableRow hoverable>
     <TableRowColumn>Anthony Green</TableRowColumn>
-    <TableRowColumn><a href="#">Sex Music Tour</a></TableRowColumn>
+    <TableRowColumn>Sex Music Tour</TableRowColumn>
+    <TableRowColumn><a href="#">Upgrade</a> | <a href="#">Ticket</a></TableRowColumn>
     <TableRowColumn>0/100</TableRowColumn>
   </TableRow>
 );
