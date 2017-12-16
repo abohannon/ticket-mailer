@@ -3,31 +3,29 @@ import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
 
 const SidebarStyles = () => ({
   sidebar: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: '#2b2d37',
-    color: '#ADBEE0',
+    backgroundColor: DARK_BLUE,
+    color: LIGHT_BLUE,
     height: '100vh',
   },
   listStyleTop: {
     width: 180,
   },
   listItemStyle: {
-    color: '#ADBEE0',
+    color: LIGHT_BLUE,
   },
 });
 
-class Sidebar extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      state: null,
-    };
+class Sidebar extends Component {
+  componentDidMount() {
+    console.log('Sidebar mounted!');
   }
 
   render() {
@@ -47,7 +45,7 @@ class Sidebar extends Component {
           <ListItem primaryText="Orders" style={listItemStyle} />
         </List>
         <List>
-          <ListItem primaryText="Settings" style={listItemStyle} rightIcon={<SettingsIcon color={'#ADBEE0'} />} />
+          <ListItem primaryText="Settings" style={listItemStyle} rightIcon={<SettingsIcon color={LIGHT_BLUE} />} />
           <ListItem primaryText="Log out" style={listItemStyle} />
         </List>
       </div>

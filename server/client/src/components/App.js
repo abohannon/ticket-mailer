@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as actions from '../actions';
-import '../css/App.css';
+import '../style/App.css';
 import Dashboard from './Dashboard';
 import Login from './Login';
 
