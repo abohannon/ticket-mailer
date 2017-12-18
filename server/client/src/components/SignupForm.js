@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { ACCENT_BLUE, WHITE, LIGHT_BLUE } from '../style/constants';
 
-const LoginFormStyles = () => ({
+const SignupFormStyles = () => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -23,7 +23,6 @@ const LoginFormStyles = () => ({
   },
   buttonStyle: {
     marginTop: 48,
-    width: '100%',
   },
   topText: {
     textAlign: 'center',
@@ -33,17 +32,18 @@ const LoginFormStyles = () => ({
   },
 });
 
-class LoginForm extends Component {
+class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: '',
       email: '',
       password: '',
     };
   }
 
   componentDidMount() {
-    console.log('LoginForm mounted!');
+    console.log('SignupForm mounted!');
   }
 
   handleInputChange = (event) => {
@@ -55,11 +55,12 @@ class LoginForm extends Component {
   }
 
   handleSubmit = () => {
-    console.log('Data submitted!', this.state.email, this.state.password);
     this.setState({
+      firstName: '',
       email: '',
       password: '',
     });
+    console.log('Signup submitted!', this.state);
   }
 
   render() {
@@ -72,11 +73,21 @@ class LoginForm extends Component {
       buttonStyle,
       topText,
       bottomText,
-    } = LoginFormStyles();
+    } = SignupFormStyles();
 
     return (
       <div style={container}>
-        <p style={topText}>Please login</p>
+        <p style={topText}>Please sign up</p>
+        <TextField
+          name="firstName"
+          style={fieldStyle}
+          hintText="First Name"
+          hintStyle={hintStyle}
+          inputStyle={inputStyle}
+          underlineFocusStyle={underlineStyle}
+          value={this.state.firstName}
+          onChange={event => this.handleInputChange(event)}
+        />
         <TextField
           name="email"
           style={fieldStyle}
@@ -100,16 +111,16 @@ class LoginForm extends Component {
         />
         <RaisedButton
           style={buttonStyle}
-          label="Login"
+          label="Sign Up"
           backgroundColor={ACCENT_BLUE}
           labelColor={WHITE}
           onClick={this.handleSubmit}
         />
-        <a href="#" style={bottomText}><p><small>forgot?</small></p></a>
+        <a href="/login" style={bottomText}><p><small>Have an account already? Click here to login.</small></p></a>
 
       </div>
     );
   }
 }
 
-export default Radium(LoginForm);
+export default Radium(SignupForm);

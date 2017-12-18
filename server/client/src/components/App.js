@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as actions from '../actions';
 import '../style/App.css';
 import Dashboard from './Dashboard';
-import Login from './Login';
+import UserAuth from './UserAuth';
 
 class App extends Component {
   static propTypes = {
@@ -18,13 +18,15 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <MuiThemeProvider>
         <div className="App">
           <BrowserRouter>
             <div>
               <Route exact path="/" component={Dashboard} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" component={UserAuth} />
+              <Route exact path="/signup" component={UserAuth} />
             </div>
           </BrowserRouter>
         </div>
@@ -32,5 +34,6 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = state => ({ shopifyFetch: state.shopifyFetch });
 
-export default connect(null, actions)(App);
+export default connect(mapStateToProps, actions)(App);
