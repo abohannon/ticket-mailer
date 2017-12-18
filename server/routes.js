@@ -1,5 +1,7 @@
 const Controller = require('./controller')
 
 module.exports = (app) => {
-  app.get('/api/collections', Controller.getCollections)
+  // TODO: Is collections necessary?
+  // app.get('/api/collections', Controller.getCollections)
+  app.get('/api/products', Controller.getProducts)
 }
