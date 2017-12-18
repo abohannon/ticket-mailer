@@ -8,12 +8,24 @@ const shopify = new Shopify({
 })
 
 module.exports = {
-  getCollections (req, res) {
-    shopify.collectionListing.list()
-      .then(collectionData => res.send(collectionData))
+  // getCollections (req, res) {
+  //   shopify.collectionListing.list()
+  //     .then(collectionData => res.send(collectionData))
+  //     .catch((err) => {
+  //       console.log(err)
+  //       res.send('404 Not Found')
+  //     })
+  // },
+
+  getProducts (req, res) {
+    shopify.productListing.list()
+      .then((productData) => {
+        res.send(productData)
+      }).then(() => {
+        shopify.on('callLimits', limits => console.log('limits', limits))
+      })
       .catch((err) => {
-        console.log(err)
-        res.send('404 Not Found')
+        console.log('Error with product fetch', err)
       })
   }
 }
