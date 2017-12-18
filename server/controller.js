@@ -1,5 +1,7 @@
 const Shopify = require('shopify-api-node')
+const mongoose = require('mongoose')
 const keys = require('./config/keys')
+const User = mongoose.model('users')
 
 const shopify = new Shopify({
   shopName: keys.shopName,
@@ -26,6 +28,18 @@ module.exports = {
       })
       .catch((err) => {
         console.log('Error with product fetch', err)
+      })
+  },
+
+  createUser (req, res) {
+    const newUser = new User({
+      name: 'Adam',
+      email: 'abo46n2@gmail.com',
+      password: 123
+    })
+    newUser.save()
+      .then(() => {
+        res.redirect('/login')
       })
   }
 }

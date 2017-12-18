@@ -1,6 +1,11 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const keys = require('./config/keys')
+require('./models/User.js')
+mongoose.Promise = global.Promise
+mongoose.connect(keys.mongoURI)
 
 const app = express()
 const routes = require('./routes')

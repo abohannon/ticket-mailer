@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { FETCH_COLLECTIONS } from './types';
+import { FETCH_PRODUCTS } from './types';
 
-export const fetchCollections = () => async (dispatch) => {
-  const res = await axios.get('/api/collections');
-  dispatch({ type: FETCH_COLLECTIONS, payload: res.data });
-  console.log('collections data', res.data);
+export const fetchProducts = () => async (dispatch) => {
+  const res = await axios.get('/api/products');
+  dispatch({ type: FETCH_PRODUCTS, payload: res.data });
+  console.log('products data', res.data);
 };
 
 export const fetchOrders = () => {};
