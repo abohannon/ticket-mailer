@@ -10,11 +10,11 @@ import Login from './Login';
 
 class App extends Component {
   static propTypes = {
-    fetchCollections: PropTypes.func.isRequired,
+    fetchProducts: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    this.props.fetchCollections();
+    this.props.fetchProducts();
   }
 
   render() {

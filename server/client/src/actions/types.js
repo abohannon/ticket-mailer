@@ -1,1 +1,1 @@
-export const FETCH_COLLECTIONS = 'fetch_collections';
+export const FETCH_PRODUCTS = 'fetch_products';

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Radium from 'radium';
 import {
   Table,
@@ -23,6 +24,11 @@ class TourList extends Component {
       state: null,
     };
   }
+
+  componentDidMount() {
+    console.log('TourList mounted!');
+  }
+
   render() {
     const { header } = TourListStyles();
     return (
