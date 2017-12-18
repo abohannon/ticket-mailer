@@ -32,7 +32,6 @@ const LoginFormStyles = () => ({
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: '',
       password: '',
@@ -41,6 +40,22 @@ class LoginForm extends Component {
 
   componentDidMount() {
     console.log('LoginForm mounted!');
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit = () => {
+    console.log('Data submitted!', this.state.email, this.state.password);
+    this.setState({
+      email: '',
+      password: '',
+    });
   }
 
   render() {
@@ -57,27 +72,32 @@ class LoginForm extends Component {
     return (
       <div style={container}>
         <TextField
+          name="email"
           style={fieldStyle}
           hintText="Email"
           hintStyle={hintStyle}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
-          onChange={event => console.log(event)}
+          value={this.state.email}
+          onChange={event => this.handleInputChange(event)}
         />
         <TextField
+          name="password"
           style={fieldStyle}
           type="password"
           hintText="Password"
           hintStyle={hintStyle}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
-          onChange={event => console.log(event)}
+          value={this.state.password}
+          onChange={event => this.handleInputChange(event)}
         />
         <RaisedButton
           style={buttonStyle}
           label="Login"
           backgroundColor={ACCENT_BLUE}
           labelColor={WHITE}
+          onClick={this.handleSubmit}
         />
         <a href="#" style={bottomText}><p><small>forgot?</small></p></a>
 
