@@ -32,14 +32,10 @@ module.exports = {
   },
 
   createUser (req, res) {
-    const newUser = new User({
-      name: 'Adam',
-      email: 'abo46n2@gmail.com',
-      password: 123
+    User.create(req.body, (error, user) => {
+      if (error) console.log(error)
+
+      return res.redirect('/login')
     })
-    newUser.save()
-      .then(() => {
-        res.redirect('/login')
-      })
   }
 }

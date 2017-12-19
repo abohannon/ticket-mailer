@@ -34,6 +34,6 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => ({ shopifyFetch: state.shopifyFetch });
+const mapStateToProps = state => ({ shopifyProducts: state.shopifyFetch });
 
 export default connect(mapStateToProps, actions)(App);

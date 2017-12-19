@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as actions from '../actions';
 import { ACCENT_BLUE, WHITE, LIGHT_BLUE } from '../style/constants';
 
 const SignupFormStyles = () => ({
@@ -33,6 +36,10 @@ const SignupFormStyles = () => ({
 });
 
 class SignupForm extends Component {
+  static propTypes = {
+    createUser: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,11 +62,14 @@ class SignupForm extends Component {
   }
 
   handleSubmit = () => {
+    this.props.createUser(this.state);
+
     this.setState({
       firstName: '',
       email: '',
       password: '',
     });
+
     console.log('Signup submitted!', this.state);
   }
 
@@ -123,4 +133,4 @@ class SignupForm extends Component {
   }
 }
 
-export default Radium(SignupForm);
+export default Radium(connect(null, actions)(SignupForm));

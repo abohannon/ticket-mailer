@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 import MailIcon from 'material-ui/svg-icons/communication/mail-outline';
 import { LIGHT_BLUE } from '../style/constants';
 import LoginForm from './LoginForm';
@@ -20,6 +21,10 @@ const UserAuthStyles = () => ({
 
 
 class UserAuth extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+  }
+
   componentDidMount() {
     console.log('UserAuth mounted!');
   }
@@ -36,7 +41,6 @@ class UserAuth extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {
       container,
     } = UserAuthStyles();
