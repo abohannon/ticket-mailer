@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as actions from '../actions';
 import { ACCENT_BLUE, WHITE, LIGHT_BLUE } from '../style/constants';
 
 const LoginFormStyles = () => ({
@@ -55,7 +57,8 @@ class LoginForm extends Component {
   }
 
   handleSubmit = () => {
-    console.log('Data submitted!', this.state.email, this.state.password);
+    this.props.loginUser(this.state);
+
     this.setState({
       email: '',
       password: '',
@@ -112,4 +115,4 @@ class LoginForm extends Component {
   }
 }
 
-export default Radium(LoginForm);
+export default Radium(connect(null, actions)(LoginForm));

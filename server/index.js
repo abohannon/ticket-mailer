@@ -1,20 +1,32 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const cookieSession = require('cookie-session')
+const session = require('express-session')
 const passport = require('passport')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const keys = require('./config/keys')
 require('./models/User.js')
+require('./services/passport')
 mongoose.Promise = global.Promise
 mongoose.connect(keys.mongoURI)
 
 const app = express()
 const routes = require('./routes')
 
+// Middleware
 app.use(bodyParser.json())
 app.use(cors())
+app.set('trust proxy', true)
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  cookie: { secure: true }
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 // TODO: Change cors call for production. Add options and whitelist single domain.
+
 routes(app)
 
 if (process.env.NODE_ENV === 'production') {

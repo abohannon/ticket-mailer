@@ -69,8 +69,6 @@ class SignupForm extends Component {
       email: '',
       password: '',
     });
-
-    console.log('Signup submitted!', this.state);
   }
 
   render() {
