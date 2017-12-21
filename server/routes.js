@@ -1,5 +1,5 @@
 const Controller = require('./controller')
-const userAuth = require('./services/userAuth')
+const checkAuth = require('./services/userAuth')
 
 module.exports = (app) => {
   // TODO: Is collections necessary?
@@ -9,5 +9,5 @@ module.exports = (app) => {
   app.post('/api/login', Controller.loginUser)
   app.get('/api/logout', Controller.logoutUser)
   app.get('/api/current_user', Controller.currentUser)
-  app.get('/', userAuth, Controller.serveHome)
+  app.get('/api/home', checkAuth, Controller.serveHome) // this works
 }

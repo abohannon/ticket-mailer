@@ -1,12 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const session = require('express-session')
-const passport = require('passport')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const keys = require('./config/keys')
 require('./models/User.js')
-require('./services/passport')
+
 mongoose.Promise = global.Promise
 mongoose.connect(keys.mongoURI)
 
@@ -23,8 +22,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days in milliseconds
 }))
-// app.use(passport.initialize())
-// app.use(passport.session())
+
 // TODO: Change cors call for production. Add options and whitelist single domain.
 
 routes(app)

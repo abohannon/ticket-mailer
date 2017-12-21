@@ -1,7 +1,6 @@
 const Shopify = require('shopify-api-node')
 const mongoose = require('mongoose')
 const User = mongoose.model('users')
-const path = require('path')
 const keys = require('./config/keys')
 
 const shopify = new Shopify({
@@ -77,7 +76,7 @@ module.exports = {
 
   serveHome (req, res, next) {
     console.log(res)
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    return res.send('hello')
   }
 
 }

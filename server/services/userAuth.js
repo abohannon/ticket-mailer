@@ -1,5 +1,9 @@
-const userAuth = (req, res, next) => {
-  if (req.session.userId) { return next() } else { return res.sendStatus(401) }
+const checkAuth = (req, res, next) => {
+  if (!req.session.userId) {
+    res.send('Unauthorized. Please log in.')
+  } else {
+    next()
+  }
 }
 
-module.exports = userAuth
+module.exports = checkAuth
