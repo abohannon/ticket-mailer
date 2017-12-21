@@ -28,15 +28,20 @@ userSchema.statics.authenticate = function (email, password, callback) {
       }
       bcrypt.compare(password, user.password, (err, result) => {
         if (err) return callback(err)
-        if (result === true) return callback(null, user)
-        return callback()
+        if (result === true) {
+          return callback(null, user)
+        } else {
+          return callback()
+        }
       })
     })
 }
 
+const saltRounds = 10
+
 userSchema.pre('save', function (next) {
   const user = this
-  bcrypt.hash(user.password, 10, function (err, hash) {
+  bcrypt.hash(user.password, saltRounds, function (err, hash) {
     if (err) return next(err)
     user.password = hash
     next()

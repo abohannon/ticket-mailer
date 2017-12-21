@@ -18,13 +18,13 @@ app.use(bodyParser.json())
 app.use(cors())
 app.set('trust proxy', true)
 app.use(session({
-  secret: 'work hard',
+  secret: keys.sessionSecret,
   resave: true,
   saveUninitialized: false,
-  cookie: { secure: true }
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days in milliseconds
 }))
-app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.initialize())
+// app.use(passport.session())
 // TODO: Change cors call for production. Add options and whitelist single domain.
 
 routes(app)

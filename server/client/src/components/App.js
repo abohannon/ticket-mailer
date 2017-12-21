@@ -9,11 +9,13 @@ import Routes from '../routes/Routes';
 
 class App extends Component {
   static propTypes = {
+    fetchUser: PropTypes.func.isRequired,
     fetchProducts: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     console.log('==== App mounted!');
+    this.props.fetchUser();
     this.props.fetchProducts();
   }
 
@@ -27,6 +29,6 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => ({ shopifyProducts: state.shopifyFetch });
+const mapStateToProps = state => ({ shopifyProducts: state.shopifyFetch }); // TODO: Need this?
 
 export default connect(mapStateToProps, actions)(App);

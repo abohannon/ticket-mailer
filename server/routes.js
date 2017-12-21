@@ -1,15 +1,13 @@
-const passport = require('passport')
 const Controller = require('./controller')
+const userAuth = require('./services/userAuth')
 
 module.exports = (app) => {
   // TODO: Is collections necessary?
   // app.get('/api/collections', Controller.getCollections)
   app.get('/api/products', Controller.getProducts)
   app.post('/api/create_user', Controller.createUser)
-  // app.post('/api/login', passport.authenticate('local', {
-  //   successRedirect: '/',
-  //   failureRedirect: '/signup'
-  // }), Controller.loginUser)
   app.post('/api/login', Controller.loginUser)
   app.get('/api/logout', Controller.logoutUser)
+  app.get('/api/current_user', Controller.currentUser)
+  app.get('/', userAuth, Controller.serveHome)
 }

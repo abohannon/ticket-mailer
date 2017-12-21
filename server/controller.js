@@ -1,7 +1,8 @@
 const Shopify = require('shopify-api-node')
 const mongoose = require('mongoose')
-const keys = require('./config/keys')
 const User = mongoose.model('users')
+const path = require('path')
+const keys = require('./config/keys')
 
 const shopify = new Shopify({
   shopName: keys.shopName,
@@ -51,7 +52,7 @@ module.exports = {
           return next(err)
         } else {
           req.session.userId = user._id
-          console.log('loginUser', user)
+          console.log(req.session)
           return res.send(req.session.userId)
         }
       })
@@ -62,18 +63,21 @@ module.exports = {
     if (req.session) {
       // delete session object
       req.session.destroy((err) => {
-        if (err) return next(err)
+        if (err) {
+          return next(err)
+        }
         return res.send(req.session)
       })
     }
+  },
+
+  currentUser (req, res, next) {
+    res.send(req.session.userId)
+  },
+
+  serveHome (req, res, next) {
+    console.log(res)
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   }
-  // loginUser (req, res) {
-  //   const email = req.body.email
-  //   User.findOne({ email })
-  //     .then((user) => {
-  //       if (!user) console.log('Error, no user found')
-  //       res.send(user)
-  //     }).catch(err => console.log(err))
-  // }
 
 }
