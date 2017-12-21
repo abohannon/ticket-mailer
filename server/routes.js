@@ -1,5 +1,5 @@
 const Controller = require('./controller')
-const checkAuth = require('./services/userAuth')
+const checkAuth = require('./services/checkAuth')
 
 module.exports = (app) => {
   // TODO: Is collections necessary?
