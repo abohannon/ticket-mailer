@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -36,6 +37,10 @@ const LoginFormStyles = () => ({
 });
 
 class LoginForm extends Component {
+  static propTypes = {
+    loginUser: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -45,7 +50,7 @@ class LoginForm extends Component {
   }
 
   componentDidMount() {
-    console.log('LoginForm mounted!');
+    console.log('==== LoginForm mounted!');
   }
 
   handleInputChange = (event) => {

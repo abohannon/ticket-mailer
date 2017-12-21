@@ -4,7 +4,7 @@ import TourList from './TourList';
 
 class Dashboard extends Component {
   componentDidMount() {
-    console.log('Dashboard mounted!');
+    console.log('==== Dashboard mounted!');
   }
 
   render() {

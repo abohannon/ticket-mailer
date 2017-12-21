@@ -3,28 +3,22 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import UserAuth from '../components/UserAuth';
 import PrivateRoute from '../components/PrivateRoute';
+import isLoggedIn from '../helpers/is_logged_in';
 
 class Routes extends Component {
   componentDidMount() {
-    console.log('Routes mounted!');
+    console.log('==== Routes mounted!');
   }
 
-  isAuthed = () => {
-    if (window.sessionStorage.userId) {
-      return true;
-    }
-    return false;
-  }
+  // TODO: NEED TO FIX authed PROPS
 
   render() {
-    console.log(this.isAuthed());
     return (
       <BrowserRouter>
         <div>
-          {/* <Route exact path="/" component={Dashboard} /> */}
           <Route exact path="/login" component={UserAuth} />
           <Route exact path="/signup" component={UserAuth} />
-          <PrivateRoute exact path="/" component={Dashboard} authed={this.isAuthed()} />
+          <PrivateRoute exact path="/" component={Dashboard} authed={isLoggedIn()} />
         </div>
       </BrowserRouter>
     );

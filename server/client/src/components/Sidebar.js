@@ -28,6 +28,11 @@ class Sidebar extends Component {
     console.log('Sidebar mounted!');
   }
 
+  handleLogout = (history) => {
+    window.sessionStorage.clear();
+    history.push('/login');
+  }
+
   render() {
     const {
       sidebar,
@@ -46,7 +51,7 @@ class Sidebar extends Component {
         </List>
         <List>
           <ListItem primaryText="Settings" style={listItemStyle} rightIcon={<SettingsIcon color={LIGHT_BLUE} />} />
-          <ListItem primaryText="Log out" style={listItemStyle} />
+          <ListItem primaryText="Log out" style={listItemStyle} onClick={this.handleLogout} />
         </List>
       </div>
     );

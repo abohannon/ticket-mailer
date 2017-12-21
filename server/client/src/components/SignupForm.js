@@ -50,7 +50,7 @@ class SignupForm extends Component {
   }
 
   componentDidMount() {
-    console.log('SignupForm mounted!');
+    console.log('==== SignupForm mounted!');
   }
 
   handleInputChange = (event) => {

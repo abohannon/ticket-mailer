@@ -26,7 +26,7 @@ class UserAuth extends Component {
   }
 
   componentDidMount() {
-    console.log('UserAuth mounted!');
+    console.log('==== UserAuth mounted!');
   }
 
   renderContent() {

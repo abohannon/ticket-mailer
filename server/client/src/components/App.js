@@ -13,11 +13,11 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log('==== App mounted!');
     this.props.fetchProducts();
   }
 
   render() {
-    console.log(this.props);
     return (
       <MuiThemeProvider>
         <div className="App">
