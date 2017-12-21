@@ -1,6 +1,6 @@
 const checkAuth = (req, res, next) => {
   if (!req.session.userId) {
-    req.send('Unauthorized. Please log in.')
+    res.send('Unauthorized. Please log in.')
   } else {
     next()
   }
