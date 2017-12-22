@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
@@ -51,6 +52,12 @@ class LoginForm extends Component {
 
   componentDidMount() {
     console.log('==== LoginForm mounted!');
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.currentUser.success === true) {
+      this.props.history.push('/');
+    }
   }
 
   handleInputChange = (event) => {
@@ -120,4 +127,6 @@ class LoginForm extends Component {
   }
 }
 
-export default Radium(connect(null, actions)(LoginForm));
+const mapStateToProps = state => ({ currentUser: state.userAuth });
+
+export default Radium(connect(mapStateToProps, actions)(withRouter(LoginForm)));
