@@ -8,15 +8,12 @@ import '../style/App.css';
 import Routes from '../routes/Routes';
 
 class App extends Component {
-  static propTypes = {
-    fetchUser: PropTypes.func.isRequired,
-    fetchProducts: PropTypes.func.isRequired,
+  componentWillMount() {
+    this.props.fetchUser();
   }
 
   componentDidMount() {
     console.log('==== App mounted!');
-    this.props.fetchUser();
-    this.props.fetchProducts();
   }
 
   render() {

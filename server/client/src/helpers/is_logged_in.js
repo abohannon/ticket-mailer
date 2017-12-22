@@ -1,11 +1,9 @@
 
-export const isLoggedIn = (userAuthReducerPayload) => {
-  console.log('window session', window.sessionStorage.userId);
-  console.log('reducer payload', userAuthReducerPayload);
-  if (window.sessionStorage.userId === userAuthReducerPayload) {
-    return true;
+export const isLoggedIn = (payload) => {
+  if (payload === null) {
+    return false;
   }
-  return false;
+  return true;
 };
 
 // TODO: NEED TO FIX. NO LONGER USING WINDOW SESSION, USING LOCAL STORAGE

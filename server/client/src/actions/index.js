@@ -34,7 +34,7 @@ export const loginUser = userData => (dispatch) => {
       const currentUser = {
         id: res.data,
         timestamp: new Date().getTime(),
-      }; // TODO: IS THIS HOW WE WANT TO STORE USER SESSION?
+      };
       localStorage.setItem('user', JSON.stringify(currentUser));
       dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data });
     }).catch((err) => {
@@ -44,6 +44,7 @@ export const loginUser = userData => (dispatch) => {
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/current_user');
+  console.log('current user', res);
 
   dispatch({ type: FETCH_USER, payload: res.data });
 };
