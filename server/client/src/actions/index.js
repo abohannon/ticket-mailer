@@ -25,26 +25,18 @@ export const createUser = userData => async (dispatch) => {
   }
 };
 
-export const loginUser = userData => (dispatch) => {
-  console.log('before axios', userData);
-  axios.post('/api/login', userData)
-    .then((res) => {
-      if (res.status !== 200) console.log('Error with login', res.status);
-      // set user in local storage with timestamp
-      const currentUser = {
-        id: res.data,
-        timestamp: new Date().getTime(),
-      };
-      localStorage.setItem('user', JSON.stringify(currentUser));
-      dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data });
-    }).catch((err) => {
-      if (err) console.log('Error with login action', err);
-    });
+export const loginUser = userData => async (dispatch) => {
+  try {
+    const res = await axios.post('/api/login', userData);
+    dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data });
+    console.log(res);
+  } catch (error) {
+    console.log('Error logging in user', error);
+  }
 };
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/current_user');
-  console.log('current user', res);
 
   dispatch({ type: FETCH_USER, payload: res.data });
 };

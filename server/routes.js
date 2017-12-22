@@ -1,5 +1,5 @@
+const passport = require('passport')
 const Controller = require('./controller')
-const checkAuth = require('./services/checkAuth')
 
 module.exports = (app) => {
   // TODO: Is collections necessary?
@@ -9,5 +9,4 @@ module.exports = (app) => {
   app.post('/api/login', Controller.loginUser)
   app.get('/api/logout', Controller.logoutUser)
   app.get('/api/current_user', Controller.currentUser)
-  app.get('/api/home', checkAuth, Controller.serveHome) // this works
 }

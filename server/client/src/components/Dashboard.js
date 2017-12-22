@@ -25,4 +25,5 @@ class Dashboard extends Component {
   }
 }
 
+
 export default connect(null, actions)(Dashboard);

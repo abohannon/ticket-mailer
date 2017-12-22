@@ -12,14 +12,13 @@ class Routes extends Component {
   }
 
   render() {
-    const currentUser = this.props.currentUser;
-    console.log(currentUser);
+    console.log('Routes props', this.props.currentUser);
     return (
       <BrowserRouter>
         <div>
-          <PrivateRoute exact path="/" component={Dashboard} authed={currentUser} />
           <Route exact path="/login" component={UserAuth} />
           <Route exact path="/signup" component={UserAuth} />
+          <PrivateRoute exact path="/" component={Dashboard} authed={this.props.currentUser} />
         </div>
       </BrowserRouter>
     );
