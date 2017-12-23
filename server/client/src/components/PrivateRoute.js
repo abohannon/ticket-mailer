@@ -4,12 +4,21 @@ import { Route, Redirect, withRouter } from 'react-router-dom';
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
-    render={props => (
-      authed
+    render={(props) => {
+      console.log('Private Route Props', props, authed);
+
+      return authed
         ? <Component {...props} />
-        : <Redirect to="/login" />
-    )}
+        : <Redirect to="/login" />;
+    }
+    }
   />
 );
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);
+
+// props => (
+//   authed
+//     ? <Component {...props} />
+//     : <Redirect to="/login" />
+// );

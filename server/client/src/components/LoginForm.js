@@ -55,9 +55,7 @@ class LoginForm extends Component {
   }
 
   componentWillReceiveProps() {
-    if (this.props.currentUser.success === true) {
-      this.props.history.push('/');
-    }
+    console.log('LoginForm Component', this.props);
   }
 
   handleInputChange = (event) => {
