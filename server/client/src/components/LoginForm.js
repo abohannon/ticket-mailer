@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as actions from '../actions';
+import { loginUser } from '../actions';
 import { ACCENT_BLUE, WHITE, LIGHT_BLUE } from '../style/constants';
 
 const LoginFormStyles = () => ({
@@ -39,7 +39,8 @@ const LoginFormStyles = () => ({
 
 class LoginForm extends Component {
   static propTypes = {
-    loginUser: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -54,10 +55,6 @@ class LoginForm extends Component {
     console.log('==== LoginForm mounted!');
   }
 
-  componentWillReceiveProps() {
-    console.log('LoginForm Component', this.props);
-  }
-
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
@@ -67,7 +64,7 @@ class LoginForm extends Component {
   }
 
   handleSubmit = () => {
-    this.props.loginUser(this.state);
+    this.props.dispatch(loginUser(this.state));
 
     this.setState({
       email: '',
@@ -86,6 +83,12 @@ class LoginForm extends Component {
       topText,
       bottomText,
     } = LoginFormStyles();
+
+    const { isAuthorized } = this.props.user;
+
+    if (isAuthorized) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div style={container}>
@@ -125,6 +128,6 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentUser: state.userAuth });
+const mapStateToProps = state => ({ user: state.userAuth });
 
-export default Radium(connect(mapStateToProps, actions)(withRouter(LoginForm)));
+export default Radium(connect(mapStateToProps)(withRouter(LoginForm)));

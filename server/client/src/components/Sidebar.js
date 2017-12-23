@@ -25,12 +25,11 @@ const SidebarStyles = () => ({
 
 class Sidebar extends Component {
   componentDidMount() {
-    console.log('Sidebar mounted!');
+    console.log('==== Sidebar mounted!');
   }
 
-  handleLogout = (history) => {
-    window.sessionStorage.clear();
-    history.push('/login');
+  handleLogout = () => {
+
   }
 
   render() {

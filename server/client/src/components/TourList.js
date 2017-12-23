@@ -26,7 +26,7 @@ class TourList extends Component {
   }
 
   componentDidMount() {
-    console.log('TourList mounted!');
+    console.log('==== TourList mounted!');
   }
 
   render() {

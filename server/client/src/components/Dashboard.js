@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actions from '../actions';
+import { fetchProducts, fetchUser } from '../actions';
 import Sidebar from './Sidebar';
 import TourList from './TourList';
 
 class Dashboard extends Component {
   static propTypes = {
-    fetchProducts: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     console.log('==== Dashboard mounted!');
-    this.props.fetchProducts();
+    this.props.dispatch(fetchProducts());
+    this.props.dispatch(fetchUser());
   }
 
   render() {
+    console.log('Dashboard props', this.props);
     return (
       <div className="dashboard--container">
         <Sidebar />
@@ -25,5 +27,6 @@ class Dashboard extends Component {
   }
 }
 
+const mapStateToProps = state => ({ user: state.userAuth, products: state.shopifyFetch });
 
-export default connect(null, actions)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

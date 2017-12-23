@@ -8,6 +8,8 @@ import {
   LOGIN_USER_PENDING,
   LOGIN_USER_REJECTED,
   FETCHED_USER_SUCCESS,
+  FETCHED_USER_PENDING,
+  FETCHED_USER_REJECTED,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -41,7 +43,7 @@ export const loginUser = userData => async (dispatch) => {
   dispatch(action);
   try {
     const res = await axios.post('/api/login', userData);
-    const type = res.status === 200 ? LOGIN_USER_SUCCESS : LOGIN_USER_REJECTED;
+    const type = res.data.success === true ? LOGIN_USER_SUCCESS : LOGIN_USER_REJECTED;
     action = {
       type,
       payload: res.data,
@@ -56,7 +58,16 @@ export const loginUser = userData => async (dispatch) => {
 };
 
 export const fetchUser = () => async (dispatch) => {
-  const res = await axios.get('/api/current_user');
-  console.log('fetchUser action', res);
-  dispatch({ type: FETCHED_USER_SUCCESS, payload: res.data });
+  const action = {
+    type: FETCHED_USER_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get('/api/current_user');
+    console.log('fetchUser action', res);
+    dispatch({ type: FETCHED_USER_SUCCESS, payload: res.data });
+  } catch (error) {
+    dispatch({ type: FETCHED_USER_REJECTED, payload: error });
+    console.log('Error fetching user', error);
+  }
 };

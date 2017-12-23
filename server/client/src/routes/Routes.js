@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import UserAuth from '../components/UserAuth';
 import PrivateRoute from '../components/PrivateRoute';
@@ -12,18 +12,17 @@ class Routes extends Component {
 
   render() {
     const { isAuthorized } = this.props.user;
-    console.log('From Routes Component', this.props);
-    console.log('From Routes Component', isAuthorized);
+    console.log('Routes props', this.props);
+    console.log('Routes isAuthorized', isAuthorized);
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route path="/login" component={UserAuth} />
-          <Route path="/signup" component={UserAuth} />
-          <PrivateRoute path="/" component={Dashboard} authed={isAuthorized} />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        {/* <Route exact path="/" component={Dashboard} /> */}
+        <Route path="/login" component={UserAuth} authed={isAuthorized} />
+        <Route path="/signup" component={UserAuth} />
+        <PrivateRoute path="/" component={Dashboard} authed={isAuthorized} />
+      </Switch>
     );
   }
 }
 const mapStateToProps = state => ({ user: state.userAuth });
-export default connect(mapStateToProps)(Routes);
+export default withRouter(connect(mapStateToProps)(Routes));

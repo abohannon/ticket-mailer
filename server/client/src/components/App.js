@@ -11,15 +11,16 @@ import Routes from '../routes/Routes';
 class App extends Component {
   componentDidMount() {
     console.log('==== App mounted!');
-    this.props.dispatch(fetchUser());
   }
 
   render() {
     return (
       <MuiThemeProvider>
-        <div className="App">
-          <Routes />
-        </div>
+        <BrowserRouter>
+          <div className="App">
+            <Routes />
+          </div>
+        </BrowserRouter>
       </MuiThemeProvider>
     );
   }

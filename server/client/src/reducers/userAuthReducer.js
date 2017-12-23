@@ -6,6 +6,8 @@ import {
   LOGIN_USER_PENDING,
   LOGIN_USER_REJECTED,
   FETCHED_USER_SUCCESS,
+  FETCHED_USER_REJECTED,
+  FETCHED_USER_PENDING,
 } from '../actions/types';
 
 const initialState = {
@@ -75,8 +77,30 @@ const userAuthReducer = (state = initialState, action) => {
       };
       return { ...state, ...newState };
     }
-    // case FETCHED_USER_SUCCESS:
-    //   return action.payload || false;
+    case FETCHED_USER_PENDING: {
+      const newState = {
+        fetchedUserRejected: undefined,
+        fetchedUserSuccess: undefined,
+        fetchedUserPending: action,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCHED_USER_REJECTED: {
+      const newState = {
+        fetchedUserRejected: action,
+        fetchedUserSuccess: undefined,
+        fetchedUserPending: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCHED_USER_SUCCESS: {
+      const newState = {
+        fetchedUserRejected: undefined,
+        fetchedUserSuccess: action,
+        fetchedUserPending: undefined,
+      };
+      return { ...state, ...newState };
+    }
     default:
       return state;
   }

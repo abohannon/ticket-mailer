@@ -5,7 +5,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
     render={(props) => {
-      console.log('Private Route Props', props, authed);
+      console.log('Private Route Authed', authed);
 
       return authed
         ? <Component {...props} />
