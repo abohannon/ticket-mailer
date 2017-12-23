@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Dashboard from '../components/Dashboard';
 import UserAuth from '../components/UserAuth';
 import PrivateRoute from '../components/PrivateRoute';
 
 class Routes extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+  }
+
   componentDidMount() {
     console.log('==== Routes mounted!');
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
 
@@ -28,21 +28,34 @@ class Sidebar extends Component {
     console.log('==== Sidebar mounted!');
   }
 
+  componentWillReceiveProps() {
+    this.greeting();
+  }
+
   handleLogout = () => {
 
   }
 
+  greeting = () => {
+    if (this.props.user.fetchedUserSuccess !== undefined) {
+      const { firstName } = this.props.user.fetchedUserSuccess.payload;
+      return `Hello, ${firstName}`;
+    }
+  }
+
   render() {
+    console.log('Sidebar', this.props.user.fetchedUserSuccess);
     const {
       sidebar,
       listStyleTop,
       listItemStyle,
     } = SidebarStyles();
 
+
     return (
       <div className="sidebar" style={sidebar}>
         <List style={listStyleTop}>
-          <ListItem primaryText="Hello, Carynn." style={listItemStyle} />
+          <ListItem primaryText={this.greeting()} style={listItemStyle} />
           <ListItem primaryText="Home" style={listItemStyle} />
           <ListItem primaryText="Tours" style={listItemStyle} />
           <ListItem primaryText="Shows" style={listItemStyle} />
@@ -57,4 +70,6 @@ class Sidebar extends Component {
   }
 }
 
-export default Radium(Sidebar);
+const mapStateToProps = state => ({ user: state.userAuth });
+
+export default Radium(connect(mapStateToProps)(Sidebar));
