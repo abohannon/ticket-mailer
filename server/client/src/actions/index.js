@@ -10,6 +10,9 @@ import {
   FETCHED_USER_SUCCESS,
   FETCHED_USER_PENDING,
   FETCHED_USER_REJECTED,
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_PENDING,
+  LOGOUT_USER_REJECTED,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -57,9 +60,20 @@ export const loginUser = userData => async (dispatch) => {
   }
 };
 
-// export const logoutUser = () => dispatch => {
-//
-// }
+export const logoutUser = () => async (dispatch) => {
+  const action = {
+    type: LOGOUT_USER_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = axios.get('/api/logout');
+    dispatch({ type: LOGOUT_USER_SUCCESS, payload: res.data });
+    console.log('User logged out');
+  } catch (error) {
+    dispatch({ type: LOGOUT_USER_REJECTED, payload: error });
+    console.log('Error logging out', error);
+  }
+};
 
 export const fetchUser = () => async (dispatch) => {
   const action = {
@@ -68,8 +82,12 @@ export const fetchUser = () => async (dispatch) => {
   dispatch(action);
   try {
     const res = await axios.get('/api/current_user');
+    const type = res.data !== '' ? FETCHED_USER_SUCCESS : FETCHED_USER_REJECTED;
     console.log('fetchUser action', res);
-    dispatch({ type: FETCHED_USER_SUCCESS, payload: res.data });
+    dispatch({
+      type,
+      payload: res.data,
+    });
   } catch (error) {
     dispatch({ type: FETCHED_USER_REJECTED, payload: error });
     console.log('Error fetching user', error);

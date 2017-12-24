@@ -8,10 +8,11 @@ import {
   FETCHED_USER_SUCCESS,
   FETCHED_USER_REJECTED,
   FETCHED_USER_PENDING,
+  LOGOUT_USER,
 } from '../actions/types';
 
 const initialState = {
-  isAuthorized: true, // XXX: for testing only, default should be false
+  isAuthorized: false, // XXX: for testing only, default should be false
   createUserPending: undefined,
   createUserRejected: undefined,
   createUserSuccess: undefined,
@@ -87,6 +88,7 @@ const userAuthReducer = (state = initialState, action) => {
     }
     case FETCHED_USER_REJECTED: {
       const newState = {
+        isAuthorized: false,
         fetchedUserRejected: action,
         fetchedUserSuccess: undefined,
         fetchedUserPending: undefined,
@@ -95,6 +97,7 @@ const userAuthReducer = (state = initialState, action) => {
     }
     case FETCHED_USER_SUCCESS: {
       const newState = {
+        isAuthorized: true,
         fetchedUserRejected: undefined,
         fetchedUserSuccess: action,
         fetchedUserPending: undefined,
