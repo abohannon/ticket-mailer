@@ -13,6 +13,7 @@ const SidebarStyles = () => ({
     backgroundColor: DARK_BLUE,
     color: LIGHT_BLUE,
     height: '100vh',
+    position: 'fixed',
   },
   listStyleTop: {
     width: 180,
@@ -39,12 +40,11 @@ class Sidebar extends Component {
   greeting = () => {
     if (this.props.user.fetchedUserSuccess !== undefined) {
       const { firstName } = this.props.user.fetchedUserSuccess.payload;
-      return `Hello, ${firstName}`;
+      return `Hello, ${firstName}.`;
     }
   }
 
   render() {
-    console.log('Sidebar', this.props.user.fetchedUserSuccess);
     const {
       sidebar,
       listStyleTop,

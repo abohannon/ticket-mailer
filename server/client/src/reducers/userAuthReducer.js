@@ -11,7 +11,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  isAuthorized: false,
+  isAuthorized: true, // XXX: for testing only, default should be false
   createUserPending: undefined,
   createUserRejected: undefined,
   createUserSuccess: undefined,

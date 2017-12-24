@@ -57,6 +57,10 @@ export const loginUser = userData => async (dispatch) => {
   }
 };
 
+// export const logoutUser = () => dispatch => {
+//
+// }
+
 export const fetchUser = () => async (dispatch) => {
   const action = {
     type: FETCHED_USER_PENDING,
