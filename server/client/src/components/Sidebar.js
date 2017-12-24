@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
+import { logoutUser, fetchUser } from '../actions';
 
 const SidebarStyles = () => ({
   sidebar: {
@@ -25,6 +28,12 @@ const SidebarStyles = () => ({
 
 
 class Sidebar extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    payload: PropTypes.object.isRequired,
+    firstName: PropTypes.string.isRequired,
+  }
+
   componentDidMount() {
     console.log('==== Sidebar mounted!');
   }
@@ -34,7 +43,10 @@ class Sidebar extends Component {
   }
 
   handleLogout = () => {
-
+    this.props.dispatch(logoutUser())
+      .then(() => {
+        this.props.history.push('/login');
+      });
   }
 
   greeting = () => {
@@ -72,4 +84,4 @@ class Sidebar extends Component {
 
 const mapStateToProps = state => ({ user: state.userAuth });
 
-export default Radium(connect(mapStateToProps)(Sidebar));
+export default Radium(connect(mapStateToProps)(withRouter(Sidebar)));
