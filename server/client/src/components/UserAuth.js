@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import PropTypes from 'prop-types';
 import MailIcon from 'material-ui/svg-icons/communication/mail-outline';
 import { LIGHT_BLUE } from '../style/constants';
 import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 
-const LoginStyles = () => ({
+const UserAuthStyles = () => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -18,25 +20,39 @@ const LoginStyles = () => ({
 });
 
 
-class Login extends Component {
+class UserAuth extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+  }
+
   componentDidMount() {
-    console.log('Login mounted!');
+    console.log('==== UserAuth mounted!');
+  }
+
+  renderContent() {
+    switch (this.props.location.pathname) {
+      case '/login':
+        return <LoginForm />;
+      case '/signup':
+        return <SignupForm />;
+      default:
+        return <LoginForm />;
+    }
   }
 
   render() {
     const {
       container,
-    } = LoginStyles();
+    } = UserAuthStyles();
 
     return (
       <div style={container}>
         <MailIcon style={{ height: 56, width: 56, color: LIGHT_BLUE }} />
         <h1>TICKET MAILER</h1>
-        <p>Please login</p>
-        <LoginForm />
+        {this.renderContent()}
       </div>
     );
   }
 }
 
-export default Radium(Login);
+export default Radium(UserAuth);

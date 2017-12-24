@@ -1,36 +1,29 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import * as actions from '../actions';
 import '../style/App.css';
-import Dashboard from './Dashboard';
-import Login from './Login';
+import Routes from '../routes/Routes';
 
 class App extends Component {
-  static propTypes = {
-    fetchProducts: PropTypes.func.isRequired,
-  }
-
   componentDidMount() {
-    this.props.fetchProducts();
+    console.log('==== App mounted!');
   }
 
   render() {
     return (
       <MuiThemeProvider>
-        <div className="App">
-          <BrowserRouter>
-            <div>
-              <Route exact path="/" component={Dashboard} />
-              <Route exact path="/login" component={Login} />
-            </div>
-          </BrowserRouter>
-        </div>
+        <BrowserRouter>
+          <div className="App">
+            <Routes />
+          </div>
+        </BrowserRouter>
       </MuiThemeProvider>
     );
   }
 }
 
-export default connect(null, actions)(App);
+const mapStateToProps = state => ({ shopifyProducts: state.shopifyFetch }); // TODO: Need this?
+
+export default connect(mapStateToProps)(App);

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
+import { fetchProducts } from '../actions';
 import {
   Table,
   TableBody,
@@ -11,28 +13,36 @@ import {
 import TourListItem from './TourListItem';
 
 const TourListStyles = () => ({
+  container: {
+    marginLeft: 180,
+  },
   header: {
     padding: '0px 24px 0px 24px',
   },
 });
 
 class TourList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      state: null,
-    };
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    products: PropTypes.object.isRequired,
   }
-
   componentDidMount() {
-    console.log('TourList mounted!');
+    console.log('==== TourList mounted!');
+    this.props.dispatch(fetchProducts());
   }
 
   render() {
-    const { header } = TourListStyles();
+    const productList = Array.from(this.props.products);
+
+    const renderList = productList.map(product => <TourListItem vendor={product.vendor} title={product.title} variants={product.variants} />);
+
+    const {
+      container,
+      header,
+    } = TourListStyles();
+
     return (
-      <div className="tourList--container">
+      <div className="tourList--container" style={container}>
         <div className="header" style={header}>
           <h1>Ticket Mailer</h1>
         </div>
@@ -46,7 +56,7 @@ class TourList extends Component {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TourListItem />
+            {renderList}
           </TableBody>
         </Table>
       </div>
@@ -54,4 +64,6 @@ class TourList extends Component {
   }
 }
 
-export default Radium(TourList);
+const mapStateToProps = state => ({ products: state.shopifyFetch });
+
+export default Radium(connect(mapStateToProps)(TourList));
