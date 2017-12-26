@@ -17,11 +17,8 @@ class Routes extends Component {
 
   render() {
     const { isAuthorized } = this.props.user;
-    console.log('Routes props', this.props);
-    console.log('Routes isAuthorized', isAuthorized);
     return (
       <Switch>
-        {/* <Route exact path="/" component={Dashboard} /> */}
         <Route path="/login" component={UserAuth} authed={isAuthorized} />
         <Route path="/signup" component={UserAuth} />
         <PrivateRoute path="/" component={Dashboard} authed={isAuthorized} />

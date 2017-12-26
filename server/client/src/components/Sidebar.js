@@ -30,8 +30,13 @@ const SidebarStyles = () => ({
 class Sidebar extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    payload: PropTypes.object.isRequired,
-    firstName: PropTypes.string.isRequired,
+    payload: PropTypes.object,
+    firstName: PropTypes.string,
+  }
+
+  static defaultProps = {
+    payload: {},
+    firstName: 'Friend',
   }
 
   componentDidMount() {

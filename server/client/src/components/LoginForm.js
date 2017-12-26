@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { loginUser, fetchUser } from '../actions';
+import { loginUser } from '../actions';
 import { ACCENT_BLUE, WHITE, LIGHT_BLUE } from '../style/constants';
 
 const LoginFormStyles = () => ({
@@ -53,7 +53,6 @@ class LoginForm extends Component {
 
   componentDidMount() {
     console.log('==== LoginForm mounted!');
-    this.props.dispatch(fetchUser());
   }
 
   handleInputChange = (event) => {
@@ -85,11 +84,11 @@ class LoginForm extends Component {
       bottomText,
     } = LoginFormStyles();
 
-    const { isAuthorized } = this.props.user;
-
-    if (isAuthorized) {
-      return <Redirect to="/" />;
-    }
+    // const { isAuthorized } = this.props.user;
+    //
+    // if (isAuthorized) {
+    //   return <Redirect to="/" />;
+    // }
 
     return (
       <div style={container}>

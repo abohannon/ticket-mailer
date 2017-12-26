@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 import MailIcon from 'material-ui/svg-icons/communication/mail-outline';
 import { LIGHT_BLUE } from '../style/constants';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
+import { fetchUser } from '../actions';
 
 const UserAuthStyles = () => ({
   container: {
@@ -23,24 +26,39 @@ const UserAuthStyles = () => ({
 class UserAuth extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    isAuthorized: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
     console.log('==== UserAuth mounted!');
+    this.props.dispatch(fetchUser());
   }
 
   renderContent() {
-    switch (this.props.location.pathname) {
-      case '/login':
-        return <LoginForm />;
-      case '/signup':
-        return <SignupForm />;
-      default:
-        return <LoginForm />;
+    const { fetchedUserPending, fetchedUserRejected } = this.props.user;
+
+    if (fetchedUserRejected) {
+      switch (this.props.location.pathname) {
+        case '/login':
+          return <LoginForm />;
+        case '/signup':
+          return <SignupForm />;
+        default:
+          return <LoginForm />;
+      }
     }
+    return <p>LOADING...</p>;
   }
 
   render() {
+    console.log(this.props);
+    const { isAuthorized } = this.props.user;
+
+    if (isAuthorized) {
+      return <Redirect to="/" />;
+    }
+
     const {
       container,
     } = UserAuthStyles();
@@ -55,4 +73,6 @@ class UserAuth extends Component {
   }
 }
 
-export default Radium(UserAuth);
+const mapStateToProps = state => ({ user: state.userAuth });
+
+export default Radium(connect(mapStateToProps)(withRouter(UserAuth)));

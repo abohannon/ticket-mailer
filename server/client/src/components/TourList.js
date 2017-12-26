@@ -24,7 +24,7 @@ const TourListStyles = () => ({
 class TourList extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    products: PropTypes.object.isRequired,
+    products: PropTypes.array.isRequired,
   }
   componentDidMount() {
     console.log('==== TourList mounted!');
@@ -34,7 +34,14 @@ class TourList extends Component {
   render() {
     const productList = Array.from(this.props.products);
 
-    const renderList = productList.map(product => <TourListItem vendor={product.vendor} title={product.title} variants={product.variants} />);
+    const renderList = productList.map(product => (
+      <TourListItem
+        key={product.product_id}
+        vendor={product.vendor}
+        title={product.title}
+        variants={product.variants}
+      />
+    ));
 
     const {
       container,
