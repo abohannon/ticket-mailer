@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import TextField from 'material-ui/TextField';
@@ -84,12 +84,6 @@ class LoginForm extends Component {
       bottomText,
     } = LoginFormStyles();
 
-    // const { isAuthorized } = this.props.user;
-    //
-    // if (isAuthorized) {
-    //   return <Redirect to="/" />;
-    // }
-
     return (
       <div style={container}>
         <p style={topText}>Please login</p>
@@ -121,7 +115,7 @@ class LoginForm extends Component {
           labelColor={WHITE}
           onClick={this.handleSubmit}
         />
-        <a href="#" style={bottomText}><p><small>forgot?</small></p></a>
+        <a href="/login" style={bottomText}><p><small>forgot?</small></p></a>
 
       </div>
     );

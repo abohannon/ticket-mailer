@@ -1,6 +1,11 @@
 import axios from 'axios';
 import {
-  FETCH_PRODUCTS,
+  FETCH_COLLECTIONS_PENDING,
+  FETCH_COLLECTIONS_SUCCESS,
+  FETCH_COLLECTIONS_REJECTED,
+  FETCH_PRODUCTS_PENDING,
+  FETCH_PRODUCTS_SUCCESS,
+  FETCH_PRODUCTS_REJECTED,
   CREATE_USER_SUCCESS,
   CREATE_USER_PENDING,
   CREATE_USER_REJECTED,
@@ -17,9 +22,30 @@ import {
 
 // SHOPIFY ACTIONS
 
+export const fetchCollections = () => async (dispatch) => {
+  const action = {
+    type: FETCH_COLLECTIONS_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get('/api/collections');
+    dispatch({ type: FETCH_COLLECTIONS_SUCCESS, payload: res.data });
+  } catch (error) {
+    dispatch({ type: FETCH_COLLECTIONS_REJECTED, payload: error });
+  }
+};
+
 export const fetchProducts = () => async (dispatch) => {
-  const res = await axios.get('/api/products');
-  dispatch({ type: FETCH_PRODUCTS, payload: res.data });
+  const action = {
+    type: FETCH_PRODUCTS_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get('/api/products');
+    dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: res.data });
+  } catch (error) {
+    dispatch({ type: FETCH_PRODUCTS_REJECTED, payload: error });
+  }
 };
 
 // USER ACTIONS

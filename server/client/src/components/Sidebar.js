@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
-import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
-import { logoutUser, fetchUser } from '../actions';
+import { LIGHT_BLUE, DARK_BLUE } from '../style/constants';
+import { logoutUser } from '../actions';
 
 const SidebarStyles = () => ({
   sidebar: {
@@ -68,14 +68,18 @@ class Sidebar extends Component {
       listItemStyle,
     } = SidebarStyles();
 
+    const {
+      history,
+    } = this.props;
+
 
     return (
       <div className="sidebar" style={sidebar}>
         <List style={listStyleTop}>
           <ListItem primaryText={this.greeting()} style={listItemStyle} />
           <ListItem primaryText="Home" style={listItemStyle} />
-          <ListItem primaryText="Tours" style={listItemStyle} />
-          <ListItem primaryText="Shows" style={listItemStyle} />
+          <ListItem primaryText="Tours" style={listItemStyle} onClick={() => { history.push('/'); }} />
+          <ListItem primaryText="Shows" style={listItemStyle} onClick={() => { history.push('/dates'); }} />
           <ListItem primaryText="Orders" style={listItemStyle} />
         </List>
         <List>

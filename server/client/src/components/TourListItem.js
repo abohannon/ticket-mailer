@@ -11,17 +11,12 @@ class TourListItem extends Component {
 
   render() {
     const {
-      vendor,
       title,
-      variants,
     } = this.props;
 
     return (
       <TableRow hoverable>
-        <TableRowColumn>{vendor}</TableRowColumn>
-        <TableRowColumn>{title}</TableRowColumn>
-        <TableRowColumn><a href="#">Bundle 1</a> | <a href="#">Bundle 2</a></TableRowColumn>
-        <TableRowColumn>0/100</TableRowColumn>
+        <TableRowColumn><a href="/">{title}</a></TableRowColumn>
       </TableRow>
     );
   }

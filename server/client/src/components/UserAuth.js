@@ -27,7 +27,14 @@ class UserAuth extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    isAuthorized: PropTypes.bool.isRequired,
+    isAuthorized: PropTypes.bool,
+    fetchedUserRejected: PropTypes.object,
+    user: PropTypes.object.isRequired,
+  }
+
+  static defaultProps = {
+    fetchedUserRejected: undefined,
+    isAuthorized: false,
   }
 
   componentDidMount() {
@@ -36,7 +43,7 @@ class UserAuth extends Component {
   }
 
   renderContent() {
-    const { fetchedUserPending, fetchedUserRejected } = this.props.user;
+    const { fetchedUserRejected } = this.props.user;
 
     if (fetchedUserRejected) {
       switch (this.props.location.pathname) {
@@ -52,7 +59,6 @@ class UserAuth extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { isAuthorized } = this.props.user;
 
     if (isAuthorized) {

@@ -25,12 +25,6 @@ app.use(
     keys: [keys.cookieKey]
   })
 )
-// app.use(session({
-//   secret: keys.sessionSecret,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days in milliseconds
-// }))
 app.use(passport.initialize())
 app.use(passport.session())
 

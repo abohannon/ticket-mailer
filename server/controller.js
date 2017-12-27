@@ -12,16 +12,16 @@ const shopify = new Shopify({
 
 module.exports = {
 
+  getCollections (req, res) {
+    shopify.collectionListing.list()
+      .then(collectionData => res.send(collectionData))
+      .catch(err => console.log('Error fetching collections', err))
+  },
+
   getProducts (req, res) {
     shopify.productListing.list()
-      .then((productData) => {
-        res.send(productData)
-      }).then(() => {
-        shopify.on('callLimits', limits => console.log('limits', limits))
-      })
-      .catch((err) => {
-        console.log('Error with product fetch', err)
-      })
+      .then(productData => res.send(productData))
+      .catch(err => console.log('Error with product fetch', err))
   },
 
   createUser (req, res) {
@@ -62,34 +62,6 @@ module.exports = {
     req.logout()
     return res.json({ success: true, message: 'Logout successful' })
   },
-
-  // loginUser (req, res, next) {
-  //   if (req.body.email && req.body.password) {
-  //     User.authenticate(req.body.email, req.body.password, (err, user) => {
-  //       if (err || !user) {
-  //         const err = new Error('Wrong email or password')
-  //         err.status = 401
-  //         return next(err)
-  //       } else {
-  //         req.session.userId = user._id
-  //         console.log(req.session)
-  //         return res.send(req.session.userId)
-  //       }
-  //     })
-  //   }
-  // },
-
-  // logoutUser (req, res, next) {
-  //   if (req.session) {
-  //     // delete session object
-  //     req.session.destroy((err) => {
-  //       if (err) {
-  //         return next(err)
-  //       }
-  //       return res.send(req.session)
-  //     })
-  //   }
-  // },
 
   currentUser (req, res, next) {
     res.send(req.user)
