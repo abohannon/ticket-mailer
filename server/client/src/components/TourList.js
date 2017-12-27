@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
-import { fetchProducts } from '../actions';
 import {
   Table,
   TableBody,
@@ -10,6 +9,7 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
+import { fetchCollections } from '../actions';
 import TourListItem from './TourListItem';
 
 const TourListStyles = () => ({
@@ -24,25 +24,33 @@ const TourListStyles = () => ({
 class TourList extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired,
+    fetchCollectionsSuccess: PropTypes.object,
   }
+
+  static defaultProps = {
+    fetchCollectionsSuccess: undefined,
+  }
+
   componentDidMount() {
     console.log('==== TourList mounted!');
-    this.props.dispatch(fetchProducts());
+    this.props.dispatch(fetchCollections());
+  }
+
+  renderContent() {
+    const { fetchCollectionsSuccess } = this.props.tourData;
+    if (fetchCollectionsSuccess) {
+      const collectionList = Array.from(fetchCollectionsSuccess.payload);
+      return collectionList.map(collection => (
+        <TourListItem
+          key={collection.collection_id}
+          title={collection.title}
+        />
+      ));
+    }
   }
 
   render() {
-    const productList = Array.from(this.props.products);
-
-    const renderList = productList.map(product => (
-      <TourListItem
-        key={product.product_id}
-        vendor={product.vendor}
-        title={product.title}
-        variants={product.variants}
-      />
-    ));
-
+    console.log('TourList props', this.props);
     const {
       container,
       header,
@@ -56,14 +64,11 @@ class TourList extends Component {
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>Artist</TableHeaderColumn>
               <TableHeaderColumn>Tour</TableHeaderColumn>
-              <TableHeaderColumn>Bundle</TableHeaderColumn>
-              <TableHeaderColumn>Sent</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {renderList}
+            {this.renderContent()}
           </TableBody>
         </Table>
       </div>
@@ -71,6 +76,6 @@ class TourList extends Component {
   }
 }
 
-const mapStateToProps = state => ({ products: state.shopifyFetch });
+const mapStateToProps = state => ({ tourData: state.shopifyFetch });
 
 export default Radium(connect(mapStateToProps)(TourList));

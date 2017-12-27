@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchProducts, fetchUser } from '../actions';
+import { fetchUser } from '../actions';
 import Sidebar from './Sidebar';
 import TourList from './TourList';
+import DatesList from './DatesList';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -12,8 +13,18 @@ class Dashboard extends Component {
 
   componentDidMount() {
     console.log('==== Dashboard mounted!');
-    this.props.dispatch(fetchProducts());
     this.props.dispatch(fetchUser());
+  }
+
+  renderContent() {
+    switch (this.props.location.pathname) {
+      case '/':
+        return <TourList />;
+      case '/dates':
+        return <DatesList />;
+      default:
+        return <TourList />;
+    }
   }
 
   render() {
@@ -21,12 +32,12 @@ class Dashboard extends Component {
     return (
       <div className="dashboard--container">
         <Sidebar />
-        <TourList />
+        {this.renderContent()}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ user: state.userAuth, products: state.shopifyFetch });
+const mapStateToProps = state => ({ user: state.userAuth });
 
 export default connect(mapStateToProps)(Dashboard);

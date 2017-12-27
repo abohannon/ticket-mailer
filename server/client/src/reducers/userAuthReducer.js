@@ -8,7 +8,6 @@ import {
   FETCHED_USER_SUCCESS,
   FETCHED_USER_REJECTED,
   FETCHED_USER_PENDING,
-  LOGOUT_USER,
 } from '../actions/types';
 
 const initialState = {
