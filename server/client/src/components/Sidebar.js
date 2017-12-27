@@ -81,6 +81,7 @@ class Sidebar extends Component {
           <ListItem primaryText="Tours" style={listItemStyle} onClick={() => { history.push('/'); }} />
           <ListItem primaryText="Shows" style={listItemStyle} onClick={() => { history.push('/dates'); }} />
           <ListItem primaryText="Orders" style={listItemStyle} />
+          <ListItem primaryText="Archive" style={listItemStyle} />
         </List>
         <List>
           <ListItem primaryText="Settings" style={listItemStyle} rightIcon={<SettingsIcon color={LIGHT_BLUE} />} />
