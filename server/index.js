@@ -1,6 +1,5 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const session = require('express-session')
 const cookieSession = require('cookie-session')
 const bodyParser = require('body-parser')
 const passport = require('passport')
@@ -42,6 +41,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 3050
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}.`)
-})
+if (!module.parent) {
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}.`)
+  })
+}
+
+module.exports = app
