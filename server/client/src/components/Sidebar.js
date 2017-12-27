@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
@@ -62,6 +61,7 @@ class Sidebar extends Component {
   }
 
   render() {
+    console.log('Sidebar Props', this.props);
     const {
       sidebar,
       listStyleTop,
@@ -93,4 +93,4 @@ class Sidebar extends Component {
 
 const mapStateToProps = state => ({ user: state.userAuth });
 
-export default Radium(connect(mapStateToProps)(withRouter(Sidebar)));
+export default Radium(connect(mapStateToProps)(Sidebar));
