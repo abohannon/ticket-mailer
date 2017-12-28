@@ -18,6 +18,7 @@ class DatesListItem extends Component {
   }
 
   render() {
+    console.log('DatesListItem', this.props);
     const {
       title,
       id,

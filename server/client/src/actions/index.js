@@ -35,13 +35,13 @@ export const fetchCollections = () => async (dispatch) => {
   }
 };
 
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProducts = collectionId => async (dispatch) => {
   const action = {
     type: FETCH_PRODUCTS_PENDING,
   };
   dispatch(action);
   try {
-    const res = await axios.get('/api/products');
+    const res = await axios.get(`/api/collection_products/${collectionId}`);
     dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({ type: FETCH_PRODUCTS_REJECTED, payload: error });

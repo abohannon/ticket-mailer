@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import { fetchProducts } from '../actions';
 
 class TourListItem extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    handle: PropTypes.string.isRequired,
+  }
   componentDidMount() {
 
   }
@@ -13,7 +22,8 @@ class TourListItem extends Component {
   sendCollectionId = () => {
     console.log('sendCollectionId');
     console.log(this.props.id);
-    // TODO: Complete
+    const collectionId = this.props.id;
+    this.props.dispatch(fetchProducts(collectionId));
   }
 
   render() {
@@ -23,7 +33,7 @@ class TourListItem extends Component {
       handle,
     } = this.props;
 
-    const tourHash = `#${title}`;
+    const tourHash = `#${handle}`;
 
     return (
       <TableRow hoverable>
@@ -44,4 +54,4 @@ class TourListItem extends Component {
 }
 
 
-export default TourListItem;
+export default connect()(TourListItem);

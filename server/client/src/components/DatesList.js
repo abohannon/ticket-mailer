@@ -26,6 +26,18 @@ class DatesList extends Component {
     this.props.dispatch(fetchProducts());
   }
 
+  // renderVendor() {
+  //   const { fetchProductsSuccess } = this.props.tourData;
+  //   let vendorName;
+  //   if (fetchProductsSuccess) {
+  //     console.log(fetchProductsSuccess.payload[0].vendor);
+  //     // vendorName = fetchProductsSuccess.payload[0].vendor;
+  //   } else if (fetchProductsSuccess === undefined) {
+  //     console.log('Undefined');
+  //   }
+  //   // return vendorName;
+  // }
+
   renderContent() {
     const { fetchProductsSuccess } = this.props.tourData;
     if (fetchProductsSuccess) {

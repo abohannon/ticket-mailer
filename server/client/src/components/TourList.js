@@ -45,6 +45,7 @@ class TourList extends Component {
           key={collection.collection_id}
           title={collection.title}
           id={collection.collection_id}
+          handle={collection.handle}
         />
       ));
     }
