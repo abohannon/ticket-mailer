@@ -5,17 +5,12 @@ const app = require('../index.js')
 const assert = require('assert')
 const User = mongoose.model('users')
 
-beforeEach((done) => {
-  User.findOneAndRemove({ firstName: 'TestName' })
-  done()
-})
-
 describe('Create user', () => {
   it('Saves a user', (done) => {
     const user = new User({
       firstName: 'TestName',
       email: 'test@test.com',
-      password: 'test password'
+      password: 'password'
     })
 
     user.save()

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const keys = require('../config/keys')
+const keys = require('../config/dev')
 const User = mongoose.model('users')
 
 mongoose.Promise = global.Promise
@@ -11,14 +11,3 @@ before((done) => {
     .once('open', () => { done() })
     .on('error', (error) => console.log('Warning', error))
 })
-
-// XXX: Create separate test db?
-// beforeEach((done) => {
-//   User.find({ firstname: 'TestName' })
-//     .then((user) => {
-//       if (user) {
-//         user.remove()
-//         done()
-//       }
-//     })
-// })
