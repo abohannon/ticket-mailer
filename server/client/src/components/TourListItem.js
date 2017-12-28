@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   TableRow,
   TableRowColumn,
@@ -9,15 +10,34 @@ class TourListItem extends Component {
 
   }
 
+  sendCollectionId = () => {
+    console.log('sendCollectionId');
+    console.log(this.props.id);
+    // TODO: Complete
+  }
+
   render() {
     const {
       title,
       id,
+      handle,
     } = this.props;
+
+    const tourHash = `#${title}`;
 
     return (
       <TableRow hoverable>
-        <TableRowColumn><a href="/">{title}</a></TableRowColumn>
+        <TableRowColumn>
+          <Link
+            to={{
+              pathname: '/dates',
+              hash: tourHash, // TODO: Fix hash
+            }}
+            onClick={this.sendCollectionId}
+          >
+            {title}
+          </Link>
+        </TableRowColumn>
       </TableRow>
     );
   }
