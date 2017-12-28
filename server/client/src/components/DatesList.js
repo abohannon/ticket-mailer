@@ -10,6 +10,7 @@ import {
   TableRow,
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
+import EditIcon from 'material-ui/svg-icons/content/create';
 import { fetchProducts } from '../actions';
 import DatesListItem from './DatesListItem';
 
@@ -54,11 +55,12 @@ class DatesList extends Component {
             <div>
               <h1>Tour Dates</h1>
               <h3>{vendorName}</h3>
+              <h3>Tour Name Here</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <RaisedButton
                 label="Edit Tour Info"
-                labelPosition="before"
+                icon={<EditIcon />}
               />
             </div>
           </div>
