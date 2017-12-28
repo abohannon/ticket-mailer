@@ -12,6 +12,7 @@ class TourListItem extends Component {
   render() {
     const {
       title,
+      id,
     } = this.props;
 
     return (

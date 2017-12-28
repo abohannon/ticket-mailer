@@ -44,6 +44,7 @@ class TourList extends Component {
         <TourListItem
           key={collection.collection_id}
           title={collection.title}
+          id={collection.collection_id}
         />
       ));
     }
@@ -59,7 +60,7 @@ class TourList extends Component {
     return (
       <div className="tourList--container" style={container}>
         <div className="header" style={header}>
-          <h1>Ticket Mailer</h1>
+          <h1>Current Tours</h1>
         </div>
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
