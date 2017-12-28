@@ -11,7 +11,8 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "nodemon --exec 'mocha -R min'"
   },
   "author": "",
   "license": "ISC",
@@ -25,9 +26,13 @@
     "express-session": "^1.15.6",
     "mongoose": "^4.13.7",
     "node-fetch": "^1.7.3",
-    "nodemon": "^1.12.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "shopify-api-node": "^2.10.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.5",
+    "supertest": "^3.0.0"
   }
 }
