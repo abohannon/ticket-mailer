@@ -36,13 +36,18 @@ export const fetchCollections = () => async (dispatch) => {
 };
 
 export const fetchProducts = collectionId => async (dispatch) => {
-  const action = {
+  let action = {
     type: FETCH_PRODUCTS_PENDING,
   };
   dispatch(action);
   try {
     const res = await axios.get(`/api/collection_products/${collectionId}`);
-    dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: res.data });
+    const type = res.data.length > 0 ? FETCH_PRODUCTS_SUCCESS : FETCH_PRODUCTS_REJECTED;
+    action = {
+      type,
+      payload: res.data,
+    };
+    dispatch(action);
   } catch (error) {
     dispatch({ type: FETCH_PRODUCTS_REJECTED, payload: error });
   }

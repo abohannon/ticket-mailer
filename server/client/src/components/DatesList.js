@@ -9,6 +9,7 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
+import RaisedButton from 'material-ui/RaisedButton';
 import { fetchProducts } from '../actions';
 import DatesListItem from './DatesListItem';
 
@@ -17,7 +18,12 @@ const DatesListStyles = () => ({
     marginLeft: 180,
   },
   header: {
+    display: 'flex',
+    justifyContent: 'space-between',
     padding: '0px 24px 0px 24px',
+  },
+  buttonContainer: {
+    padding: 24,
   },
 });
 
@@ -31,12 +37,11 @@ class DatesList extends Component {
   }
   componentDidMount() {
     console.log('==== DatesList mounted!');
-    this.props.dispatch(fetchProducts());
   }
 
   renderContent() {
-    const { fetchProductsSuccess } = this.props.tourData;
-    const { header } = DatesListStyles();
+    const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
+    const { header, buttonContainer } = DatesListStyles();
     let vendorName = '';
     if (fetchProductsSuccess) {
       const productList = Array.from(fetchProductsSuccess.payload);
@@ -46,8 +51,16 @@ class DatesList extends Component {
       return (
         <div>
           <div className="header" style={header}>
-            <h1>Tour Dates</h1>
-            <h3>{vendorName}</h3>
+            <div>
+              <h1>Tour Dates</h1>
+              <h3>{vendorName}</h3>
+            </div>
+            <div className="button" style={buttonContainer}>
+              <RaisedButton
+                label="Edit Tour Info"
+                labelPosition="before"
+              />
+            </div>
           </div>
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -69,6 +82,12 @@ class DatesList extends Component {
           </Table>
         </div>
       );
+    } else if (fetchProductsRejected) {
+      <div>
+        <h2>Looks like there was a problem grabbing your data.</h2>
+        <h2 onClick={() => { this.props.dispatch(fetchProducts('1625882628')); }}>Click here to try again.</h2>
+        {/* TODO: Update with dynamic collection id */}
+      </div>;
     }
   }
 
