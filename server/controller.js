@@ -24,6 +24,12 @@ module.exports = {
       .catch(err => console.log('Error with product fetch', err))
   },
 
+  getCollectionProducts (req, res) {
+    shopify.collectionListing.productIds(req.params.id)
+      .then(products => res.send(products))
+      .catch(err => console.log('Error fetching collection products', err))
+  },
+
   createUser (req, res) {
     if (
       req.body.firstName &&
