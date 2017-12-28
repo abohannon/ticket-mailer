@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
   Table,
@@ -21,36 +22,53 @@ const DatesListStyles = () => ({
 });
 
 class DatesList extends Component {
+  static PropTypes = {
+    tourData: PropTypes.object.isRequired,
+  }
+
+  static defaultProps = {
+    fetchProductsSuccess: undefined,
+  }
   componentDidMount() {
     console.log('==== DatesList mounted!');
     this.props.dispatch(fetchProducts());
   }
 
-  // renderVendor() {
-  //   const { fetchProductsSuccess } = this.props.tourData;
-  //   let vendorName;
-  //   if (fetchProductsSuccess) {
-  //     console.log(fetchProductsSuccess.payload[0].vendor);
-  //     // vendorName = fetchProductsSuccess.payload[0].vendor;
-  //   } else if (fetchProductsSuccess === undefined) {
-  //     console.log('Undefined');
-  //   }
-  //   // return vendorName;
-  // }
-
   renderContent() {
     const { fetchProductsSuccess } = this.props.tourData;
+    const { header } = DatesListStyles();
+    let vendorName = '';
     if (fetchProductsSuccess) {
       const productList = Array.from(fetchProductsSuccess.payload);
-      console.log('product list', productList);
-      return productList.map(product => (
-        <DatesListItem
-          key={product.product_id}
-          title={product.title}
-          id={product.product_id}
-          variants={product.variants}
-        />
-      ));
+      if (fetchProductsSuccess.payload.length > 0) {
+        vendorName = productList[0].vendor;
+      }
+      return (
+        <div>
+          <div className="header" style={header}>
+            <h1>Tour Dates</h1>
+            <h3>{vendorName}</h3>
+          </div>
+          <Table>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+              <TableRow>
+                <TableHeaderColumn>Date & Location</TableHeaderColumn>
+                <TableHeaderColumn>Bundle</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              { productList.map(product => (
+                <DatesListItem
+                  key={product.product_id}
+                  title={product.title}
+                  id={product.product_id}
+                  variants={product.variants}
+                />
+              )) }
+            </TableBody>
+          </Table>
+        </div>
+      );
     }
   }
 
@@ -58,26 +76,11 @@ class DatesList extends Component {
     console.log(this.props);
     const {
       container,
-      header,
     } = DatesListStyles();
 
     return (
       <div className="datesList--container" style={container}>
-        <div className="header" style={header}>
-          <h1>Tour Dates</h1>
-          <h2>Band Name Here</h2>
-        </div>
-        <Table>
-          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableRow>
-              <TableHeaderColumn>Date & Location</TableHeaderColumn>
-              <TableHeaderColumn>Bundle</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {this.renderContent()}
-          </TableBody>
-        </Table>
+        {this.renderContent()}
       </div>
     );
   }
