@@ -25,7 +25,7 @@ module.exports = {
   },
 
   getCollectionProducts (req, res) {
-    shopify.collectionListing.productIds(req.params.id)
+    shopify.productListing.list({ collection_id: req.params.id })
       .then(products => res.send(products))
       .catch(err => console.log('Error fetching collection products', err))
   },
@@ -71,7 +71,6 @@ module.exports = {
 
   currentUser (req, res, next) {
     res.send(req.user)
-    console.log('current user', req.user)
   }
 
 }
