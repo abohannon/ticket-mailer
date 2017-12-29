@@ -12,6 +12,8 @@ const shopify = new Shopify({
 
 module.exports = {
 
+  // Shopify Endpoints
+
   getCollections (req, res) {
     shopify.collectionListing.list()
       .then(collectionData => res.send(collectionData))
@@ -29,6 +31,18 @@ module.exports = {
       .then(products => res.send(products))
       .catch(err => console.log('Error fetching collection products', err))
   },
+
+  getVariantOrders (req, res) {
+    shopify.order.list()
+      .then(orders => {
+        const variantId = Number(req.params.id)
+        const variantOrders = orders.filter((order) => order.line_items[0].variant_id === variantId)
+        res.send(variantOrders)
+      })
+      .catch(err => console.log('Error fetching orders', err))
+  },
+
+  // User Endpoints
 
   createUser (req, res) {
     if (
