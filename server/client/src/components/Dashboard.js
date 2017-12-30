@@ -22,7 +22,7 @@ class Dashboard extends Component {
     if (pathname === '/') {
       return <TourList />;
     } else if (pathname.includes('/dates')) {
-      return <DatesList />;
+      return <DatesList pathname={pathname} />;
     }
     return <TourList />;
   }

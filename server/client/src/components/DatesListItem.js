@@ -17,14 +17,20 @@ class DatesListItem extends Component {
   }
 
   renderVariants() {
-    const { variants } = this.props;
+    const { variants, pathname } = this.props;
     if (variants.length < 2) {
       return <TableRowColumn><a href="/">{variants[0].title}</a></TableRowColumn>;
     }
     return (
       <TableRowColumn>
-        <Link to="#" onClick={() => this.sendVariantId(0)}>{variants[0].title}</Link> |
-        <Link to="#" onClick={() => this.sendVariantId(1)}>{variants[1].title}</Link>
+        <Link
+          to={{ pathname: `${pathname}/${variants[0].title}` }}
+          onClick={() => this.sendVariantId(0)}
+        >{variants[0].title}</Link> |
+        <Link
+          to={{ pathname: `${pathname}/${variants[1].title}` }}
+          onClick={() => this.sendVariantId(1)}
+        >{variants[1].title}</Link>
       </TableRowColumn>
     );
   }
