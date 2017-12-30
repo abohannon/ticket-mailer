@@ -18,14 +18,13 @@ class Dashboard extends Component {
   }
 
   renderContent() {
-    switch (this.props.location.pathname) {
-      case '/':
-        return <TourList />;
-      case '/dates':
-        return <DatesList />;
-      default:
-        return <TourList />;
+    const { pathname } = this.props.location;
+    if (pathname === '/') {
+      return <TourList />;
+    } else if (pathname.includes('/dates')) {
+      return <DatesList />;
     }
+    return <TourList />;
   }
 
   render() {

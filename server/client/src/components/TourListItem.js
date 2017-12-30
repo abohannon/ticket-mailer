@@ -39,10 +39,7 @@ class TourListItem extends Component {
       <TableRow hoverable>
         <TableRowColumn>
           <Link
-            to={{
-              pathname: '/dates',
-              hash: tourHash, // TODO: Fix hash
-            }}
+            to={{ pathname: `/dates/${handle}` }}
             onClick={this.sendCollectionId}
           >
             {title}
