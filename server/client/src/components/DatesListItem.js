@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   TableRow,
   TableRowColumn,
@@ -9,12 +10,23 @@ class DatesListItem extends Component {
 
   }
 
+  sendVariantId = (index) => {
+    const variantId = this.props.variants[index].id;
+    console.log('variant id:', variantId);
+  // TODO: FINISH SETTING UP DISPATCH
+  }
+
   renderVariants() {
     const { variants } = this.props;
     if (variants.length < 2) {
       return <TableRowColumn><a href="/">{variants[0].title}</a></TableRowColumn>;
     }
-    return <TableRowColumn><a href="/">{variants[0].title}</a> | <a href="/">{variants[1].title}</a></TableRowColumn>;
+    return (
+      <TableRowColumn>
+        <Link to="#" onClick={() => this.sendVariantId(0)}>{variants[0].title}</Link> |
+        <Link to="#" onClick={() => this.sendVariantId(1)}>{variants[1].title}</Link>
+      </TableRowColumn>
+    );
   }
 
   render() {
