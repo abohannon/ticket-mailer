@@ -11,8 +11,10 @@ import {
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
 import EditIcon from 'material-ui/svg-icons/content/create';
+import OrdersListItem from './OrdersListItem';
+import { fetchOrders } from '../actions';
 
-const ProductsListStyles = () => ({
+const OrdersListStyles = () => ({
   container: {
     marginLeft: 180,
   },
@@ -26,7 +28,7 @@ const ProductsListStyles = () => ({
   },
 });
 
-class DatesList extends Component {
+class OrdersList extends Component {
   static PropTypes = {
     tourData: PropTypes.object.isRequired,
   }
@@ -35,29 +37,33 @@ class DatesList extends Component {
     fetchProductsSuccess: undefined,
   }
   componentDidMount() {
-    console.log('==== DatesList mounted!');
+    console.log('==== OrdersList mounted!');
   }
 
   renderContent() {
-    const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
-    const { header, buttonContainer } = ProductsListStyles();
-    let vendorName = '';
-    if (fetchProductsSuccess) {
-      const productList = Array.from(fetchProductsSuccess.payload);
-      if (fetchProductsSuccess.payload.length > 0) {
-        vendorName = productList[0].vendor;
+    const { fetchOrdersSuccess, fetchOrdersRejected } = this.props.tourData;
+    const { header, buttonContainer } = OrdersListStyles();
+    let variantTitle = 'Bundle Orders';
+    let vendor = '';
+    let tourName = '';
+    if (fetchOrdersSuccess) {
+      const ordersList = Array.from(fetchOrdersSuccess.payload);
+      if (fetchOrdersSuccess.payload.length > 0) {
+        variantTitle = ordersList[0].line_items[0].variant_title;
+        vendor = ordersList[0].line_items[0].vendor;
+        tourName = ordersList[0].line_items[0].title;
       }
       return (
         <div>
           <div className="header" style={header}>
             <div>
-              <h1>Tour Dates</h1>
-              <h3>{vendorName}</h3>
-              <h3>Tour Name Here</h3>
+              <h1>{variantTitle}</h1>
+              <h3>{vendor}</h3>
+              <h3>{tourName}</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <RaisedButton
-                label="Edit Tour Info"
+                label="Edit Date Info"
                 icon={<EditIcon />}
               />
             </div>
@@ -65,40 +71,44 @@ class DatesList extends Component {
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
-                <TableHeaderColumn>Date & Location</TableHeaderColumn>
-                <TableHeaderColumn>Bundle</TableHeaderColumn>
+                <TableHeaderColumn>Order #</TableHeaderColumn>
+                <TableHeaderColumn>Name</TableHeaderColumn>
+                <TableHeaderColumn>Email</TableHeaderColumn>
+                <TableHeaderColumn>Status</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody>
-              { productList.map(product => (
-                <DatesListItem
-                  key={product.product_id}
-                  title={product.title}
-                  id={product.product_id}
-                  variants={product.variants}
+              { ordersList.map(order => (
+                <OrdersListItem
+                  key={order.id}
+                  orderNumber={order.order_number}
+                  customerName={order.shipping_address.name}
+                  customerEmail={order.email}
                 />
               )) }
             </TableBody>
           </Table>
         </div>
       );
-    } else if (fetchProductsRejected) {
-      <div>
-        <h2>Looks like there was a problem grabbing your data.</h2>
-        <h2 onClick={() => { this.props.dispatch(fetchProducts('1625882628')); }}>Click here to try again.</h2>
-        {/* TODO: Update with dynamic collection id */}
-      </div>;
+    } else if (fetchOrdersRejected) {
+      return (
+        <div>
+          <h2>Looks like there was a problem grabbing your data.</h2>
+          <h2 onClick={() => { this.props.dispatch(fetchOrders('887373070340')); }}>Click here to try again.</h2>
+          {/* TODO: Update with dynamic variant id */}
+        </div>
+      );
     }
   }
 
   render() {
-    console.log(this.props);
+    console.log('OrdersList props', this.props);
     const {
       container,
-    } = DatesListStyles();
+    } = OrdersListStyles();
 
     return (
-      <div className="datesList--container" style={container}>
+      <div className="ordersList--container" style={container}>
         {this.renderContent()}
       </div>
     );
@@ -107,4 +117,4 @@ class DatesList extends Component {
 
 const mapStateToProps = state => ({ tourData: state.shopifyFetch });
 
-export default Radium(connect(mapStateToProps)(DatesList));
+export default Radium(connect(mapStateToProps)(OrdersList));

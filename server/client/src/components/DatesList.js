@@ -96,7 +96,6 @@ class DatesList extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {
       container,
     } = DatesListStyles();

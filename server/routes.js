@@ -2,6 +2,7 @@ const passport = require('passport')
 const Controller = require('./controller')
 
 module.exports = (app) => {
+  app.get('/api/orders/', Controller.getAllOrders)
   app.get('/api/orders/:id', Controller.getVariantOrders)
   app.get('/api/collection_products/:id', Controller.getCollectionProducts)
   app.get('/api/collections', Controller.getCollections)
