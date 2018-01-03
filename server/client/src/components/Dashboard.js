@@ -11,6 +11,7 @@ import OrdersList from './OrdersList';
 class Dashboard extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -23,9 +24,9 @@ class Dashboard extends Component {
     if (pathname === '/') {
       return <TourList />;
     } else if (pathname.includes('/dates')) {
-      return <DatesList pathname={pathname} />;
+      return <DatesList pathname={pathname} history={this.props.history} />;
     } else if (pathname.includes('/orders')) {
-      return <OrdersList pathname={pathname} />;
+      return <OrdersList pathname={pathname} history={this.props.history} />;
     }
     return <TourList />;
   }

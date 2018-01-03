@@ -22,7 +22,7 @@ class DatesListItem extends Component {
     if (variants.length < 2) {
       return (<TableRowColumn>
         <Link
-          to={{ pathname: `${pathname}/orders/${variants[0].title}` }}
+          to={{ pathname: `/orders/${variants[0].title}` }}
           onClick={() => this.sendVariantId(0)}
         >{variants[0].title}
         </Link>

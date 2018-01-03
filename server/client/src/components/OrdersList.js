@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
@@ -42,6 +43,7 @@ class OrdersList extends Component {
 
   renderContent() {
     const { fetchOrdersSuccess, fetchOrdersRejected } = this.props.tourData;
+    const { history } = this.props;
     const { header, buttonContainer } = OrdersListStyles();
     let variantTitle = 'Bundle Orders';
     let vendor = '';
@@ -58,7 +60,7 @@ class OrdersList extends Component {
           <div className="header" style={header}>
             <div>
               <h1>{variantTitle}</h1>
-              <h3>{vendor}</h3>
+              <h3><Link to="#" onClick={history.goBack}>{vendor}</Link></h3>
               <h3>{tourName}</h3>
             </div>
             <div className="button" style={buttonContainer}>
