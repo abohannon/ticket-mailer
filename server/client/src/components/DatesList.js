@@ -36,6 +36,7 @@ class DatesList extends Component {
   static defaultProps = {
     fetchProductsSuccess: undefined,
   }
+
   componentDidMount() {
     console.log('==== DatesList mounted!');
   }
