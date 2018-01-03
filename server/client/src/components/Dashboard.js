@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchUser } from '../actions';
@@ -24,9 +24,9 @@ class Dashboard extends Component {
     if (pathname === '/') {
       return <TourList />;
     } else if (pathname.includes('/dates')) {
-      return <DatesList pathname={pathname} history={this.props.history} />;
+      return <Route path="/dates" component={DatesList} />;
     } else if (pathname.includes('/orders')) {
-      return <OrdersList pathname={pathname} history={this.props.history} />;
+      return <Route path="/orders" component={OrdersList} />;
     }
     return <TourList />;
   }

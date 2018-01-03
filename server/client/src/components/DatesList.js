@@ -43,7 +43,9 @@ class DatesList extends Component {
   renderContent() {
     const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
     const { pathname } = this.props;
+    const tourName = this.props.location.title;
     const { header, buttonContainer } = DatesListStyles();
+    console.log('DatesList props:', this.props);
     let vendorName = '';
     if (fetchProductsSuccess) {
       const productList = Array.from(fetchProductsSuccess.payload);
@@ -56,7 +58,7 @@ class DatesList extends Component {
             <div>
               <h1>Tour Dates</h1>
               <h3>{vendorName}</h3>
-              <h3>Tour Name Here</h3>
+              <h3>{tourName}</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <RaisedButton

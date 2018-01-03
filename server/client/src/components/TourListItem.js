@@ -21,7 +21,8 @@ class TourListItem extends Component {
 
   sendCollectionId = () => {
     console.log('sendCollectionId');
-    console.log(this.props.id);
+    console.log('collection id:', this.props.id);
+    console.log('collection title:', this.props.title);
     const collectionId = this.props.id;
     this.props.dispatch(fetchProducts(collectionId));
   }
@@ -39,7 +40,7 @@ class TourListItem extends Component {
       <TableRow hoverable>
         <TableRowColumn>
           <Link
-            to={{ pathname: `/dates/${handle}` }}
+            to={{ pathname: `/dates/${handle}`, title }}
             onClick={this.sendCollectionId}
           >
             {title}
