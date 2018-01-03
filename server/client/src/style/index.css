@@ -8,10 +8,11 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: underline;
   color: inherit;
 }
 
 a:hover {
-  color: #fff;
+  text-decoration: underline;
+  color: #5F97FB;
 }
