@@ -42,6 +42,14 @@ module.exports = {
       .catch(err => console.log('Error fetching orders', err))
   },
 
+  getAllOrders (req, res) {
+    shopify.order.list()
+      .then(orders => {
+        res.send(orders)
+      })
+      .catch(err => console.log('Error fetching orders', err))
+  },
+
   // User Endpoints
 
   createUser (req, res) {

@@ -6,6 +6,9 @@ import {
   FETCH_PRODUCTS_PENDING,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_REJECTED,
+  FETCH_ORDERS_PENDING,
+  FETCH_ORDERS_SUCCESS,
+  FETCH_ORDERS_REJECTED,
   CREATE_USER_SUCCESS,
   CREATE_USER_PENDING,
   CREATE_USER_REJECTED,
@@ -50,6 +53,25 @@ export const fetchProducts = collectionId => async (dispatch) => {
     dispatch(action);
   } catch (error) {
     dispatch({ type: FETCH_PRODUCTS_REJECTED, payload: error });
+  }
+};
+
+export const fetchOrders = variantId => async (dispatch) => {
+  let action = {
+    type: FETCH_ORDERS_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get(`/api/orders/${variantId}`);
+    const type = res.data.length > 0 ? FETCH_ORDERS_SUCCESS : FETCH_ORDERS_REJECTED;
+    action = {
+      type,
+      payload: res.data,
+    };
+    console.log('fetchOrders:', res.data);
+    dispatch(action);
+  } catch (error) {
+    dispatch({ type: FETCH_ORDERS_REJECTED });
   }
 };
 

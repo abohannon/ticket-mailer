@@ -5,6 +5,9 @@ import {
   FETCH_PRODUCTS_PENDING,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_REJECTED,
+  FETCH_ORDERS_PENDING,
+  FETCH_ORDERS_SUCCESS,
+  FETCH_ORDERS_REJECTED,
 } from '../actions/types';
 
 const initialState = {
@@ -14,10 +17,37 @@ const initialState = {
   fetchProductsPending: undefined,
   fetchProductsRejected: undefined,
   fetchProductsSuccess: undefined,
+  fetchOrdersPending: undefined,
+  fetchOrdersRejected: undefined,
+  fetchOrdersSuccess: undefined,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case FETCH_ORDERS_PENDING: {
+      const newState = {
+        fetchOrdersPending: action,
+        fetchOrdersRejected: undefined,
+        fetchOrdersSuccess: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_ORDERS_REJECTED: {
+      const newState = {
+        fetchOrdersPending: undefined,
+        fetchOrdersRejected: action,
+        fetchOrdersSuccess: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_ORDERS_SUCCESS: {
+      const newState = {
+        fetchOrdersPending: undefined,
+        fetchOrdersRejected: undefined,
+        fetchOrdersSuccess: action,
+      };
+      return { ...state, ...newState };
+    }
     case FETCH_PRODUCTS_PENDING: {
       const newState = {
         fetchProductsPending: action,

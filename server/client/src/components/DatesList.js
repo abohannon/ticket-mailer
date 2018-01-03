@@ -42,6 +42,7 @@ class DatesList extends Component {
 
   renderContent() {
     const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
+    const { pathname } = this.props;
     const { header, buttonContainer } = DatesListStyles();
     let vendorName = '';
     if (fetchProductsSuccess) {
@@ -78,6 +79,7 @@ class DatesList extends Component {
                   title={product.title}
                   id={product.product_id}
                   variants={product.variants}
+                  pathname={pathname}
                 />
               )) }
             </TableBody>
@@ -94,7 +96,6 @@ class DatesList extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {
       container,
     } = DatesListStyles();

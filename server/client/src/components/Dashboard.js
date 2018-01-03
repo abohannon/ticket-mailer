@@ -6,6 +6,7 @@ import { fetchUser } from '../actions';
 import Sidebar from './Sidebar';
 import TourList from './TourList';
 import DatesList from './DatesList';
+import OrdersList from './OrdersList';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -22,7 +23,9 @@ class Dashboard extends Component {
     if (pathname === '/') {
       return <TourList />;
     } else if (pathname.includes('/dates')) {
-      return <DatesList />;
+      return <DatesList pathname={pathname} />;
+    } else if (pathname.includes('/orders')) {
+      return <OrdersList pathname={pathname} />;
     }
     return <TourList />;
   }
