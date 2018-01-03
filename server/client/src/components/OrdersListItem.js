@@ -9,7 +9,7 @@ class OrdersListItem extends Component {
     const { orderNumber, customerName, customerEmail } = this.props;
     return (
       <TableRow hoverable>
-        <TableRowColumn>{orderNumber}</TableRowColumn>
+        <TableRowColumn>#{orderNumber}</TableRowColumn>
         <TableRowColumn>{customerName}</TableRowColumn>
         <TableRowColumn>{customerEmail}</TableRowColumn>
         <TableRowColumn>Unsent. <a href="/">Send?</a></TableRowColumn>
