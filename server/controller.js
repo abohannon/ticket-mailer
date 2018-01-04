@@ -98,7 +98,15 @@ module.exports = {
   },
 
   sendEmail(req, res, next) {
-    sendMail()
+    const { subject, text } = req.body
+
+    const content = {
+      subject,
+      text,
+    }
+
+    sendMail(content)
+
     console.log('sendMail contoller')
   },
 

@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer')
 const keys = require('../config/keys')
 
-const sendMail = () => {
+const sendMail = (content) => {
+  const { subject, text } = content
   const transporter = nodemailer.createTransport({
     service: 'Mailgun',
     auth: {
@@ -10,11 +11,10 @@ const sendMail = () => {
     },
   });
   const message = {
-    from: 'no-reply@test.com',
+    from: 'no-reply@test2.com',
     to: 'abo46n2@gmail.com', // comma separated list
-    subject: 'Testing node mailer',
-    text: 'Text contents.',
-    html: '<b>Text contents.</b>',
+    subject,
+    text,
   };
   transporter.sendMail(message, (error, info) => {
     if (error) {
