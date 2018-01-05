@@ -42,7 +42,7 @@ class TourListItem extends Component {
       <TableRow hoverable>
         <TableRowColumn>
           <Link
-            to={{ pathname: `/dates/${handle}`, title }}
+            to={{ pathname: `/dates/${handle}` }}
             onClick={this.sendCollectionId}
           >
             {title}
