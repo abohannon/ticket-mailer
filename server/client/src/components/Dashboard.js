@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchUser } from '../actions';
@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import TourList from './TourList';
 import DatesList from './DatesList';
 import OrdersList from './OrdersList';
+import EmailEdit from './emailForm/EmailEdit';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -19,24 +20,18 @@ class Dashboard extends Component {
     this.props.dispatch(fetchUser());
   }
 
-  renderContent() {
-    const { pathname } = this.props.location;
-    if (pathname === '/') {
-      return <TourList />;
-    } else if (pathname.includes('/dates')) {
-      return <Route path="/dates" component={DatesList} />;
-    } else if (pathname.includes('/orders')) {
-      return <Route path="/orders" component={OrdersList} />;
-    }
-    return <TourList />;
-  }
-
   render() {
+    const { pathname } = this.props.history;
     console.log('Dashboard props', this.props);
     return (
       <div className="dashboard--container">
         <Sidebar history={this.props.history} />
-        {this.renderContent()}
+        <Switch>
+          <Route path="/edit-email" component={EmailEdit} />
+          <Route path="/dates" component={DatesList} />
+          <Route path="/orders" component={OrdersList} />
+          <Route path="/" component={TourList} />
+        </Switch>
       </div>
     );
   }

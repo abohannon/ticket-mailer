@@ -66,10 +66,12 @@ class OrdersList extends Component {
               <h3>{showDate}</h3>
             </div>
             <div className="button" style={buttonContainer}>
-              <RaisedButton
-                label="Edit Date Info"
-                icon={<EditIcon />}
-              />
+              <Link to="/edit-email">
+                <RaisedButton
+                  label="Edit Details"
+                  icon={<EditIcon />}
+                />
+              </Link>
             </div>
           </div>
           <Table>
