@@ -44,7 +44,7 @@ class DatesList extends Component {
   renderContent() {
     const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
     const { pathname } = this.props;
-    const tourName = this.props.location.title;
+    const tourName = this.props.user.currentTour.payload || '';
     const { header, buttonContainer } = DatesListStyles();
     console.log('DatesList props:', this.props);
     let vendorName = '';
@@ -111,6 +111,6 @@ class DatesList extends Component {
   }
 }
 
-const mapStateToProps = state => ({ tourData: state.shopifyFetch });
+const mapStateToProps = state => ({ tourData: state.shopifyFetch, user: state.userAuth });
 
 export default Radium(connect(mapStateToProps)(DatesList));

@@ -47,21 +47,23 @@ class OrdersList extends Component {
     const { header, buttonContainer } = OrdersListStyles();
     let variantTitle = 'Bundle Orders';
     let vendor = '';
-    let tourName = '';
+    const tourName = this.props.user.currentTour.payload;
+    let showDate = '';
     if (fetchOrdersSuccess) {
       const ordersList = Array.from(fetchOrdersSuccess.payload);
       if (fetchOrdersSuccess.payload.length > 0) {
         variantTitle = ordersList[0].line_items[0].variant_title;
         vendor = ordersList[0].line_items[0].vendor;
-        tourName = ordersList[0].line_items[0].title;
+        showDate = ordersList[0].line_items[0].title;
       }
       return (
         <div>
           <div className="header" style={header}>
             <div>
               <h1>{variantTitle}</h1>
-              <h3><Link to="#" onClick={history.goBack}>{vendor}</Link></h3>
-              <h3>{tourName}</h3>
+              <h3>{vendor}</h3>
+              <h3><Link to="#" onClick={history.goBack}>{tourName}</Link></h3>
+              <h3>{showDate}</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <RaisedButton
@@ -117,6 +119,6 @@ class OrdersList extends Component {
   }
 }
 
-const mapStateToProps = state => ({ tourData: state.shopifyFetch });
+const mapStateToProps = state => ({ tourData: state.shopifyFetch, user: state.userAuth });
 
 export default Radium(connect(mapStateToProps)(OrdersList));

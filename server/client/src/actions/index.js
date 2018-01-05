@@ -21,6 +21,7 @@ import {
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_PENDING,
   LOGOUT_USER_REJECTED,
+  CURRENT_TOUR,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -145,4 +146,12 @@ export const fetchUser = () => async (dispatch) => {
     dispatch({ type: FETCHED_USER_REJECTED, payload: error });
     console.log('Error fetching user', error);
   }
+};
+
+export const updateTour = tourName => (dispatch) => {
+  const type = CURRENT_TOUR;
+  dispatch({
+    type,
+    payload: tourName,
+  });
 };
