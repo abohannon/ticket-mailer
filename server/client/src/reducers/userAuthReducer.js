@@ -8,10 +8,12 @@ import {
   FETCHED_USER_SUCCESS,
   FETCHED_USER_REJECTED,
   FETCHED_USER_PENDING,
+  CURRENT_TOUR,
 } from '../actions/types';
 
 const initialState = {
   isAuthorized: false, // XXX: for testing only, default should be false
+  currentTour: undefined,
   createUserPending: undefined,
   createUserRejected: undefined,
   createUserSuccess: undefined,
@@ -100,6 +102,12 @@ const userAuthReducer = (state = initialState, action) => {
         fetchedUserRejected: undefined,
         fetchedUserSuccess: action,
         fetchedUserPending: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case CURRENT_TOUR: {
+      const newState = {
+        currentTour: action,
       };
       return { ...state, ...newState };
     }

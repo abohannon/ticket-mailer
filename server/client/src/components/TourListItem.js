@@ -6,7 +6,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import { fetchProducts } from '../actions';
+import { fetchProducts, updateTour } from '../actions';
 
 class TourListItem extends Component {
   static propTypes = {
@@ -24,7 +24,9 @@ class TourListItem extends Component {
     console.log('collection id:', this.props.id);
     console.log('collection title:', this.props.title);
     const collectionId = this.props.id;
+    const tourTitle = this.props.title;
     this.props.dispatch(fetchProducts(collectionId));
+    this.props.dispatch(updateTour(tourTitle));
   }
 
   render() {
