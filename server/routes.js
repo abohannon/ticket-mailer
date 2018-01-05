@@ -11,4 +11,5 @@ module.exports = (app) => {
   app.post('/api/login', Controller.loginUser)
   app.get('/api/logout', Controller.logoutUser)
   app.get('/api/current_user', Controller.currentUser)
+  app.post('/api/email', Controller.sendEmail)
 }
