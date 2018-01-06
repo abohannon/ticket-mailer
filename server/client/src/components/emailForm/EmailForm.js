@@ -1,25 +1,42 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
-import EmailFormField from './EmailFormField';
+import EmailTextField from './EmailTextField';
 import formFields from './formFields';
+
+const EmailFormStyles = () => ({
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+});
 
 class EmailForm extends Component {
   renderFields() {
-    return formFields.map(({ label, name }) => <Field key={name} component={EmailFormField} type="text" label={label} name={name} />);
+    return formFields.map(({ label, name, multiLine }) => <Field key={name} component={EmailTextField} type="text" label={label} name={name} multiLine={multiLine} />);
   }
 
   render() {
+    const {
+      buttonContainer,
+    } = EmailFormStyles();
+
+    const { history } = this.props;
+
     return (
-      <div>
+      <div className="email-form__container">
         <form onSubmit={this.props.handleSubmit((values) => {
           console.log('Submit Form');
           console.log(values);
         })}
         >
           {this.renderFields()}
-          <FlatButton label="Save" type="submit" />
+          <div className="email-form__button-container" style={buttonContainer}>
+            <FlatButton label="Go Back" onClick={history.goBack} />
+            <FlatButton label="Next" type="submit" />
+          </div>
+
         </form>
       </div>
     );
@@ -28,4 +45,4 @@ class EmailForm extends Component {
 
 export default reduxForm({
   form: 'emailForm',
-})(EmailForm);
+})(withRouter(EmailForm));

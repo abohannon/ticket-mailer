@@ -5,7 +5,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import { fetchOrders } from '../actions';
+import { fetchOrders, updateShowDate } from '../actions';
 
 class DatesListItem extends Component {
   componentDidMount() {
@@ -15,6 +15,7 @@ class DatesListItem extends Component {
   sendVariantId = (index) => {
     const variantId = this.props.variants[index].id;
     this.props.dispatch(fetchOrders(variantId));
+    this.props.dispatch(updateShowDate(this.props.title));
   }
 
   renderVariants() {
