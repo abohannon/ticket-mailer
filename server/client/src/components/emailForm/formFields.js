@@ -1,9 +1,33 @@
-export default [
-  { label: 'Check In', name: 'checkin' },
-  { label: 'Start Time', name: 'start' },
-  { label: 'Items for Pickup', name: 'pickup', multiLine: true },
-  { label: 'Items Shipping', name: 'shipping', multiLine: true },
-  { label: 'Expected Shipping Date', name: 'shipping-date' },
-  { label: 'Items Delivered Digitally', name: 'digital', multiLine: true },
-  { label: 'Digital Delivery Date', name: 'digital-date' },
-];
+export default {
+  checkIn: {
+    label: 'Check In',
+    name: 'checkin',
+  },
+  startTime: {
+    label: 'Start Time',
+    name: 'start',
+  },
+  pickup: {
+    label: 'Items for Pickup',
+    name: 'pickup',
+    multiLine: true,
+  },
+  shipping: {
+    label: 'Items Shipping',
+    name: 'shipping',
+    multiLine: true,
+  },
+  shippingDate: {
+    label: 'Expected Shipping Date',
+    name: 'shipping-date',
+  },
+  digital: {
+    label: 'Items Delivered Digitally',
+    name: 'digital',
+    multiLine: true,
+  },
+  digitalDate: {
+    label: 'Digital Delivery Date',
+    name: 'digital-date',
+  },
+};

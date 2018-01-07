@@ -33,8 +33,8 @@ class EmailEdit extends Component {
       <div className="email-edit__container" style={container}>
         <div className="email-edit__header" style={header}>
           <h1>Edit Email</h1>
-          <h3>{tourName}</h3>
           <h3>{showDate}</h3>
+          <h3>{tourName}</h3>
         </div>
         <EmailForm />
       </div>

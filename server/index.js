@@ -18,12 +18,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 app.set('trust proxy', true)
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-  })
-)
+app.use(cookieSession({
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  keys: [keys.cookieKey],
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 

@@ -61,9 +61,9 @@ class OrdersList extends Component {
           <div className="header" style={header}>
             <div>
               <h1>{variantTitle}</h1>
-              <h3>{vendor}</h3>
-              <h3><Link to="#" onClick={history.goBack}>{tourName}</Link></h3>
               <h3>{showDate}</h3>
+              <h3><Link to="#" onClick={history.goBack}>{tourName}</Link></h3>
+              <h3>{vendor}</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <Link to="/edit-email">

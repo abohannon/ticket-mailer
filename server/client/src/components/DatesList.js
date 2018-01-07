@@ -58,8 +58,8 @@ class DatesList extends Component {
           <div className="header" style={header}>
             <div>
               <h1>Tour Dates</h1>
-              <h3>{vendorName}</h3>
               <h3>{tourName}</h3>
+              <h3>{vendorName}</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <RaisedButton

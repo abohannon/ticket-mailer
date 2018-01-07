@@ -1,4 +1,3 @@
-const passport = require('passport')
 const Controller = require('./controller')
 
 module.exports = (app) => {
