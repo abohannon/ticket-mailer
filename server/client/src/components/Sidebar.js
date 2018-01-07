@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import ListIcon from 'material-ui/svg-icons/action/list';
+import GroupIcon from 'material-ui/svg-icons/social/group';
+import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
 import { LIGHT_BLUE, DARK_BLUE } from '../style/constants';
 import { logoutUser } from '../actions';
 
@@ -16,6 +19,10 @@ const SidebarStyles = () => ({
     color: LIGHT_BLUE,
     height: '100vh',
     position: 'fixed',
+  },
+  iconContainer: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   listStyleTop: {
     width: 180,
@@ -66,6 +73,7 @@ class Sidebar extends Component {
       sidebar,
       listStyleTop,
       listItemStyle,
+      iconContainer,
     } = SidebarStyles();
 
     const {
@@ -76,16 +84,35 @@ class Sidebar extends Component {
     return (
       <div className="sidebar" style={sidebar}>
         <List style={listStyleTop}>
-          <ListItem primaryText={this.greeting()} style={listItemStyle} />
-          <ListItem primaryText="Home" style={listItemStyle} />
-          <ListItem primaryText="Tours" style={listItemStyle} onClick={() => { history.push('/'); }} />
-          <ListItem primaryText="Shows" style={listItemStyle} onClick={() => { history.push('/dates'); }} />
-          <ListItem primaryText="Orders" style={listItemStyle} onClick={() => { history.push('/email'); }} />
-          <ListItem primaryText="Archive" style={listItemStyle} />
+          <ListItem
+            primaryText={this.greeting()}
+            style={listItemStyle}
+          />
+          <ListItem
+            primaryText="Tours"
+            style={listItemStyle}
+            leftIcon={<ListIcon color={LIGHT_BLUE} />}
+            onClick={() => { history.push('/'); }}
+          />
+          <ListItem
+            primaryText="Orders"
+            style={listItemStyle}
+            leftIcon={<GroupIcon color={LIGHT_BLUE} />}
+            onClick={() => { history.push('/email'); }}
+          />
         </List>
         <List>
-          <ListItem primaryText="Settings" style={listItemStyle} rightIcon={<SettingsIcon color={LIGHT_BLUE} />} />
-          <ListItem primaryText="Log out" style={listItemStyle} onClick={this.handleLogout} />
+          <ListItem
+            primaryText="Settings"
+            style={listItemStyle}
+            leftIcon={<SettingsIcon color={LIGHT_BLUE} />}
+          />
+          <ListItem
+            primaryText="Log out"
+            style={listItemStyle}
+            leftIcon={<ExitIcon color={LIGHT_BLUE} />}
+            onClick={this.handleLogout}
+          />
         </List>
       </div>
     );
