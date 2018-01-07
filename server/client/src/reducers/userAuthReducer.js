@@ -9,11 +9,13 @@ import {
   FETCHED_USER_REJECTED,
   FETCHED_USER_PENDING,
   CURRENT_TOUR,
+  CURRENT_SHOW_DATE,
 } from '../actions/types';
 
 const initialState = {
-  isAuthorized: false, // XXX: for testing only, default should be false
+  isAuthorized: false,
   currentTour: undefined,
+  currentShowDate: undefined,
   createUserPending: undefined,
   createUserRejected: undefined,
   createUserSuccess: undefined,
@@ -108,6 +110,12 @@ const userAuthReducer = (state = initialState, action) => {
     case CURRENT_TOUR: {
       const newState = {
         currentTour: action,
+      };
+      return { ...state, ...newState };
+    }
+    case CURRENT_SHOW_DATE: {
+      const newState = {
+        currentShowDate: action,
       };
       return { ...state, ...newState };
     }

@@ -80,7 +80,7 @@ class Sidebar extends Component {
           <ListItem primaryText="Home" style={listItemStyle} />
           <ListItem primaryText="Tours" style={listItemStyle} onClick={() => { history.push('/'); }} />
           <ListItem primaryText="Shows" style={listItemStyle} onClick={() => { history.push('/dates'); }} />
-          <ListItem primaryText="Orders" style={listItemStyle} />
+          <ListItem primaryText="Orders" style={listItemStyle} onClick={() => { history.push('/email'); }} />
           <ListItem primaryText="Archive" style={listItemStyle} />
         </List>
         <List>

@@ -42,12 +42,12 @@ class DatesList extends Component {
   }
 
   renderContent() {
+    const { header, buttonContainer } = DatesListStyles();
     const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
     const { pathname } = this.props;
     const tourName = this.props.user.currentTour.payload || '';
-    const { header, buttonContainer } = DatesListStyles();
-    console.log('DatesList props:', this.props);
     let vendorName = '';
+    console.log('DatesList props:', this.props);
     if (fetchProductsSuccess) {
       const productList = Array.from(fetchProductsSuccess.payload);
       if (fetchProductsSuccess.payload.length > 0) {
@@ -58,8 +58,8 @@ class DatesList extends Component {
           <div className="header" style={header}>
             <div>
               <h1>Tour Dates</h1>
-              <h3>{vendorName}</h3>
               <h3>{tourName}</h3>
+              <h3>{vendorName}</h3>
             </div>
             <div className="button" style={buttonContainer}>
               <RaisedButton
