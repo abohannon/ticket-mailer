@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
+import { sendEmail } from '../../actions';
 import formFields from './formFields';
 
 const EmailFormReviewStyles = () => ({
@@ -28,13 +29,14 @@ class EmailFormReview extends Component {
   }
 
   render() {
+    console.log('EmailFormReview props', this.props);
     const {
       formContainer,
       flexRow,
       buttonContainer,
     } = EmailFormReviewStyles();
 
-    const { formValues } = this.props;
+    const { formValues, onCancel } = this.props;
     const { checkIn, startTime, pickup, shipping, shippingDate, digital, digitalDate } = formFields;
 
     return (
@@ -56,8 +58,8 @@ class EmailFormReview extends Component {
           <p>{formValues.digitalDate}</p>
         </div>
         <div className="email-form__button-container" style={buttonContainer}>
-          <FlatButton label="Go Back" onClick={this.props.onCancel} />
-          <FlatButton label="Send to all" onClick={() => { console.log('Send Email'); }} />
+          <FlatButton label="Go Back" onClick={onCancel} />
+          <FlatButton label="Send to all" onClick={() => { this.props.dispatch(sendEmail(formValues)); }} />
         </div>
       </div>
     );

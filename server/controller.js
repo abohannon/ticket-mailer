@@ -98,14 +98,7 @@ module.exports = {
   },
 
   sendEmail(req, res, next) {
-    const { subject, text } = req.body
-
-    const content = {
-      subject,
-      text,
-    }
-
-    sendMail(content)
+    sendMail(req.body)
 
     console.log('sendMail contoller')
   },
