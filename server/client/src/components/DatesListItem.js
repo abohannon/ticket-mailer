@@ -19,7 +19,7 @@ class DatesListItem extends Component {
   }
 
   renderVariants() {
-    const { variants, pathname } = this.props;
+    const { variants } = this.props;
     if (variants.length < 2) {
       return (<TableRowColumn>
         <Link
