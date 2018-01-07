@@ -1,0 +1,68 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
+import formFields from './formFields';
+
+const EmailFormReviewStyles = () => ({
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 960,
+    maxWidth: 960,
+    minWidth: 350,
+  },
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+});
+
+class EmailFormReview extends Component {
+  componentDidMount() {
+    console.log('==== EmailFormReview Mounted!');
+  }
+
+  render() {
+    const {
+      formContainer,
+      flexRow,
+      buttonContainer,
+    } = EmailFormReviewStyles();
+
+    const { formValues } = this.props;
+    const { checkIn, startTime, pickup, shipping, shippingDate, digital, digitalDate } = formFields;
+
+    return (
+      <div style={formContainer}>
+        <div>
+          <h4>{checkIn.label}</h4>
+          <p>{formValues.checkin}</p>
+          <h4>{startTime.label}</h4>
+          <p>{formValues.start}</p>
+          <h4>{pickup.label}</h4>
+          <p>{formValues.pickup}</p>
+          <h4>{shipping.label}</h4>
+          <p>{formValues.shipping}</p>
+          <h4>{shippingDate.label}</h4>
+          <p>{formValues.shippingDate}</p>
+          <h4>{digital.label}</h4>
+          <p>{formValues.digital}</p>
+          <h4>{digitalDate.label}</h4>
+          <p>{formValues.digitalDate}</p>
+        </div>
+        <div className="email-form__button-container" style={buttonContainer}>
+          <FlatButton label="Go Back" onClick={this.props.onCancel} />
+          <FlatButton label="Send to all" onClick={() => { console.log('Send Email'); }} />
+        </div>
+      </div>
+    );
+  }
+}
+const mapStateToProps = state => ({ formValues: state.form.emailForm.values });
+
+export default connect(mapStateToProps)(EmailFormReview);
