@@ -73,7 +73,6 @@ class Sidebar extends Component {
       sidebar,
       listStyleTop,
       listItemStyle,
-      iconContainer,
     } = SidebarStyles();
 
     const {
