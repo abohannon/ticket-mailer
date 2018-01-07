@@ -19,7 +19,7 @@ export default {
   },
   shippingDate: {
     label: 'Expected Shipping Date',
-    name: 'shipping-date',
+    name: 'shippingDate',
   },
   digital: {
     label: 'Items Delivered Digitally',
@@ -28,6 +28,6 @@ export default {
   },
   digitalDate: {
     label: 'Digital Delivery Date',
-    name: 'digital-date',
+    name: 'digitalDate',
   },
 };

@@ -40,11 +40,7 @@ class EmailForm extends Component {
 
     return (
       <div className="email-form__container" style={formContainer}>
-        <form onSubmit={this.props.handleSubmit((values) => {
-          console.log('Submit Form');
-          console.log(values);
-        })}
-        >
+        <form onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}>
           <div style={flexRow}>
             <Field component={EmailTextField} type="text" label={checkIn.label} name={checkIn.name} />
             <Field component={EmailTextField} type="text" label={startTime.label} name={startTime.name} />

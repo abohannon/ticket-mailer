@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import Radium from 'radium';
 import EmailForm from './EmailForm';
+import EmailFormReview from './EmailFormReview';
 
 const EmailEditStyles = () => ({
   container: {
@@ -18,6 +19,13 @@ class EmailEdit extends Component {
 
   componentDidMount() {
     console.log('===== EmailEdit mounted!');
+  }
+
+  renderContent() {
+    if (this.state.showEmailReview) {
+      return <EmailFormReview onCancel={() => this.setState({ showEmailReview: false })} />;
+    }
+    return <EmailForm onFormSubmit={() => this.setState({ showEmailReview: true })} />;
   }
 
   render() {
@@ -36,7 +44,7 @@ class EmailEdit extends Component {
           <h3>{showDate}</h3>
           <h3>{tourName}</h3>
         </div>
-        <EmailForm />
+        {this.renderContent()}
       </div>
     );
   }
