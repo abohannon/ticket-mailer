@@ -164,3 +164,10 @@ export const updateShowDate = showDate => (dispatch) => {
     payload: showDate,
   });
 };
+
+// Email ACTIONS
+
+export const sendEmail = (values, history) => async (dispatch) => {
+  const res = await axios.post('/api/email', values);
+  console.log('sendEmail', res.body);
+};
