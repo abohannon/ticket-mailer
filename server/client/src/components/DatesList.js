@@ -54,13 +54,13 @@ class DatesList extends Component {
       }
       return (
         <div>
-          <div className="header" style={header}>
+          <div className="dates-list__header" style={header}>
             <div>
               <h1>Tour Dates</h1>
               <h3>{tourName}</h3>
               <h3>{vendorName}</h3>
             </div>
-            <div className="button" style={buttonContainer}>
+            <div className="dates-list__button-container" style={buttonContainer}>
               <RaisedButton
                 label="Edit Tour Info"
                 icon={<EditIcon />}
@@ -102,7 +102,7 @@ class DatesList extends Component {
     } = DatesListStyles();
 
     return (
-      <div className="datesList--container" style={container}>
+      <div className="datesList__container" style={container}>
         {this.renderContent()}
       </div>
     );

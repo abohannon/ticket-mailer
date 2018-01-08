@@ -59,8 +59,8 @@ class TourList extends Component {
     } = TourListStyles();
 
     return (
-      <div className="tourList--container" style={container}>
-        <div className="header" style={header}>
+      <div className="tour-list__container" style={container}>
+        <div className="tour-list__header" style={header}>
           <h1>Current Tours</h1>
         </div>
         <Table>

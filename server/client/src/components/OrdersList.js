@@ -114,7 +114,7 @@ class OrdersList extends Component {
     } = OrdersListStyles();
 
     return (
-      <div className="ordersList--container" style={container}>
+      <div className="ordersList__container" style={container}>
         {this.renderContent()}
       </div>
     );

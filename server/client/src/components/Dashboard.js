@@ -24,7 +24,7 @@ class Dashboard extends Component {
     const { pathname } = this.props.history;
     console.log('Dashboard props', this.props);
     return (
-      <div className="dashboard--container">
+      <div className="dashboard__container">
         <Sidebar history={this.props.history} />
         <Switch>
           <Route path="/edit-email" component={EmailEdit} />
