@@ -15,18 +15,14 @@ class TourListItem extends Component {
     title: PropTypes.string.isRequired,
     handle: PropTypes.string.isRequired,
   }
-  componentDidMount() {
-
-  }
 
   sendCollectionId = () => {
     console.log('sendCollectionId');
     console.log('collection id:', this.props.id);
     console.log('collection title:', this.props.title);
-    const collectionId = this.props.id;
+    const tourId = this.props.id;
     const tourTitle = this.props.title;
-    this.props.dispatch(fetchProducts(collectionId));
-    this.props.dispatch(updateTour(tourTitle));
+    this.props.dispatch(updateTour({ tourTitle, tourId }));
   }
 
   render() {

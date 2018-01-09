@@ -5,7 +5,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import { fetchOrders, updateShowDate } from '../actions';
+import { fetchOrders, updateShowDate, updateTour } from '../actions';
 
 class DatesListItem extends Component {
   componentDidMount() {
@@ -13,9 +13,13 @@ class DatesListItem extends Component {
   }
 
   sendVariantId = (index) => {
+    const dateTitle = this.props.title;
+    const dateId = this.props.id;
     const variantId = this.props.variants[index].id;
-    this.props.dispatch(fetchOrders(variantId));
-    this.props.dispatch(updateShowDate(this.props.title));
+    const variantTitle = this.props.variants[index].title;
+    const previousTourState = this.props.user.currentTour.payload;
+    const tourState = { dateTitle, dateId, variantId, variantTitle };
+    this.props.dispatch(updateTour({ ...previousTourState, ...tourState }));
   }
 
   renderVariants() {
@@ -23,7 +27,7 @@ class DatesListItem extends Component {
     if (variants.length < 2) {
       return (<TableRowColumn>
         <Link
-          to={{ pathname: `/orders/${variants[0].title}` }}
+          to={{ pathname: '/orders' }}
           onClick={() => this.sendVariantId(0)}
         >{variants[0].title}
         </Link>
@@ -34,12 +38,12 @@ class DatesListItem extends Component {
       // XXX: When clicking the link twice, it doubles the route text
       <TableRowColumn>
         <Link
-          to={{ pathname: `/orders/${variants[0].title}` }}
+          to={{ pathname: '/orders' }}
           onClick={() => this.sendVariantId(0)}
         >{variants[0].title}</Link>
         &nbsp;|&nbsp;
         <Link
-          to={{ pathname: `/orders/${variants[1].title}` }}
+          to={{ pathname: '/orders' }}
           onClick={() => this.sendVariantId(1)}
         >{variants[1].title}</Link>
       </TableRowColumn>
@@ -47,7 +51,6 @@ class DatesListItem extends Component {
   }
 
   render() {
-    console.log('DatesListItem', this.props);
     const {
       title,
       id,
@@ -63,5 +66,6 @@ class DatesListItem extends Component {
   }
 }
 
+const mapStateToProps = state => ({ user: state.userAuth });
 
-export default connect()(DatesListItem);
+export default connect(mapStateToProps)(DatesListItem);

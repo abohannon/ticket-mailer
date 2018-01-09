@@ -34,8 +34,8 @@ class EmailEdit extends Component {
       header,
     } = EmailEditStyles();
 
-    const tourName = this.props.user.currentTour.payload;
-    const showDate = this.props.user.currentShowDate.payload;
+    const tourName = this.props.user.currentTour.payload.tourTitle;
+    const showDate = this.props.user.currentTour.payload.dateTitle;
 
     return (
       <div className="email-edit__container" style={container}>
