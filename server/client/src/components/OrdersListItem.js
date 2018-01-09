@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
 
 class OrdersListItem extends Component {
+  static propTypes = {
+    orderNumber: PropTypes.number.isRequired,
+    customerName: PropTypes.string.isRequired,
+    customerEmail: PropTypes.string.isRequired,
+  }
+
   render() {
     const { orderNumber, customerName, customerEmail } = this.props;
     return (

@@ -39,12 +39,15 @@ class DatesList extends Component {
 
   componentDidMount() {
     console.log('==== DatesList mounted!');
+    const tourId = this.props.user.currentTour.payload.tourId;
+    this.props.dispatch(fetchProducts(tourId));
   }
 
   renderContent() {
     const { header, buttonContainer } = DatesListStyles();
     const { fetchProductsSuccess, fetchProductsRejected } = this.props.tourData;
-    const tourName = this.props.user.currentTour.payload || '';
+    const tourId = this.props.user.currentTour.payload.tourId;
+    const tourName = this.props.user.currentTour.payload.tourTitle || '';
     let vendorName = '';
     console.log('DatesList props:', this.props);
     if (fetchProductsSuccess) {
@@ -90,7 +93,7 @@ class DatesList extends Component {
     } else if (fetchProductsRejected) {
       <div>
         <h2>Looks like there was a problem grabbing your data.</h2>
-        <h2 onClick={() => { this.props.dispatch(fetchProducts('1625882628')); }}>Click here to try again.</h2>
+        <h2 onClick={() => { this.props.dispatch(fetchProducts(tourId)); }}>Click here to try again.</h2>
         {/* TODO: Update with dynamic collection id */}
       </div>;
     }

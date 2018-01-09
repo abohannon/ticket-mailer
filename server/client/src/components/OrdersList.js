@@ -30,31 +30,27 @@ const OrdersListStyles = () => ({
 });
 
 class OrdersList extends Component {
-  static PropTypes = {
-    tourData: PropTypes.object.isRequired,
-  }
-
-  static defaultProps = {
-    fetchProductsSuccess: undefined,
-  }
   componentDidMount() {
     console.log('==== OrdersList mounted!');
+    const variantId = this.props.user.currentTour.payload.variantId;
+    this.props.dispatch(fetchOrders(variantId));
   }
 
   renderContent() {
-    const { fetchOrdersSuccess, fetchOrdersRejected } = this.props.tourData;
-    const { history } = this.props;
     const { header, buttonContainer } = OrdersListStyles();
+    const { history } = this.props;
+    const { fetchOrdersSuccess, fetchOrdersRejected } = this.props.tourData;
+    const variantId = this.props.user.currentTour.payload.variantId;
+    const tourName = this.props.user.currentTour.payload.tourTitle;
     let variantTitle = 'Bundle Orders';
     let vendor = '';
-    const tourName = this.props.user.currentTour.payload;
     let showDate = '';
     if (fetchOrdersSuccess) {
       const ordersList = Array.from(fetchOrdersSuccess.payload);
       if (fetchOrdersSuccess.payload.length > 0) {
-        variantTitle = ordersList[0].line_items[0].variant_title;
+        variantTitle = this.props.user.currentTour.payload.variantTitle;
         vendor = ordersList[0].line_items[0].vendor;
-        showDate = ordersList[0].line_items[0].title;
+        showDate = this.props.user.currentTour.payload.dateTitle;
       }
       return (
         <div>
@@ -100,8 +96,7 @@ class OrdersList extends Component {
       return (
         <div>
           <h2>Looks like there was a problem grabbing your data.</h2>
-          <h2 onClick={() => { this.props.dispatch(fetchOrders('887373070340')); }}>Click here to try again.</h2>
-          {/* TODO: Update with dynamic variant id */}
+          <h2 onClick={() => { this.props.dispatch(fetchOrders(variantId)); }}>Click here to try again.</h2>
         </div>
       );
     }
