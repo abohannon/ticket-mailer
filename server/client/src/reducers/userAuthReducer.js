@@ -9,7 +9,6 @@ import {
   FETCHED_USER_REJECTED,
   FETCHED_USER_PENDING,
   CURRENT_TOUR,
-  CURRENT_SHOW_DATE,
 } from '../actions/types';
 
 const initialState = {
@@ -110,12 +109,6 @@ const userAuthReducer = (state = initialState, action) => {
     case CURRENT_TOUR: {
       const newState = {
         currentTour: action,
-      };
-      return { ...state, ...newState };
-    }
-    case CURRENT_SHOW_DATE: {
-      const newState = {
-        currentShowDate: action,
       };
       return { ...state, ...newState };
     }

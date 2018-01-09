@@ -22,7 +22,6 @@ import {
   LOGOUT_USER_PENDING,
   LOGOUT_USER_REJECTED,
   CURRENT_TOUR,
-  CURRENT_SHOW_DATE,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -154,14 +153,6 @@ export const updateTour = tourName => (dispatch) => {
   dispatch({
     type,
     payload: tourName,
-  });
-};
-
-export const updateShowDate = showDate => (dispatch) => {
-  const type = CURRENT_SHOW_DATE;
-  dispatch({
-    type,
-    payload: showDate,
   });
 };
 
