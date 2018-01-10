@@ -40,6 +40,7 @@ class UserAuth extends Component {
   componentDidMount() {
     console.log('==== UserAuth mounted!');
     this.props.dispatch(fetchUser());
+    console.log('User Auth props', this.props.user);
   }
 
   renderContent() {
