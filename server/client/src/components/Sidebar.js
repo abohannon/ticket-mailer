@@ -7,7 +7,7 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import ListIcon from 'material-ui/svg-icons/action/list';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
-import { LIGHT_BLUE, DARK_BLUE } from '../style/constants';
+import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
 import { logoutUser } from '../actions';
 
 const SidebarStyles = () => ({
@@ -29,6 +29,11 @@ const SidebarStyles = () => ({
   },
   listItemStyle: {
     color: LIGHT_BLUE,
+  },
+  greeting: {
+    color: LIGHT_BLUE,
+    padding: 32,
+    textAlign: 'center',
   },
 });
 
@@ -73,6 +78,7 @@ class Sidebar extends Component {
       sidebar,
       listStyleTop,
       listItemStyle,
+      greeting,
     } = SidebarStyles();
 
     const {
@@ -85,7 +91,8 @@ class Sidebar extends Component {
         <List style={listStyleTop}>
           <ListItem
             primaryText={this.greeting()}
-            style={listItemStyle}
+            style={greeting}
+            disabled
           />
           <ListItem
             primaryText="Tours"

@@ -1,3 +1,7 @@
 .dashboard__container {
   display: flex;
 }
+
+h3 {
+  font-weight: 400;
+}
