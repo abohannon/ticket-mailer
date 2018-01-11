@@ -16,3 +16,15 @@ a:hover {
   text-decoration: underline;
   color: #5F97FB;
 }
+
+tr:hover td {
+  background-color: #fefaf1 !important;
+}
+
+tr td:first-child {
+  border-left: 4px solid transparent;
+}
+
+tr:hover td:first-child {
+  border-left: 4px solid #5F97FB;
+}
