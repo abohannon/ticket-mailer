@@ -34,6 +34,7 @@ export const fetchCollections = () => async (dispatch) => {
     type: FETCH_COLLECTIONS_PENDING,
   };
   dispatch(action);
+  console.log('&&&&& fetchCollections');
   try {
     const res = await axios.get('/api/collections');
     dispatch({ type: FETCH_COLLECTIONS_SUCCESS, payload: res.data });
@@ -47,6 +48,7 @@ export const fetchProducts = collectionId => async (dispatch) => {
     type: FETCH_PRODUCTS_PENDING,
   };
   dispatch(action);
+  console.log('&&&&& fetchProducts');
   try {
     const res = await axios.get(`/api/collection_products/${collectionId}`);
     const type = res.data.length > 0 ? FETCH_PRODUCTS_SUCCESS : FETCH_PRODUCTS_REJECTED;
@@ -65,6 +67,7 @@ export const fetchOrders = variantId => async (dispatch) => {
     type: FETCH_ORDERS_PENDING,
   };
   dispatch(action);
+  console.log('&&&&& fetchOrders');
   try {
     const res = await axios.get(`/api/orders/${variantId}`);
     const type = res.data.length > 0 ? FETCH_ORDERS_SUCCESS : FETCH_ORDERS_REJECTED;
@@ -72,7 +75,6 @@ export const fetchOrders = variantId => async (dispatch) => {
       type,
       payload: res.data,
     };
-    console.log('fetchOrders:', res.data);
     dispatch(action);
   } catch (error) {
     dispatch({ type: FETCH_ORDERS_REJECTED });
@@ -84,6 +86,7 @@ export const fetchAllOrders = () => async (dispatch) => {
     type: FETCH_ALL_ORDERS_PENDING,
   };
   dispatch(action);
+  console.log('&&&&& fetchAllOrders');
   try {
     const res = await axios.get('/api/orders/');
     const type = res.data.length > 0 ? FETCH_ALL_ORDERS_SUCCESS : FETCH_ALL_ORDERS_REJECTED;
@@ -91,7 +94,6 @@ export const fetchAllOrders = () => async (dispatch) => {
       type,
       payload: res.data,
     };
-    console.log('fetchAllOrders:', res.data);
     dispatch(action);
   } catch (error) {
     dispatch({ type: FETCH_ALL_ORDERS_REJECTED });
