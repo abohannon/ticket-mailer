@@ -97,7 +97,7 @@ class Sidebar extends Component {
             primaryText="Orders"
             style={listItemStyle}
             leftIcon={<GroupIcon color={LIGHT_BLUE} />}
-            onClick={() => { history.push('/email'); }}
+            onClick={() => { history.push('/all-orders'); }}
           />
         </List>
         <List>
