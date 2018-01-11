@@ -8,6 +8,7 @@ import TourList from './TourList';
 import DatesList from './DatesList';
 import OrdersList from './OrdersList';
 import EmailEdit from './emailForm/EmailEdit';
+import AllOrdersList from './AllOrdersList';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -27,6 +28,7 @@ class Dashboard extends Component {
       <div className="dashboard__container">
         <Sidebar history={this.props.history} />
         <Switch>
+          <Route path="/all-orders" component={AllOrdersList} />
           <Route path="/edit-email" component={EmailEdit} />
           <Route path="/dates" component={DatesList} />
           <Route path="/orders" component={OrdersList} />

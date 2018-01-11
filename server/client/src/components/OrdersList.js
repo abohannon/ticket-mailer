@@ -83,6 +83,7 @@ class OrdersList extends Component {
               { ordersList.map(order => (
                 <OrdersListItem
                   key={order.id}
+                  id={order.id}
                   orderNumber={order.order_number}
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}

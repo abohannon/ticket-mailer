@@ -9,6 +9,9 @@ import {
   FETCH_ORDERS_PENDING,
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_REJECTED,
+  FETCH_ALL_ORDERS_PENDING,
+  FETCH_ALL_ORDERS_SUCCESS,
+  FETCH_ALL_ORDERS_REJECTED,
   CREATE_USER_SUCCESS,
   CREATE_USER_PENDING,
   CREATE_USER_REJECTED,
@@ -73,6 +76,25 @@ export const fetchOrders = variantId => async (dispatch) => {
     dispatch(action);
   } catch (error) {
     dispatch({ type: FETCH_ORDERS_REJECTED });
+  }
+};
+
+export const fetchAllOrders = () => async (dispatch) => {
+  let action = {
+    type: FETCH_ALL_ORDERS_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get('/api/orders/');
+    const type = res.data.length > 0 ? FETCH_ALL_ORDERS_SUCCESS : FETCH_ALL_ORDERS_REJECTED;
+    action = {
+      type,
+      payload: res.data,
+    };
+    console.log('fetchAllOrders:', res.data);
+    dispatch(action);
+  } catch (error) {
+    dispatch({ type: FETCH_ALL_ORDERS_REJECTED });
   }
 };
 

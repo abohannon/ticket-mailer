@@ -8,6 +8,9 @@ import {
   FETCH_ORDERS_PENDING,
   FETCH_ORDERS_SUCCESS,
   FETCH_ORDERS_REJECTED,
+  FETCH_ALL_ORDERS_PENDING,
+  FETCH_ALL_ORDERS_SUCCESS,
+  FETCH_ALL_ORDERS_REJECTED,
 } from '../actions/types';
 
 const initialState = {
@@ -20,6 +23,9 @@ const initialState = {
   fetchOrdersPending: undefined,
   fetchOrdersRejected: undefined,
   fetchOrdersSuccess: undefined,
+  fetchAllOrdersPending: undefined,
+  fetchAllOrdersRejected: undefined,
+  fetchAllOrdersSuccess: undefined,
 };
 
 export default function (state = initialState, action) {
@@ -45,6 +51,30 @@ export default function (state = initialState, action) {
         fetchOrdersPending: undefined,
         fetchOrdersRejected: undefined,
         fetchOrdersSuccess: action,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_ALL_ORDERS_PENDING: {
+      const newState = {
+        fetchAllOrdersPending: action,
+        fetchAllOrdersRejected: undefined,
+        fetchAllOrdersSuccess: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_ALL_ORDERS_REJECTED: {
+      const newState = {
+        fetchAllOrdersPending: undefined,
+        fetchAllOrdersRejected: action,
+        fetchAllOrdersSuccess: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_ALL_ORDERS_SUCCESS: {
+      const newState = {
+        fetchAllOrdersPending: undefined,
+        fetchAllOrdersRejected: undefined,
+        fetchAllOrdersSuccess: action,
       };
       return { ...state, ...newState };
     }
