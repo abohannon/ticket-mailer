@@ -63,6 +63,7 @@ class AllOrdersList extends Component {
       hintStyle,
       inputStyle,
       underlineStyle,
+      tableBody,
     } = AllOrdersListStyles();
 
     const { fetchAllOrdersSuccess, fetchAllOrdersRejected } = this.props.tourData;
