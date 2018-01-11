@@ -8,8 +8,10 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
 import OrdersListItem from './OrdersListItem';
 import { fetchAllOrders } from '../actions';
+import { ACCENT_BLUE, WHITE, LIGHT_BLUE } from '../style/constants';
 
 const AllOrdersListStyles = () => ({
   container: {
@@ -17,26 +19,74 @@ const AllOrdersListStyles = () => ({
   },
   header: {
     display: 'flex',
-    justifyContent: 'space-between',
     padding: '0px 24px 0px 24px',
+  },
+  fieldStyle: {
+    margin: '24px 0 0 24px',
+  },
+  hintStyle: {
+    color: LIGHT_BLUE,
+  },
+  inputStyle: {
+    color: LIGHT_BLUE,
+  },
+  underlineStyle: {
+    borderColor: ACCENT_BLUE,
   },
 });
 
 class AllOrdersList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      search: '',
+    };
+  }
+
   componentDidMount() {
     console.log('==== All Orders List Mounted!');
     this.props.dispatch(fetchAllOrders());
   }
 
+  handleSearchInput = (event) => {
+    this.setState({
+      search: event.target.value,
+    });
+    console.log('search input', this.state.search);
+  }
+
   renderContent() {
-    const { header } = AllOrdersListStyles();
+    const {
+      header,
+      fieldStyle,
+      hintStyle,
+      inputStyle,
+      underlineStyle,
+    } = AllOrdersListStyles();
+
     const { fetchAllOrdersSuccess, fetchAllOrdersRejected } = this.props.tourData;
     if (fetchAllOrdersSuccess) {
       const ordersList = Array.from(fetchAllOrdersSuccess.payload);
+      const filteredOrders = ordersList.filter(order => (
+        order.email.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
+        order.order_number.toString().indexOf(this.state.search) !== -1
+      ));
+
       return (
         <div>
           <div className="header" style={header}>
             <h1>All Orders</h1>
+            <TextField
+              name="search"
+              style={fieldStyle}
+              hintText="Search"
+              hintStyle={hintStyle}
+              inputStyle={inputStyle}
+              underlineFocusStyle={underlineStyle}
+              value={this.state.search}
+              onChange={event => this.handleSearchInput(event)}
+            />
           </div>
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -48,7 +98,7 @@ class AllOrdersList extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-              { ordersList.map(order => (
+              { filteredOrders.map(order => (
                 <OrdersListItem
                   key={order.id}
                   id={order.id}
@@ -72,7 +122,6 @@ class AllOrdersList extends Component {
   }
 
   render() {
-    console.log('AllOrdersList', this.props.tourData);
     const {
       container,
     } = AllOrdersListStyles();
