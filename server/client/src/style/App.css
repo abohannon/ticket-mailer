@@ -1,5 +1,6 @@
 .dashboard__container {
   display: flex;
+  width: 100vw;
 }
 
 h3 {
