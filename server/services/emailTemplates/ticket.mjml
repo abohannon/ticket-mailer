@@ -1,9 +1,31 @@
 <mjml>
+  <mj-head>
+    <mj-style>
+      .reset {
+        margin: 0;
+        padding: 0;
+      },
+      .border {
+        border: 1px solid orangered;
+      }
+    </mj-style>
+  </mj-head>
   <mj-body>
-    <mj-container>
-      <mj-section>
+    <mj-container width="100%">
+      <mj-section full-width="full-width" border="1px solid orangered">
+        <mj-column css-class="reset">
+          <mj-image width="100%" src="https://cdn.shopify.com/s/files/1/1046/3446/products/Ticket_Bundle_92f42245-c0f0-4493-943b-2c40e6d6fd30_grande.jpg" css-class="reset">
+        </mj-column>
         <mj-column>
-          <mj-text>Hi sexy!</mj-text>
+          <mj-text>Attendee info and Check in/Start Time</mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section border="1px solid orangered">
+        <mj-column>
+          <mj-text>QR Code (if exists)</mj-text>
+        </mj-column>
+        <mj-column>
+          <mj-text>Event Notes</mj-text>
         </mj-column>
       </mj-section>
     </mj-container>
