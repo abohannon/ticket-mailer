@@ -71,7 +71,7 @@ class AllOrdersList extends Component {
       </div>);
     } else if (fetchAllOrdersSuccess) {
       const ordersList = Array.from(fetchAllOrdersSuccess.payload);
-      const filteredOrders = ordersList.filter(order => (order.email.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || order.order_number.toString().indexOf(this.state.search) !== -1));
+      const filteredOrders = ordersList.filter(order => (order.email.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || order.order_number.toString().indexOf(this.state.search) !== -1 || order.shipping_address.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1));
 
       return (<div>
         <div className="header" style={header}>
