@@ -30,14 +30,18 @@ class EmailFormReview extends Component {
 
   render() {
     console.log('EmailFormReview props', this.props);
-    const {
-      formContainer,
-      flexRow,
-      buttonContainer,
-    } = EmailFormReviewStyles();
+    const { formContainer, flexRow, buttonContainer } = EmailFormReviewStyles();
 
     const { formValues, onCancel } = this.props;
-    const { checkIn, startTime, pickup, shipping, shippingDate, digital, digitalDate } = formFields;
+    const {
+      checkIn,
+      startTime,
+      pickup,
+      shipping,
+      shippingDate,
+      digital,
+      digitalDate,
+    } = formFields;
 
     return (
       <div style={formContainer}>
@@ -59,12 +63,20 @@ class EmailFormReview extends Component {
         </div>
         <div className="email-form__button-container" style={buttonContainer}>
           <FlatButton label="Go Back" onClick={onCancel} />
-          <FlatButton label="Send to all" onClick={() => { this.props.dispatch(sendEmail(formValues)); }} />
+          <FlatButton
+            label="Send to all"
+            onClick={() => {
+              this.props.dispatch(sendEmail(formValues));
+            }}
+          />
         </div>
       </div>
     );
   }
 }
-const mapStateToProps = state => ({ formValues: state.form.emailForm.values });
+const mapStateToProps = state => ({
+  formValues: state.form.emailForm.values,
+  tourData: state.shopifyFetch,
+});
 
 export default connect(mapStateToProps)(EmailFormReview);

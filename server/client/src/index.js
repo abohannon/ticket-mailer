@@ -19,20 +19,26 @@ const persistedState = loadUser();
 const store = createStore(
   reducers,
   persistedState,
-  applyMiddleware(reduxThunk));
+  applyMiddleware(reduxThunk),
+);
 
 console.log('store', store.getState());
 
-store.subscribe(throttle(() => {
-  saveUser({
-    userAuth: {
-      isAuthorized: store.getState().userAuth.isAuthorized,
-      currentTour: store.getState().userAuth.currentTour,
-    },
-  });
-}, 1000));
+store.subscribe(
+  throttle(() => {
+    saveUser({
+      userAuth: {
+        isAuthorized: store.getState().userAuth.isAuthorized,
+        currentTour: store.getState().userAuth.currentTour,
+      },
+    });
+  }, 1000),
+);
 
 ReactDOM.render(
-  <Provider store={store}><App /></Provider>,
-  document.getElementById('root'));
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
 registerServiceWorker();
