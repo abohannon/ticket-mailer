@@ -42,7 +42,9 @@ const validate = (values) => {
 };
 
 class EmailForm extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('EmailForm props', this.props);
+  }
 
   render() {
     const { formContainer, flexRow, buttonContainer, blue } = EmailFormStyles();

@@ -14,7 +14,7 @@ class Dashboard extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-  }
+  };
 
   componentDidMount() {
     console.log('==== Dashboard mounted!');
@@ -39,6 +39,9 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.userAuth });
+const mapStateToProps = state => ({
+  user: state.userAuth,
+  tourData: state.shopifyFetch,
+});
 
-export default connect(mapStateToProps)(withRouter((Dashboard)));
+export default connect(mapStateToProps)(withRouter(Dashboard));

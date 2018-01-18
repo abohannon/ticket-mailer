@@ -10,12 +10,12 @@ export default {
   pickup: {
     label: 'Items for Pickup',
     name: 'pickup',
-    multiLine: 'true',
+    multiLine: true,
   },
   shipping: {
     label: 'Items Shipping',
     name: 'shipping',
-    multiLine: 'true',
+    multiLine: true,
   },
   shippingDate: {
     label: 'Expected Shipping Date',
@@ -24,7 +24,7 @@ export default {
   digital: {
     label: 'Items Delivered Digitally',
     name: 'digital',
-    multiLine: 'true',
+    multiLine: true,
   },
   digitalDate: {
     label: 'Digital Delivery Date',
