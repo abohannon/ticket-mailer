@@ -1,20 +1,22 @@
-const nodemailer = require('nodemailer')
-const keys = require('../config/keys')
+const nodemailer = require('nodemailer');
+const keys = require('../config/keys');
 
-const sendMail = (content) => {
+const sendMail = (values, emails) => {
   const {
     checkin, start, pickup, shipping, shippingDate, digital, digitalDate,
-  } = content
+  } = values;
+
   const transporter = nodemailer.createTransport({
     service: 'Mailgun',
     auth: {
-      user: keys.mailgunUser, // postmaster@sandbox[base64 string].mailgain.org
-      pass: keys.mailgunPass, // You set this.
+      user: keys.mailgunUser,
+      pass: keys.mailgunPass,
     },
   });
+
   const message = {
-    from: 'no-reply@test2.com',
-    to: 'abo46n2@gmail.com', // comma separated list
+    from: 'ticketmailer@showstubs.com',
+    to: emails, // comma separated list
     subject: 'Your VIP entry to TOUR NAME',
     html: `
       <h3>Check in time</h3>
@@ -33,6 +35,7 @@ const sendMail = (content) => {
       <p>${digitalDate}</p>
     `,
   };
+
   transporter.sendMail(message, (error, info) => {
     if (error) {
       console.log(error);
@@ -42,4 +45,4 @@ const sendMail = (content) => {
   });
 };
 
-module.exports = sendMail
+module.exports = sendMail;

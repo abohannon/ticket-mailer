@@ -23,17 +23,9 @@ class EmailEdit extends Component {
 
   renderContent() {
     if (this.state.showEmailReview) {
-      return (
-        <EmailFormReview
-          onCancel={() => this.setState({ showEmailReview: false })}
-        />
-      );
+      return <EmailFormReview onCancel={() => this.setState({ showEmailReview: false })} />;
     }
-    return (
-      <EmailForm
-        onFormSubmit={() => this.setState({ showEmailReview: true })}
-      />
-    );
+    return <EmailForm onFormSubmit={() => this.setState({ showEmailReview: true })} />;
   }
 
   render() {
@@ -44,19 +36,13 @@ class EmailEdit extends Component {
 
     return (
       <div className="email-edit__container" style={container}>
-        <Header
-          pageTitle={'Edit Email'}
-          showDate={showDate}
-          tourName={tourName}
-        />
+        <Header pageTitle={'Edit Email'} showDate={showDate} tourName={tourName} />
         {this.renderContent()}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ user: state.userAuth });
+const mapStateToProps = state => ({ user: state.userAuth, tourData: state.shopifyFetch });
 
-export default Radium(
-  reduxForm({ form: 'emailForm' })(connect(mapStateToProps)(EmailEdit)),
-);
+export default Radium(reduxForm({ form: 'emailForm' })(connect(mapStateToProps)(EmailEdit)));

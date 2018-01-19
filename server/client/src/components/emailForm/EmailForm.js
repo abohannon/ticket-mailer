@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
@@ -49,15 +50,7 @@ class EmailForm extends Component {
   render() {
     const { formContainer, flexRow, buttonContainer, blue } = EmailFormStyles();
 
-    const {
-      checkIn,
-      startTime,
-      pickup,
-      shipping,
-      shippingDate,
-      digital,
-      digitalDate,
-    } = formFields;
+    const { checkIn, startTime, pickup, shipping, shippingDate, digital, digitalDate } = formFields;
 
     const { history } = this.props;
 
@@ -65,18 +58,8 @@ class EmailForm extends Component {
       <div className="email-form__container" style={formContainer}>
         <form onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}>
           <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={checkIn.label}
-              name={checkIn.name}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={startTime.label}
-              name={startTime.name}
-            />
+            <Field component={EmailTextField} type="text" label={checkIn.label} name={checkIn.name} />
+            <Field component={EmailTextField} type="text" label={startTime.label} name={startTime.name} />
           </div>
           <div>
             <Field
@@ -95,12 +78,7 @@ class EmailForm extends Component {
               name={shipping.name}
               multiLine={shipping.multiLine}
             />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={shippingDate.label}
-              name={shippingDate.name}
-            />
+            <Field component={EmailTextField} type="text" label={shippingDate.label} name={shippingDate.name} />
           </div>
           <div style={flexRow}>
             <Field
@@ -110,28 +88,21 @@ class EmailForm extends Component {
               name={digital.name}
               multiLine={digital.multiLine}
             />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={digitalDate.label}
-              name={digitalDate.name}
-            />
+            <Field component={EmailTextField} type="text" label={digitalDate.label} name={digitalDate.name} />
           </div>
           <div className="email-form__button-container" style={buttonContainer}>
             <FlatButton label="Go Back" onClick={history.goBack} />
-            <FlatButton
-              label="Next"
-              labelPosition="before"
-              icon={<Arrow />}
-              type="submit"
-              style={blue}
-            />
+            <FlatButton label="Next" labelPosition="before" icon={<Arrow />} type="submit" style={blue} />
           </div>
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({ tourData: state.shopifyFetch });
+
+EmailForm = connect(mapStateToProps)(EmailForm);
 
 export default reduxForm({
   form: 'emailForm',
