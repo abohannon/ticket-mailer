@@ -16,6 +16,7 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
 
   const transporter = nodemailer.createTransport({
     service: 'Mailgun',
+    port: 587,
     auth: {
       user: keys.mailgunUser,
       pass: keys.mailgunPass,
@@ -27,9 +28,10 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
       'X-Mailgun-Recipient-Variables': JSON.stringify(userVars),
     },
     from: 'ticketmailer@showstubs.com',
-    to: emails,
+    to: emails, // TODO: NOT WORKING. Passing all emails.
     subject: `Your SHOWstubs VIP entry to ${dateTitle}`,
-    text: 'Hey %recipient.first%, your order number is %recipient.orderNum%',
+    text:
+      'Hey %recipient.first%, your order number is %recipient.orderNum%. Your email is %recipient%.',
     // html: `
     //   <h3>First Name</h3>
     //   <p>%recipient.first%</p>
