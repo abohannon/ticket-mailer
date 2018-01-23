@@ -34,8 +34,16 @@ class EmailFormReview extends Component {
     console.log('EmailFormReview props', this.props);
     const { formContainer, flexRow, buttonContainer } = EmailFormReviewStyles();
 
-    const { formValues, onCancel, tourData } = this.props;
-    const { checkIn, startTime, pickup, shipping, shippingDate, digital, digitalDate } = formFields;
+    const { formValues, onCancel, tourData, user } = this.props;
+    const {
+      checkIn,
+      startTime,
+      pickup,
+      shipping,
+      shippingDate,
+      digital,
+      digitalDate,
+    } = formFields;
 
     return (
       <div style={formContainer}>
@@ -60,7 +68,13 @@ class EmailFormReview extends Component {
           <FlatButton
             label="Send to all"
             onClick={() => {
-              this.props.dispatch(sendEmail(formValues, tourData.fetchOrdersSuccess.payload));
+              this.props.dispatch(
+                sendEmail(
+                  formValues,
+                  tourData.fetchOrdersSuccess.payload,
+                  user.currentTour.payload,
+                ),
+              );
             }}
           />
         </div>

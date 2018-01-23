@@ -1,10 +1,18 @@
 const nodemailer = require('nodemailer');
 const keys = require('../config/keys');
 
-const sendMail = (values, emails) => {
+const sendMail = (formValues, emails, currentTourData, userVars) => {
   const {
-    checkin, start, pickup, shipping, shippingDate, digital, digitalDate,
-  } = values;
+    checkin,
+    start,
+    pickup,
+    shipping,
+    shippingDate,
+    digital,
+    digitalDate,
+  } = formValues;
+
+  const { tourTitle, dateTitle, variantTitle } = currentTourData;
 
   const transporter = nodemailer.createTransport({
     service: 'Mailgun',
@@ -15,25 +23,33 @@ const sendMail = (values, emails) => {
   });
 
   const message = {
+    headers: {
+      'X-Mailgun-Recipient-Variables': JSON.stringify(userVars),
+    },
     from: 'ticketmailer@showstubs.com',
-    to: emails, // comma separated list
-    subject: 'Your VIP entry to TOUR NAME',
-    html: `
-      <h3>Check in time</h3>
-      <p>${checkin}</p>
-      <h3>Start time</h3>
-      <p>${start}</p>
-      <h3>Items to pickup at venue</h3>
-      <p>${pickup}</p>
-      <h3>Items shipping</h3>
-      <p>${shipping}</p>
-      <h3>Expected ship date</h3>
-      <p>${shippingDate}</p>
-      <h3>Digital items</h3>
-      <p>${digital}</p>
-      <h3>Expected digital delivery date</h3>
-      <p>${digitalDate}</p>
-    `,
+    to: emails,
+    subject: `Your SHOWstubs VIP entry to ${dateTitle}`,
+    text: 'Hey %recipient.first%, your order number is %recipient.orderNum%',
+    // html: `
+    //   <h3>First Name</h3>
+    //   <p>%recipient.first%</p>
+    //   <h3>Order #</h3>
+    //   <p>%recipient.orderNum%</p>
+    //   <h3>Check in time</h3>
+    //   <p>${checkin}</p>
+    //   <h3>Start time</h3>
+    //   <p>${start}</p>
+    //   <h3>Items to pickup at venue</h3>
+    //   <p>${pickup}</p>
+    //   <h3>Items shipping</h3>
+    //   <p>${shipping}</p>
+    //   <h3>Expected ship date</h3>
+    //   <p>${shippingDate}</p>
+    //   <h3>Digital items</h3>
+    //   <p>${digital}</p>
+    //   <h3>Expected digital delivery date</h3>
+    //   <p>${digitalDate}</p>
+    // `,
   };
 
   transporter.sendMail(message, (error, info) => {
