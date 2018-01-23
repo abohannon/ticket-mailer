@@ -1,15 +1,17 @@
-const Controller = require('./controller')
-const requireLogin = require('./middlewares/requireLogin')
+const shopifyController = require('./controller/shopifyController');
+const userController = require('./controller/userController');
+const emailController = require('./controller/emailController');
+const requireLogin = require('./middlewares/requireLogin');
 
 module.exports = (app) => {
-  app.get('/api/orders', requireLogin, Controller.getAllOrders)
-  app.get('/api/orders/:id', requireLogin, Controller.getVariantOrders)
-  app.get('/api/collection_products/:id', requireLogin, Controller.getCollectionProducts)
-  app.get('/api/collections', requireLogin, Controller.getCollections)
-  app.get('/api/products', requireLogin, Controller.getProducts)
-  app.post('/api/create_user', Controller.createUser)
-  app.post('/api/login', Controller.loginUser)
-  app.get('/api/logout', Controller.logoutUser)
-  app.get('/api/current_user', Controller.currentUser)
-  app.post('/api/email', requireLogin, Controller.sendEmail)
-}
+  app.get('/api/orders', requireLogin, shopifyController.getAllOrders);
+  app.get('/api/orders/:id', requireLogin, shopifyController.getVariantOrders);
+  app.get('/api/collection_products/:id', requireLogin, shopifyController.getCollectionProducts);
+  app.get('/api/collections', requireLogin, shopifyController.getCollections);
+  app.get('/api/products', requireLogin, shopifyController.getProducts);
+  app.post('/api/create_user', userController.createUser);
+  app.post('/api/login', userController.loginUser);
+  app.get('/api/logout', userController.logoutUser);
+  app.get('/api/current_user', userController.currentUser);
+  app.post('/api/email', requireLogin, emailController.sendEmail);
+};

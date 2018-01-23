@@ -189,7 +189,16 @@ export const updateTour = tourName => (dispatch) => {
 // Email ACTIONS
 // TODO: create action for this???
 
-export const sendEmail = (values, history) => async (dispatch) => {
-  const res = await axios.post('/api/email', values);
+export const sendEmail = (
+  formValues,
+  orderData,
+  currentTourData,
+  history,
+) => async (dispatch) => {
+  const res = await axios.post('/api/email', {
+    formValues,
+    orderData,
+    currentTourData,
+  });
   console.log('sendEmail', res.body);
 };

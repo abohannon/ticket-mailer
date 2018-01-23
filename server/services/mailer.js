@@ -1,22 +1,42 @@
-const nodemailer = require('nodemailer')
-const keys = require('../config/keys')
+const keys = require('../config/keys');
+const mailgun = require('mailgun-js')({
+  apiKey: keys.mailgunPrivateAPIKey,
+  domain: keys.mailgunDomain,
+});
 
-const sendMail = (content) => {
+const sendMail = (formValues, emails, currentTourData, userVars) => {
   const {
-    checkin, start, pickup, shipping, shippingDate, digital, digitalDate,
-  } = content
-  const transporter = nodemailer.createTransport({
-    service: 'Mailgun',
-    auth: {
-      user: keys.mailgunUser, // postmaster@sandbox[base64 string].mailgain.org
-      pass: keys.mailgunPass, // You set this.
-    },
-  });
+    checkin,
+    start,
+    pickup,
+    shipping,
+    shippingDate,
+    digital,
+    digitalDate,
+  } = formValues;
+
+  const { dateTitle } = currentTourData;
+
   const message = {
-    from: 'no-reply@test2.com',
-    to: 'abo46n2@gmail.com', // comma separated list
-    subject: 'Your VIP entry to TOUR NAME',
+    'recipient-variables': JSON.stringify(userVars),
+    from: 'ticketmailer@showstubs.com',
+    to: emails,
+    subject: `Your SHOWstubs VIP entry to ${dateTitle}`,
     html: `
+      <h3>Band</h3>
+      <p>%recipient.vendor%</p>
+      <h3>Show Date</h3>
+      <p>%recipient.showDate%</p>
+      <h3>Bundle Type</h3>
+      <p>%recipient.bundleType%</p>
+      <h3>Quantity</h3>
+      <p>%recipient.quantity%</p>
+      <h3>First Name</h3>
+      <p>%recipient.first%</p>
+      <h3>Order #</h3>
+      <p>%recipient.orderNum%</p>
+      <h3>Order #</h3>
+      <p>%recipient%</p>
       <h3>Check in time</h3>
       <p>${checkin}</p>
       <h3>Start time</h3>
@@ -33,13 +53,14 @@ const sendMail = (content) => {
       <p>${digitalDate}</p>
     `,
   };
-  transporter.sendMail(message, (error, info) => {
+
+  mailgun.messages().send(message, (error, body) => {
     if (error) {
       console.log(error);
     } else {
-      console.log(`Sent: ${info.response}`);
+      console.log(body);
     }
   });
 };
 
-module.exports = sendMail
+module.exports = sendMail;

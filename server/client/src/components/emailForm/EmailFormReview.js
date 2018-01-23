@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
-import { sendEmail } from '../../actions';
+import { sendEmail, fetchOrders } from '../../actions';
 import formFields from './formFields';
 
 const EmailFormReviewStyles = () => ({
@@ -26,13 +26,15 @@ const EmailFormReviewStyles = () => ({
 class EmailFormReview extends Component {
   componentDidMount() {
     console.log('==== EmailFormReview Mounted!');
+    const variantId = this.props.user.currentTour.payload.variantId;
+    this.props.dispatch(fetchOrders(variantId));
   }
 
   render() {
     console.log('EmailFormReview props', this.props);
     const { formContainer, flexRow, buttonContainer } = EmailFormReviewStyles();
 
-    const { formValues, onCancel } = this.props;
+    const { formValues, onCancel, tourData, user } = this.props;
     const {
       checkIn,
       startTime,
@@ -66,7 +68,13 @@ class EmailFormReview extends Component {
           <FlatButton
             label="Send to all"
             onClick={() => {
-              this.props.dispatch(sendEmail(formValues));
+              this.props.dispatch(
+                sendEmail(
+                  formValues,
+                  tourData.fetchOrdersSuccess.payload,
+                  user.currentTour.payload,
+                ),
+              );
             }}
           />
         </div>
@@ -77,6 +85,7 @@ class EmailFormReview extends Component {
 const mapStateToProps = state => ({
   formValues: state.form.emailForm.values,
   tourData: state.shopifyFetch,
+  user: state.userAuth,
 });
 
 export default connect(mapStateToProps)(EmailFormReview);
