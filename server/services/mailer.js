@@ -1,5 +1,8 @@
-const nodemailer = require('nodemailer');
 const keys = require('../config/keys');
+const mailgun = require('mailgun-js')({
+  apiKey: keys.mailgunPrivateAPIKey,
+  domain: keys.mailgunDomain,
+});
 
 const sendMail = (formValues, emails, currentTourData, userVars) => {
   const {
@@ -12,29 +15,22 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
     digitalDate,
   } = formValues;
 
-  const { tourTitle, dateTitle, variantTitle } = currentTourData;
-
-  const transporter = nodemailer.createTransport({
-    service: 'Mailgun',
-    port: 587,
-    secure: false,
-    auth: {
-      user: keys.mailgunUser,
-      pass: keys.mailgunPass,
-    },
-  });
+  const { dateTitle } = currentTourData;
 
   const message = {
-    headers: {
-      'X-Mailgun-Recipient-Variables': JSON.stringify(userVars),
-    },
-    // 'recipient-variables': JSON.stringify(userVars),
+    'recipient-variables': JSON.stringify(userVars),
     from: 'ticketmailer@showstubs.com',
     to: emails,
     subject: `Your SHOWstubs VIP entry to ${dateTitle}`,
-    // text:
-    // 'Hey %recipient.first%, your order number is %recipient.orderNum%. Your email is %recipient%.',
     html: `
+      <h3>Band</h3>
+      <p>%recipient.vendor%</p>
+      <h3>Show Date</h3>
+      <p>%recipient.showDate%</p>
+      <h3>Bundle Type</h3>
+      <p>%recipient.bundleType%</p>
+      <h3>Quantity</h3>
+      <p>%recipient.quantity%</p>
       <h3>First Name</h3>
       <p>%recipient.first%</p>
       <h3>Order #</h3>
@@ -58,13 +54,11 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
     `,
   };
 
-  transporter.sendMail(message, (error, info) => {
+  mailgun.messages().send(message, (error, body) => {
     if (error) {
       console.log(error);
     } else {
-      console.log(`Sent: ${info.response}`);
-      console.log('userVars', JSON.stringify(userVars));
-      console.log('emails', emails);
+      console.log(body);
     }
   });
 };

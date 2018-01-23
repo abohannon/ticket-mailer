@@ -6,4 +6,6 @@ module.exports = {
   sessionSecret: process.env.SESSION_SECRET,
   mailgunUser: process.env.MAILGUN_USER,
   mailgunPass: process.env.MAILGUN_PASS,
-}
+  mailgunPrivateAPIKey: process.env.MAILGUN_PRIVATE_KEY,
+  mailgunDomain: process.env.MAILGUN_DOMAIN,
+};
