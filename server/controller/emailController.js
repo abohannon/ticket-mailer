@@ -17,15 +17,27 @@ module.exports = {
 
       userVars[customer.email] = {
         first: customer.shipping_address.first_name,
+        fullName: customer.shipping_address.name,
         orderNum: customer.name,
+        bundleType: customer.line_items[0].variant_title,
+        quantity: customer.line_items[0].quantity,
+        showDate: customer.line_items[0].name,
+        vendor: customer.line_items[0].vendor,
       };
     });
 
-    console.log(emails);
-    console.log(JSON.stringify(userVars));
+    // XXX: TESTING
+    // userVars['mgbox01@gmail.com'] = {
+    //   first: 'mailgun',
+    //   orderNum: '#123',
+    // };
+    // emails.push('mgbox01@gmail.com');
+
+    console.log('Contr: emails', emails);
+    console.log('Contr: userVars', userVars);
 
     // XXX: Uncomment to send
-    sendMail(formValues, emails, currentTourData, userVars);
-    console.log('sendMail controller');
+    // sendMail(formValues, emails, currentTourData, userVars);
+    // console.log('sendMail controller');
   },
 };
