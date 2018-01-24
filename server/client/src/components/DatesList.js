@@ -16,6 +16,7 @@ import { ACCENT_BLUE } from '../style/constants';
 import { fetchProducts } from '../actions';
 import Header from './Header';
 import DatesListItem from './DatesListItem';
+import ErrorMessage from './ErrorMessage';
 
 const DatesListStyles = () => ({
   container: {
@@ -107,17 +108,11 @@ class DatesList extends Component {
         </div>
       );
     } else if (fetchProductsRejected) {
-      <div>
-        <h2>Looks like there was a problem grabbing your data.</h2>
-        <h2
-          onClick={() => {
-            this.props.dispatch(fetchProducts(tourId));
-          }}
-        >
-          Click here to try again.
-        </h2>
-        {/* TODO: Update with dynamic collection id */}
-      </div>;
+      return (
+        <div>
+          <ErrorMessage />
+        </div>
+      );
     }
   }
 
