@@ -10,6 +10,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  color: #282931;
 }
 
 h1 {
@@ -40,6 +41,7 @@ tr:hover td {
 
 tr td:first-child {
   border-left: 4px solid transparent;
+  transition: all .2s;
 }
 
 tr:hover td:first-child {

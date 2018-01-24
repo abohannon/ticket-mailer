@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import {
@@ -10,18 +9,18 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
-import RaisedButton from 'material-ui/RaisedButton';
-import EditIcon from 'material-ui/svg-icons/content/create';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import { ACCENT_BLUE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
+import ErrorMessage from './ErrorMessage';
 import { fetchOrders } from '../actions';
 
 const OrdersListStyles = () => ({
   container: {
     marginLeft: 180,
     position: 'relative',
+    width: '100vw',
   },
   header: {
     display: 'flex',
@@ -113,14 +112,7 @@ class OrdersList extends Component {
     } else if (fetchOrdersRejected) {
       return (
         <div>
-          <h2>Looks like there was a problem grabbing your data.</h2>
-          <h2
-            onClick={() => {
-              this.props.dispatch(fetchOrders(variantId));
-            }}
-          >
-            Click here to try again.
-          </h2>
+          <ErrorMessage />
         </div>
       );
     }
