@@ -3,7 +3,12 @@ import { withRouter, Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import EditIcon from 'material-ui/svg-icons/content/create';
-import { LIGHTEST_GREY, LIGHT_BLUE, ACCENT_BLUE, WHITE } from '../style/constants';
+import {
+  LIGHTEST_GREY,
+  LIGHT_BLUE,
+  ACCENT_BLUE,
+  WHITE,
+} from '../style/constants';
 
 const HeaderStyles = () => ({
   header: {
@@ -11,6 +16,8 @@ const HeaderStyles = () => ({
     padding: '24px 24px 24px 24px',
     backgroundColor: LIGHTEST_GREY,
     flexDirection: 'column',
+    boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.2)',
+    position: 'relative',
   },
   headerTitle: {
     display: 'flex',
@@ -37,7 +44,12 @@ const HeaderStyles = () => ({
 
 class Header extends Component {
   renderSearchField() {
-    const { fieldStyle, hintStyle, inputStyle, underlineStyle } = HeaderStyles();
+    const {
+      fieldStyle,
+      hintStyle,
+      inputStyle,
+      underlineStyle,
+    } = HeaderStyles();
 
     const { searchState, handleSearchInput, match } = this.props;
     if (match.path === '/all-orders') {
@@ -64,7 +76,12 @@ class Header extends Component {
       return (
         <div className="button" style={buttonContainer}>
           <Link to="/edit-email">
-            <RaisedButton label="Edit Email" labelColor={WHITE} backgroundColor={ACCENT_BLUE} icon={<EditIcon />} />
+            <RaisedButton
+              label="Edit Email"
+              labelColor={WHITE}
+              backgroundColor={ACCENT_BLUE}
+              icon={<EditIcon />}
+            />
           </Link>
         </div>
       );

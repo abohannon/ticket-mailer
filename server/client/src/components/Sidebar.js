@@ -37,18 +37,17 @@ const SidebarStyles = () => ({
   },
 });
 
-
 class Sidebar extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     payload: PropTypes.object,
     firstName: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     payload: {},
     firstName: 'Friend',
-  }
+  };
 
   componentDidMount() {
     console.log('==== Sidebar mounted!');
@@ -59,52 +58,43 @@ class Sidebar extends Component {
   }
 
   handleLogout = () => {
-    this.props.dispatch(logoutUser())
-      .then(() => {
-        this.props.history.push('/login');
-      });
-  }
+    this.props.dispatch(logoutUser()).then(() => {
+      this.props.history.push('/login');
+    });
+  };
 
   greeting = () => {
     if (this.props.user.fetchedUserSuccess !== undefined) {
       const { firstName } = this.props.user.fetchedUserSuccess.payload;
       return `Hello, ${firstName}.`;
     }
-  }
+  };
 
   render() {
     console.log('Sidebar Props', this.props);
-    const {
-      sidebar,
-      listStyleTop,
-      listItemStyle,
-      greeting,
-    } = SidebarStyles();
+    const { sidebar, listStyleTop, listItemStyle, greeting } = SidebarStyles();
 
-    const {
-      history,
-    } = this.props;
-
+    const { history } = this.props;
 
     return (
       <div className="sidebar" style={sidebar}>
         <List style={listStyleTop}>
-          <ListItem
-            primaryText={this.greeting()}
-            style={greeting}
-            disabled
-          />
+          <ListItem primaryText={this.greeting()} style={greeting} disabled />
           <ListItem
             primaryText="Tours"
             style={listItemStyle}
             leftIcon={<ListIcon color={LIGHT_BLUE} />}
-            onClick={() => { history.push('/'); }}
+            onClick={() => {
+              history.push('/');
+            }}
           />
           <ListItem
             primaryText="Orders"
             style={listItemStyle}
             leftIcon={<GroupIcon color={LIGHT_BLUE} />}
-            onClick={() => { history.push('/all-orders'); }}
+            onClick={() => {
+              history.push('/all-orders');
+            }}
           />
         </List>
         <List>
