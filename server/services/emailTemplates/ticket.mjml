@@ -1,32 +1,98 @@
 <mjml>
   <mj-head>
-    <mj-style>
-      .reset {
-        margin: 0;
-        padding: 0;
-      },
-      .border {
-        border: 1px solid orangered;
-      }
-    </mj-style>
+    <mj-attributes>
+      <mj-class name="grey-bg" background-color="#eaeaea" />
+      <mj-class name="text-title" color="#afafaf" text-transform="uppercase" padding-bottom=".5rem" />
+      <mj-class name="text-large" color="#333" text-transform="uppercase" padding-top="0px" font-size="1.8rem" font-weight="600"/>
+    </mj-attributes>
   </mj-head>
-  <mj-body>
-    <mj-container width="100%">
-      <mj-section full-width="full-width" border="1px solid orangered">
-        <mj-column css-class="reset">
-          <mj-image width="100%" src="https://cdn.shopify.com/s/files/1/1046/3446/products/Ticket_Bundle_92f42245-c0f0-4493-943b-2c40e6d6fd30_grande.jpg" css-class="reset">
+  <mj-body css-class="body">
+    <mj-container>
+      <mj-section>
+        <mj-column>
+          <mj-text css-class="section-one__show-text">
+            <p>VIP Ticket Bundle</p>
+            <h1>Saosin 2018</h1>
+            <h2>01/08/2018 | Anaheim, CA at Chain Reaction</h2>
+          </mj-text>
         </mj-column>
         <mj-column>
-          <mj-text>Attendee info and Check in/Start Time</mj-text>
+          <mj-text css-class="section-main__attendee-text">
+            <p>Attendee</p>
+            <h1>Carynn Pinckney</h1>
+            <p>Bundle Qty<p>
+            <h1>1</h1>
+          </mj-text>
         </mj-column>
       </mj-section>
-      <mj-section border="1px solid orangered">
+      <mj-section css-class="section-checkin" mj-class="grey-bg">
+        <mj-group>
         <mj-column>
+          <mj-text mj-class="text-title">
+            Check In
+          </mj-text>
+          <mj-text mj-class="text-large">
+            7:30PM
+          </mj-text>
+        </mj-column>
+        <mj-column>
+          <mj-text>
+            <p>Start Time</p>
+            <h1>8:15PM</h1>
+          </mj-text>
+        </mj-column>
+      </mj-group>
+      </mj-section>
+      <mj-section css-class="section-notes">
+        <!-- <mj-column>
           <mj-text>QR Code (if exists)</mj-text>
+        </mj-column> -->
+        <mj-column>
+          <mj-text>
+            <p>Event Notes</p>
+            <p>This venue is 21+. No large bags will be permitted</p>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section css-class="section-pickup" mj-class="grey-bg">
+        <mj-column>
+          <mj-text>
+            <p>Items for pickup</p>
+            <p>Signed tour poster, signed setlist, general admission ticket</p>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section css-class="section-shipping">
+        <mj-group>
+        <mj-column>
+          <mj-text>
+            <p>Items shipping</p>
+            <p>7" limited edition vinyl</p>
+          </mj-text>
         </mj-column>
         <mj-column>
-          <mj-text>Event Notes</mj-text>
+          <mj-text>
+            <p>Est. ship date</p>
+            <p>3/12/2018</p>
+          </mj-text>
         </mj-column>
+      </mj-group>
+      </mj-section>
+      <mj-section css-class="section-digital" mj-class="grey-bg">
+        <mj-group>
+        <mj-column>
+          <mj-text>
+            <p>Digital items</p>
+            <p>Digital Copy of new album</p>
+          </mj-text>
+        </mj-column>
+        <mj-column>
+          <mj-text>
+            <p>Est. delivery date</p>
+            <p>3/23/2018</p>
+          </mj-text>
+        </mj-column>
+      </mj-group>
       </mj-section>
     </mj-container>
   </mj-body>
