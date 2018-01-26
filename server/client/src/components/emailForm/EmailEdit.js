@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import Radium from 'radium';
 import Header from '../Header';
 import EmailForm from './EmailForm';
 import EmailFormReview from './EmailFormReview';
@@ -23,9 +22,17 @@ class EmailEdit extends Component {
 
   renderContent() {
     if (this.state.showEmailReview) {
-      return <EmailFormReview onCancel={() => this.setState({ showEmailReview: false })} />;
+      return (
+        <EmailFormReview
+          onCancel={() => this.setState({ showEmailReview: false })}
+        />
+      );
     }
-    return <EmailForm onFormSubmit={() => this.setState({ showEmailReview: true })} />;
+    return (
+      <EmailForm
+        onFormSubmit={() => this.setState({ showEmailReview: true })}
+      />
+    );
   }
 
   render() {
@@ -36,13 +43,23 @@ class EmailEdit extends Component {
 
     return (
       <div className="email-edit__container" style={container}>
-        <Header pageTitle={'Edit Email'} showDate={showDate} tourName={tourName} />
+        <Header
+          pageTitle={'Edit Email'}
+          showDate={showDate}
+          tourName={tourName}
+        />
         {this.renderContent()}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ user: state.userAuth, tourData: state.shopifyFetch });
+const mapStateToProps = state => ({
+  user: state.userAuth,
+  tourData: state.shopifyFetch,
+});
 
-export default Radium(reduxForm({ form: 'emailForm' })(connect(mapStateToProps)(EmailEdit)));
+export default reduxForm({
+  form: 'emailForm',
+  destroyOnUnmount: false,
+})(connect(mapStateToProps)(EmailEdit));
