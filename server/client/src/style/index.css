@@ -35,13 +35,16 @@ a:hover {
   color: #5f97fb;
 }
 
+tr td {
+  transition: all .2s;
+}
+
 tr:hover td {
   background-color: #fefaf1 !important;
 }
 
 tr td:first-child {
   border-left: 4px solid transparent;
-  transition: all .2s;
 }
 
 tr:hover td:first-child {
