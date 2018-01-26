@@ -51,7 +51,8 @@ export const fetchProducts = collectionId => async (dispatch) => {
   console.log('&&&&& fetchProducts');
   try {
     const res = await axios.get(`/api/collection_products/${collectionId}`);
-    const type = res.data.length > 0 ? FETCH_PRODUCTS_SUCCESS : FETCH_PRODUCTS_REJECTED;
+    const type =
+      res.data.length > 0 ? FETCH_PRODUCTS_SUCCESS : FETCH_PRODUCTS_REJECTED;
     action = {
       type,
       payload: res.data,
@@ -70,7 +71,8 @@ export const fetchOrders = variantId => async (dispatch) => {
   console.log('&&&&& fetchOrders');
   try {
     const res = await axios.get(`/api/orders/${variantId}`);
-    const type = res.data.length > 0 ? FETCH_ORDERS_SUCCESS : FETCH_ORDERS_REJECTED;
+    const type =
+      res.data.length > 0 ? FETCH_ORDERS_SUCCESS : FETCH_ORDERS_REJECTED;
     action = {
       type,
       payload: res.data,
@@ -89,7 +91,10 @@ export const fetchAllOrders = () => async (dispatch) => {
   console.log('&&&&& fetchAllOrders');
   try {
     const res = await axios.get('/api/orders/');
-    const type = res.data.length > 0 ? FETCH_ALL_ORDERS_SUCCESS : FETCH_ALL_ORDERS_REJECTED;
+    const type =
+      res.data.length > 0
+        ? FETCH_ALL_ORDERS_SUCCESS
+        : FETCH_ALL_ORDERS_REJECTED;
     action = {
       type,
       payload: res.data,
@@ -124,7 +129,8 @@ export const loginUser = userData => async (dispatch) => {
   dispatch(action);
   try {
     const res = await axios.post('/api/login', userData);
-    const type = res.data.success === true ? LOGIN_USER_SUCCESS : LOGIN_USER_REJECTED;
+    const type =
+      res.data.success === true ? LOGIN_USER_SUCCESS : LOGIN_USER_REJECTED;
     action = {
       type,
       payload: res.data,
@@ -181,8 +187,18 @@ export const updateTour = tourName => (dispatch) => {
 };
 
 // Email ACTIONS
+// TODO: create action for this???
 
-export const sendEmail = (values, history) => async (dispatch) => {
-  const res = await axios.post('/api/email', values);
+export const sendEmail = (
+  formValues,
+  orderData,
+  currentTourData,
+  history,
+) => async (dispatch) => {
+  const res = await axios.post('/api/email', {
+    formValues,
+    orderData,
+    currentTourData,
+  });
   console.log('sendEmail', res.body);
 };

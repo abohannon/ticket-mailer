@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
-import { sendEmail } from '../../actions';
+import { sendEmail, fetchOrders } from '../../actions';
 import formFields from './formFields';
 
 const EmailFormReviewStyles = () => ({
@@ -26,18 +26,24 @@ const EmailFormReviewStyles = () => ({
 class EmailFormReview extends Component {
   componentDidMount() {
     console.log('==== EmailFormReview Mounted!');
+    const variantId = this.props.user.currentTour.payload.variantId;
+    this.props.dispatch(fetchOrders(variantId));
   }
 
   render() {
     console.log('EmailFormReview props', this.props);
-    const {
-      formContainer,
-      flexRow,
-      buttonContainer,
-    } = EmailFormReviewStyles();
+    const { formContainer, flexRow, buttonContainer } = EmailFormReviewStyles();
 
-    const { formValues, onCancel } = this.props;
-    const { checkIn, startTime, pickup, shipping, shippingDate, digital, digitalDate } = formFields;
+    const { formValues, onCancel, tourData, user } = this.props;
+    const {
+      checkIn,
+      startTime,
+      pickup,
+      shipping,
+      shippingDate,
+      digital,
+      digitalDate,
+    } = formFields;
 
     return (
       <div style={formContainer}>
@@ -59,12 +65,27 @@ class EmailFormReview extends Component {
         </div>
         <div className="email-form__button-container" style={buttonContainer}>
           <FlatButton label="Go Back" onClick={onCancel} />
-          <FlatButton label="Send to all" onClick={() => { this.props.dispatch(sendEmail(formValues)); }} />
+          <FlatButton
+            label="Send to all"
+            onClick={() => {
+              this.props.dispatch(
+                sendEmail(
+                  formValues,
+                  tourData.fetchOrdersSuccess.payload,
+                  user.currentTour.payload,
+                ),
+              );
+            }}
+          />
         </div>
       </div>
     );
   }
 }
-const mapStateToProps = state => ({ formValues: state.form.emailForm.values });
+const mapStateToProps = state => ({
+  formValues: state.form.emailForm.values,
+  tourData: state.shopifyFetch,
+  user: state.userAuth,
+});
 
 export default connect(mapStateToProps)(EmailFormReview);
