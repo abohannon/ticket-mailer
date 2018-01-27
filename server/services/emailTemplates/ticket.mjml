@@ -2,30 +2,53 @@
   <mj-head>
     <mj-attributes>
       <mj-class name="grey-bg" background-color="#eaeaea" />
-      <mj-class name="text-title" color="#afafaf" text-transform="uppercase" padding-bottom=".5rem" />
-      <mj-class name="text-large" color="#333" text-transform="uppercase" padding-top="0px" font-size="1.8rem" font-weight="600"/>
+      <mj-class name="section" padding="1.5rem 1rem" />
+      <mj-class name="text-title" color="#afafaf" text-transform="uppercase" padding-bottom=".5rem" padding-top="0" />
+        <mj-class name="text-title--orange" background-color="#e97b45" color="#fff" text-transform="uppercase" align="left" width="fit-content" inner-padding=".3rem .5rem"/>
+      <mj-class name="text-large" color="#333" text-transform="uppercase" padding-top="0" padding-bottom="0" font-size="1.8rem" font-weight="600" line-height="1.8rem"/>
+      <mj-class name="text-medium--thin" color="#333" padding-top="0" padding-bottom="0" font-size="1.6rem" line-height="2rem"/>
+        <mj-class name="text-primary" color="#333" text-transform="uppercase" padding-bottom=".5rem" padding-top="0" font-weight="600"/>
+      <mj-class name="u-margin-bottom" margin-bottom=".5rem"/>
     </mj-attributes>
   </mj-head>
   <mj-body css-class="body">
     <mj-container>
-      <mj-section>
+      <mj-section css-class="header">
         <mj-column>
-          <mj-text css-class="section-one__show-text">
-            <p>VIP Ticket Bundle</p>
-            <h1>Saosin 2018</h1>
-            <h2>01/08/2018 | Anaheim, CA at Chain Reaction</h2>
-          </mj-text>
+          <mj-image src="./assets/logo.png"/>
         </mj-column>
-        <mj-column>
-          <mj-text css-class="section-main__attendee-text">
-            <p>Attendee</p>
-            <h1>Carynn Pinckney</h1>
-            <p>Bundle Qty<p>
-            <h1>1</h1>
+      </mj-section>
+      <mj-section css-class="section section-main" mj-class="section">
+        <mj-column css-class="section-main__show-text">
+          <mj-button mj-class="text-title--orange">
+            VIP Ticket Bundle
+          </mj-button>
+          <mj-text mj-class="text-large">
+            Saosin 2018
+          </mj-text>
+          <mj-text mj-class="u-margin-bottom"/>
+          <mj-text mj-class="text-medium--thin">
+            01/08/2018 | Anaheim, CA at Chain Reaction
+          </mj-text>
+                <mj-text mj-class="u-margin-bottom"/>
+        </mj-column>
+        <mj-column css-class="section-main__attendee-text">
+          <mj-text mj-class="text-title">
+            Attendee
+          </mj-text>
+          <mj-text mj-class="text-large">
+            Jane Doe
+          </mj-text>
+          <mj-text mj-class="u-margin-bottom"/>
+          <mj-text mj-class="text-title">
+            Bundle Qty
+          </mj-text>
+          <mj-text mj-class="text-large">
+            1
           </mj-text>
         </mj-column>
       </mj-section>
-      <mj-section css-class="section-checkin" mj-class="grey-bg">
+      <mj-section css-class="section section-checkin" mj-class="section grey-bg">
         <mj-group>
         <mj-column>
           <mj-text mj-class="text-title">
@@ -36,60 +59,75 @@
           </mj-text>
         </mj-column>
         <mj-column>
-          <mj-text>
-            <p>Start Time</p>
-            <h1>8:15PM</h1>
+          <mj-text mj-class="text-title">
+          Start Time
+          </mj-text>
+          <mj-text mj-class="text-large">
+            8:15PM
           </mj-text>
         </mj-column>
       </mj-group>
       </mj-section>
-      <mj-section css-class="section-notes">
-        <!-- <mj-column>
-          <mj-text>QR Code (if exists)</mj-text>
-        </mj-column> -->
+      <mj-section css-class="section section-notes" mj-class="section">
         <mj-column>
-          <mj-text>
-            <p>Event Notes</p>
-            <p>This venue is 21+. No large bags will be permitted</p>
+          <mj-image src="https://smallbiztrends.com/wp-content/uploads/2015/05/qr-code-sample.jpg"/>
+            <mj-text mj-class="u-margin-bottom"/>
+        </mj-column>
+        <mj-column>
+          <mj-text mj-class="text-title">
+            Event Notes
+          </mj-text>
+          <mj-text mj-class="text-primary">
+            This venue is 21+. No large bags will be permitted
           </mj-text>
         </mj-column>
       </mj-section>
-      <mj-section css-class="section-pickup" mj-class="grey-bg">
+      <mj-section css-class="section section-pickup" mj-class="section grey-bg">
         <mj-column>
-          <mj-text>
-            <p>Items for pickup</p>
-            <p>Signed tour poster, signed setlist, general admission ticket</p>
+          <mj-text mj-class="text-title">
+            Items for pickup
+          </mj-text>
+          <mj-text mj-class="text-primary">
+          Signed tour poster, signed setlist, general admission ticket
           </mj-text>
         </mj-column>
       </mj-section>
-      <mj-section css-class="section-shipping">
+      <mj-section css-class="section section-shipping" mj-class="section">
         <mj-group>
         <mj-column>
-          <mj-text>
-            <p>Items shipping</p>
-            <p>7" limited edition vinyl</p>
+          <mj-text mj-class="text-title">
+            Items shipping
+          </mj-text>
+          <mj-text mj-class="text-primary">
+        7" limited edition vinyl
           </mj-text>
         </mj-column>
         <mj-column>
-          <mj-text>
-            <p>Est. ship date</p>
-            <p>3/12/2018</p>
+          <mj-text mj-class="text-title">
+            Est. ship date
+          </mj-text>
+          <mj-text mj-class="text-primary">
+            3/12/2018
           </mj-text>
         </mj-column>
       </mj-group>
       </mj-section>
-      <mj-section css-class="section-digital" mj-class="grey-bg">
+      <mj-section css-class="section section-digital" mj-class="section grey-bg">
         <mj-group>
         <mj-column>
-          <mj-text>
-            <p>Digital items</p>
-            <p>Digital Copy of new album</p>
+          <mj-text mj-class="text-title">
+            Digital Items
+          </mj-text>
+          <mj-text mj-class="text-primary">
+        Digital Copy of new album
           </mj-text>
         </mj-column>
         <mj-column>
-          <mj-text>
-            <p>Est. delivery date</p>
-            <p>3/23/2018</p>
+          <mj-text mj-class="text-title">
+            Est. delivery date
+          </mj-text>
+          <mj-text mj-class="text-primary">
+          3/23/2018
           </mj-text>
         </mj-column>
       </mj-group>
