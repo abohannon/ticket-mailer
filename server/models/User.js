@@ -1,21 +1,22 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const bcrypt = require('bcrypt')
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
   firstName: {
     type: String,
-    require: true
+    require: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 // userSchema.statics.authenticate = function (email, password, callback) {
 //   User.findOne({ email: email })
@@ -38,24 +39,24 @@ const userSchema = new Schema({
 // }
 
 userSchema.methods.isPasswordValid = function (rawPassword, callback) {
-  const user = this
-  bcrypt.compare(rawPassword, user.password, function (err, same) {
+  const user = this;
+  bcrypt.compare(rawPassword, user.password, (err, same) => {
     if (err) {
-      callback(err)
+      callback(err);
     }
-    callback(null, same)
-  })
-}
+    callback(null, same);
+  });
+};
 
-const saltRounds = 10
+const saltRounds = 10;
 
 userSchema.pre('save', function (next) {
-  const user = this
-  bcrypt.hash(user.password, saltRounds, function (err, hash) {
-    if (err) return next(err)
-    user.password = hash
-    next()
-  })
-})
+  const user = this;
+  bcrypt.hash(user.password, saltRounds, (err, hash) => {
+    if (err) return next(err);
+    user.password = hash;
+    next();
+  });
+});
 
-mongoose.model('users', userSchema)
+mongoose.model('users', userSchema);
