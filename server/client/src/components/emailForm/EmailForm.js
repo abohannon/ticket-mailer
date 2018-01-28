@@ -28,6 +28,7 @@ const EmailFormStyles = () => ({
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    width: '100%',
     paddingTop: 16,
   },
   blue: {
@@ -76,7 +77,7 @@ class EmailForm extends Component {
 
     const { history } = this.props;
 
-    const form = formFields.map(field => (
+    const formInputs = formFields.map(field => (
       <Field
         component={EmailTextField}
         type="text"
@@ -94,60 +95,7 @@ class EmailForm extends Component {
           onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}
           style={formStyle}
         >
-          {form}
-          {/* <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={checkIn.label}
-              name={checkIn.name}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={startTime.label}
-              name={startTime.name}
-            />
-            </div>
-            <div>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={pickup.label}
-              name={pickup.name}
-              multiLine={pickup.multiLine}
-            />
-            </div>
-            <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={shipping.label}
-              name={shipping.name}
-              multiLine={shipping.multiLine}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={shippingDate.label}
-              name={shippingDate.name}
-            />
-            </div>
-            <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={digital.label}
-              name={digital.name}
-              multiLine={digital.multiLine}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={digitalDate.label}
-              name={digitalDate.name}
-            />
-          </div> */}
+          {formInputs}
           <div className="email-form__button-container" style={buttonContainer}>
             <FlatButton label="Go Back" onClick={history.goBack} />
             <FlatButton
