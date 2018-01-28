@@ -11,8 +11,15 @@ import { ACCENT_BLUE, WHITE } from '../../style/constants';
 const EmailFormStyles = () => ({
   formContainer: {
     display: 'flex',
+    width: 600,
     minWidth: 350,
     paddingLeft: 16,
+  },
+  formStyle: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: 600,
   },
   flexRow: {
     display: 'flex',
@@ -21,6 +28,7 @@ const EmailFormStyles = () => ({
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    width: '100%',
     paddingTop: 16,
   },
   blue: {
@@ -48,11 +56,18 @@ class EmailForm extends Component {
   }
 
   render() {
-    const { formContainer, flexRow, buttonContainer, blue } = EmailFormStyles();
+    const {
+      formContainer,
+      formStyle,
+      flexRow,
+      buttonContainer,
+      blue,
+    } = EmailFormStyles();
 
     const {
       checkIn,
       startTime,
+      eventNotes,
       pickup,
       shipping,
       shippingDate,
@@ -62,62 +77,25 @@ class EmailForm extends Component {
 
     const { history } = this.props;
 
+    const formInputs = formFields.map(field => (
+      <Field
+        component={EmailTextField}
+        type="text"
+        label={field.label}
+        name={field.name}
+        multiLine={field.multiLine}
+        fullWidth={field.fullWidth}
+        style={field.style}
+      />
+    ));
+
     return (
       <div className="email-form__container" style={formContainer}>
-        <form onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}>
-          <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={checkIn.label}
-              name={checkIn.name}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={startTime.label}
-              name={startTime.name}
-            />
-          </div>
-          <div>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={pickup.label}
-              name={pickup.name}
-              multiLine={pickup.multiLine}
-            />
-          </div>
-          <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={shipping.label}
-              name={shipping.name}
-              multiLine={shipping.multiLine}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={shippingDate.label}
-              name={shippingDate.name}
-            />
-          </div>
-          <div style={flexRow}>
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={digital.label}
-              name={digital.name}
-              multiLine={digital.multiLine}
-            />
-            <Field
-              component={EmailTextField}
-              type="text"
-              label={digitalDate.label}
-              name={digitalDate.name}
-            />
-          </div>
+        <form
+          onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}
+          style={formStyle}
+        >
+          {formInputs}
           <div className="email-form__button-container" style={buttonContainer}>
             <FlatButton label="Go Back" onClick={history.goBack} />
             <FlatButton

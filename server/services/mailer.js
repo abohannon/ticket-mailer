@@ -8,6 +8,7 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
   const {
     checkin,
     start,
+    eventNotes,
     pickup,
     shipping,
     shippingDate,
@@ -35,12 +36,14 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
       <p>%recipient.first%</p>
       <h3>Order #</h3>
       <p>%recipient.orderNum%</p>
-      <h3>Order #</h3>
+      <h3>Email</h3>
       <p>%recipient%</p>
       <h3>Check in time</h3>
       <p>${checkin}</p>
       <h3>Start time</h3>
       <p>${start}</p>
+      <h3>Event notes</h3>
+      <p>${eventNotes}</p>
       <h3>Items to pickup at venue</h3>
       <p>${pickup}</p>
       <h3>Items shipping</h3>

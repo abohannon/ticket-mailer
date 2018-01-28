@@ -4,22 +4,26 @@ import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import { sendEmail, fetchOrders } from '../../actions';
 import formFields from './formFields';
+import { ACCENT_BLUE, WHITE } from '../../style/constants';
 
 const EmailFormReviewStyles = () => ({
   formContainer: {
+    width: 600,
+    minWidth: 350,
+    paddingLeft: 16,
+  },
+  inputsContainer: {
     display: 'flex',
     flexDirection: 'column',
-    width: 960,
-    maxWidth: 960,
-    minWidth: 350,
-  },
-  flexRow: {
-    display: 'flex',
-    flexDirection: 'row',
+    margin: '8px 0px',
   },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  blue: {
+    backgroundColor: ACCENT_BLUE,
+    color: WHITE,
   },
 });
 
@@ -32,7 +36,12 @@ class EmailFormReview extends Component {
 
   render() {
     console.log('EmailFormReview props', this.props);
-    const { formContainer, flexRow, buttonContainer } = EmailFormReviewStyles();
+    const {
+      formContainer,
+      inputsContainer,
+      buttonContainer,
+      blue,
+    } = EmailFormReviewStyles();
 
     const { formValues, onCancel, tourData, user } = this.props;
     const {
@@ -45,28 +54,29 @@ class EmailFormReview extends Component {
       digitalDate,
     } = formFields;
 
+    const reviewForm = formFields.map(field => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginBottom: '8px',
+        }}
+      >
+        <h4>{field.label}</h4>
+        <p>{formValues[field.name]}</p>
+      </div>
+    ));
+
     return (
       <div style={formContainer}>
-        <div>
-          <h4>{checkIn.label}</h4>
-          <p>{formValues.checkin}</p>
-          <h4>{startTime.label}</h4>
-          <p>{formValues.start}</p>
-          <h4>{pickup.label}</h4>
-          <p>{formValues.pickup}</p>
-          <h4>{shipping.label}</h4>
-          <p>{formValues.shipping}</p>
-          <h4>{shippingDate.label}</h4>
-          <p>{formValues.shippingDate}</p>
-          <h4>{digital.label}</h4>
-          <p>{formValues.digital}</p>
-          <h4>{digitalDate.label}</h4>
-          <p>{formValues.digitalDate}</p>
+        <div className="review-form__inputs" style={inputsContainer}>
+          {reviewForm}
         </div>
         <div className="email-form__button-container" style={buttonContainer}>
           <FlatButton label="Go Back" onClick={onCancel} />
           <FlatButton
             label="Send to all"
+            style={blue}
             onClick={() => {
               this.props.dispatch(
                 sendEmail(
