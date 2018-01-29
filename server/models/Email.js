@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const RecipientSchema = require('./Recipient');
 
-const EmailSchema = new Schema({
+const emailSchema = new Schema({
   tourName: String,
   showDate: String,
   vendor: String,
   bundleType: String,
   dateSent: Date,
   recipients: [RecipientSchema],
-  _user: { type: Schema.types.ObjectId, ref: 'User' },
+  _user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
-mongoose.model('emails', EmailSchema);
+mongoose.model('emails', emailSchema);
