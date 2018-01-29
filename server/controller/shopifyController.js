@@ -43,9 +43,10 @@ module.exports = {
 
   getAllOrders(req, res) {
     shopify.order
-      .list()
+      .list({ limit: 100 })
       .then((orders) => {
         res.send(orders);
+        console.log(orders.length);
       })
       .catch(err => console.log('Error fetching orders', err));
   },
