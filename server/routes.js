@@ -14,4 +14,5 @@ module.exports = (app) => {
   app.get('/api/logout', userController.logoutUser);
   app.get('/api/current_user', userController.currentUser);
   app.post('/api/email', requireLogin, emailController.sendEmail);
+  app.get('/api/fetch_emails', requireLogin, userController.fetchEmails);
 };
