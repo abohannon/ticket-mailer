@@ -9,6 +9,9 @@ import {
   FETCHED_USER_REJECTED,
   FETCHED_USER_PENDING,
   CURRENT_TOUR,
+  FETCH_EMAILS_SUCCESS,
+  FETCH_EMAILS_PENDING,
+  FETCH_EMAILS_REJECTED,
 } from '../actions/types';
 
 const initialState = {
@@ -24,6 +27,9 @@ const initialState = {
   fetchedUserPending: undefined,
   fetchedUserRejected: undefined,
   fetchedUserResolved: undefined,
+  fetchEmailsPending: undefined,
+  fetchEmailsRejected: undefined,
+  fetchEmailsSuccess: undefined,
 };
 
 const userAuthReducer = (state = initialState, action) => {
@@ -109,6 +115,30 @@ const userAuthReducer = (state = initialState, action) => {
     case CURRENT_TOUR: {
       const newState = {
         currentTour: action,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_EMAILS_PENDING: {
+      const newState = {
+        fetchEmailsPending: action,
+        fetchEmailsRejected: undefined,
+        fetchEmailsSuccess: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_EMAILS_REJECTED: {
+      const newState = {
+        fetchEmailsPending: undefined,
+        fetchEmailsRejected: action,
+        fetchEmailsSuccess: undefined,
+      };
+      return { ...state, ...newState };
+    }
+    case FETCH_EMAILS_SUCCESS: {
+      const newState = {
+        fetchEmailsPending: undefined,
+        fetchEmailsRejected: undefined,
+        fetchEmailsSuccess: action,
       };
       return { ...state, ...newState };
     }

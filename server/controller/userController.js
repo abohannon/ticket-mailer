@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
+const Email = mongoose.model('emails')
 const passport = require('passport');
+
 
 module.exports = {
   createUser(req, res) {
@@ -41,5 +43,40 @@ module.exports = {
 
   currentUser(req, res, next) {
     res.send(req.user);
+  },
+
+  fetchEmails(req, res) {
+    function formatDate(date) {
+      const monthNames = [
+        'January', 'February', 'March',
+        'April', 'May', 'June', 'July',
+        'August', 'September', 'October',
+        'November', 'December',
+      ];
+
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+      const year = date.getFullYear();
+
+      return `${day} ${monthNames[monthIndex]} ${year}`;
+    }
+
+    try {
+      Email.find({}, (err, emails) => {
+        const recentEmails = emails.reduce((emailList, email, i) => {
+          emailList[i] = {
+            date: formatDate(email.dateSent),
+            tour: email.tourName,
+            show: email.showDate,
+            bundle: email.bundleType,
+          }
+          return emailList
+        }, [])
+
+        res.send(recentEmails.reverse())
+      })
+    } catch (err) {
+      if (err) console.log('error fetching emails', err)
+    }
   },
 };
