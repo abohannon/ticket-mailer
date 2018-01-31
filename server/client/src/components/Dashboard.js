@@ -9,6 +9,7 @@ import DatesList from './DatesList';
 import OrdersList from './OrdersList';
 import EmailEdit from './emailForm/EmailEdit';
 import AllOrdersList from './AllOrdersList';
+import HistoryList from './HistoryList';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -28,6 +29,7 @@ class Dashboard extends Component {
       <div className="dashboard__container">
         <Sidebar history={this.props.history} />
         <Switch>
+          <Route path="/history" component={HistoryList} />
           <Route path="/all-orders" component={AllOrdersList} />
           <Route path="/edit-email" component={EmailEdit} />
           <Route path="/dates" component={DatesList} />

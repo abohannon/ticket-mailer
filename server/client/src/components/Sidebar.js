@@ -5,6 +5,7 @@ import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import ListIcon from 'material-ui/svg-icons/action/list';
+import HistoryIcon from 'material-ui/svg-icons/action/restore';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
 import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
@@ -94,6 +95,14 @@ class Sidebar extends Component {
             leftIcon={<GroupIcon color={LIGHT_BLUE} />}
             onClick={() => {
               history.push('/all-orders');
+            }}
+          />
+          <ListItem
+            primaryText="History"
+            style={listItemStyle}
+            leftIcon={<HistoryIcon color={LIGHT_BLUE} />}
+            onClick={() => {
+              history.push('/history');
             }}
           />
         </List>
