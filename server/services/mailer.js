@@ -42,6 +42,9 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
       shippingDate,
       digital,
       digitalDate,
+    }, (err, str) => {
+      if (err) console.log('Error with ejs render', err)
+      return str
     }),
     // `
     //   <h3>Band</h3>
