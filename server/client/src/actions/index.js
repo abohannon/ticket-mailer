@@ -25,6 +25,9 @@ import {
   LOGOUT_USER_PENDING,
   LOGOUT_USER_REJECTED,
   CURRENT_TOUR,
+  FETCH_EMAILS_SUCCESS,
+  FETCH_EMAILS_PENDING,
+  FETCH_EMAILS_REJECTED,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -201,4 +204,23 @@ export const sendEmail = (
     currentTourData,
   });
   console.log('sendEmail', res.body);
+};
+
+export const fetchEmails = async (dispatch) => {
+  const action = {
+    type: FETCH_EMAILS_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get('/api/fetch_emails');
+    const type = res.data !== '' ? FETCH_EMAILS_SUCCESS : FETCH_EMAILS_REJECTED;
+    console.log('fetchUser action', res);
+    dispatch({
+      type,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({ type: FETCH_EMAILS_REJECTED, payload: error });
+    console.log('Error fetching emails from database', error);
+  }
 };
