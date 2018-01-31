@@ -206,7 +206,7 @@ export const sendEmail = (
   console.log('sendEmail', res.body);
 };
 
-export const fetchEmails = async (dispatch) => {
+export const fetchEmails = () => async (dispatch) => {
   const action = {
     type: FETCH_EMAILS_PENDING,
   };
