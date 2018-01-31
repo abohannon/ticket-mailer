@@ -2,13 +2,14 @@
   <mj-head>
     <mj-attributes>
       <mj-class name="grey-bg" background-color="#eaeaea" />
-      <mj-class name="section-main" padding-top="10rem"/>
+      <mj-class name="section-main" />
       <mj-class name="text-title" color="#afafaf" text-transform="uppercase" padding-bottom=".5rem" padding-top="0" />
         <mj-class name="text-title--orange" background-color="#e97b45" color="#fff" text-transform="uppercase" align="left" width="fit-content" inner-padding=".3rem .5rem"/>
-      <mj-class name="text-large" color="#333" text-transform="uppercase" padding-top="0" padding-bottom="0" font-size="1.8rem" font-weight="600" line-height="1.8rem"/>
-      <mj-class name="text-large--white" color="#fff" text-transform="uppercase" padding-top="0" padding-bottom="0" font-size="1.8rem" font-weight="600" line-height="1.8rem"/>
-      <mj-class name="text-medium--thin--white" color="#fff" padding-top="0" padding-bottom="0" font-size="1.6rem" line-height="2rem"/>
-        <mj-class name="text-primary" color="#333" text-transform="uppercase" padding-bottom=".5rem" padding-top="0" font-weight="600"/>
+      <mj-class name="text-large" color="#222" text-transform="uppercase" padding-top="0" padding-bottom="0" font-size="1.8rem" font-weight="600" line-height="1.6em"/>
+      <mj-class name="text-medium" color="#222" text-transform="uppercase" padding-top="0" padding-bottom="0" font-size="1.2rem" font-weight="600" line-height="1.6em"/>
+      <mj-class name="text-large--white" color="#fff" text-transform="uppercase" padding-top="0" padding-bottom="0" font-size="1.8rem" font-weight="600" line-height="1.6em"/>
+      <mj-class name="text-medium--thin" color="#222" padding-top="0" padding-bottom="0" font-size="1.6rem" line-height="1.6em"/>
+        <mj-class name="text-primary" color="#222" text-transform="uppercase" padding-bottom=".5rem" padding-top="0" font-weight="600"/>
       <mj-class name="u-margin-bottom" margin-bottom=".5rem"/>
     </mj-attributes>
   </mj-head>
@@ -16,31 +17,33 @@
     <mj-container>
       <mj-section css-class="header">
         <mj-column>
-          <mj-image src="./assets/logo.png"/>
+          <mj-image src="assets/logo.png"/>
         </mj-column>
       </mj-section>
-      <mj-section css-class="section-main" mj-class="section-main" background-url="./assets/tour-image.jpg" background-size="cover">
-        <mj-column css-class="section-main__show-text" background-color="rgba(0,0,0,.5)">
+      <mj-section css-class="section-main" mj-class="section-main grey-bg">
+        <mj-column css-class="section-main__show-text">
           <mj-button mj-class="text-title--orange">
             VIP Ticket Bundle
           </mj-button>
-          <mj-text mj-class="text-large--white">
+          <mj-text mj-class="text-large">
             Saosin 2018
           </mj-text>
-          <mj-text mj-class="text-medium--thin--white">
+          <mj-text mj-class="text-medium--thin">
             01/08/2018 | Anaheim, CA at Chain Reaction
           </mj-text>
           </mj-column>
         </mj-section>
-        <mj-section>
-        <mj-column css-class="section-main__attendee-text">
+        <mj-section css-class="section-attendee">
+        <mj-group>
+        <mj-column>
           <mj-text mj-class="text-title">
             Attendee
           </mj-text>
-          <mj-text mj-class="text-large">
-            Jane Doe
+          <mj-text mj-class="text-medium">
+            Christina deGraft-Johnson
           </mj-text>
-          <mj-text mj-class="u-margin-bottom"/>
+        </mj-column>
+        <mj-column>
           <mj-text mj-class="text-title">
             Bundle Qty
           </mj-text>
@@ -48,6 +51,7 @@
             1
           </mj-text>
         </mj-column>
+      </mj-group>
       </mj-section>
       <mj-section css-class="section section-checkin" mj-class="section grey-bg">
         <mj-group>
@@ -70,7 +74,7 @@
       </mj-group>
       </mj-section>
       <mj-section css-class="section section-notes" mj-class="section">
-        <mj-column>
+        <mj-column css-class="section-notes__qr-code">
           <mj-image src="https://smallbiztrends.com/wp-content/uploads/2015/05/qr-code-sample.jpg"/>
             <mj-text mj-class="u-margin-bottom"/>
         </mj-column>
@@ -79,24 +83,11 @@
             Event Notes
           </mj-text>
           <mj-text mj-class="text-primary">
-            This venue is 21+. No large bags will be permitted
+            This venue is 21+. No large bags will be permitted.
           </mj-text>
         </mj-column>
       </mj-section>
       <mj-section css-class="section section-pickup" mj-class="section grey-bg">
-        <!-- <mj-group>
-        <mj-column width="75%">
-          <mj-text mj-class="text-title">
-            Items for pickup
-          </mj-text>
-          <mj-text mj-class="text-primary">
-            Signed tour poster, signed setlist, general admission ticket
-          </mj-text>
-        </mj-column>
-        <mj-column width="25%">
-          <mj-image width="100%" align="center" padding-top="1.2rem" src="./assets/ticket-grey.png"/>
-        </mj-column>
-      </mj-group> -->
         <mj-column>
           <mj-text mj-class="text-title">
             Items for pickup
