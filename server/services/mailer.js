@@ -31,9 +31,10 @@ const sendMail = (formValues, emails, currentTourData, userVars) => {
       showDate: '%recipient.showDate%',
       bundleType: '%recipient.bundleType%',
       quantity: '%recipient.quantity%',
-      firstName: '%recipient.first%',
+      fullName: '%recipient.fullName%',
       orderNum: '%recipient.orderNum%',
       email: '%recipient%',
+      qrCode: false, // TODO: Update when file upload is implemented
       checkin,
       start,
       eventNotes,
