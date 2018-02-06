@@ -127,6 +127,7 @@ class AllOrdersList extends Component {
                   orderNumber={order.order_number}
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}
+                  path={this.props.match.path}
                 />
               ))}
             </TableBody>

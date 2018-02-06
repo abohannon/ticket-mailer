@@ -19,7 +19,7 @@ class OrdersListItem extends Component {
   }
 
   render() {
-    const { orderNumber, customerName, customerEmail, id } = this.props;
+    const { orderNumber, customerName, customerEmail, id, path } = this.props;
     const orderUrl = `https://dogdev.myshopify.com/admin/orders/${id}`;
     return (
       <TableRow hoverable>
@@ -27,7 +27,11 @@ class OrdersListItem extends Component {
           <Link to={orderUrl} target="_blank">#{orderNumber}</Link></TableRowColumn>
         <TableRowColumn>{customerName}</TableRowColumn>
         <TableRowColumn>{customerEmail}</TableRowColumn>
-        <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName)}>Send Email</Link></TableRowColumn>
+        { path === '/all-orders'
+          ? <TableRowColumn><Link to="/orders">View Date</Link></TableRowColumn>
+          :
+          <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName)}>Send Email</Link></TableRowColumn>
+        }
       </TableRow>
     );
   }
