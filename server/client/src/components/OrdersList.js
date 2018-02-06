@@ -10,6 +10,9 @@ import {
   TableRow,
 } from 'material-ui/Table';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { ACCENT_BLUE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
@@ -34,11 +37,30 @@ const OrdersListStyles = () => ({
 });
 
 class OrdersList extends Component {
+  state = {
+    open: false,
+    customer: '',
+  };
+
   componentDidMount() {
     console.log('==== OrdersList mounted!');
     const variantId = this.props.user.currentTour.payload.variantId;
     this.props.dispatch(fetchOrders(variantId));
   }
+
+  updateCustomer = (name) => {
+    this.setState({
+      customer: name,
+    });
+  }
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   renderContent() {
     const { header, buttonContainer, refreshIndicator } = OrdersListStyles();
@@ -53,6 +75,19 @@ class OrdersList extends Component {
     let variantTitle = 'Bundle Orders';
     let vendorName = '';
     let showDate = '';
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary
+        disabled
+        onClick={this.handleClose}
+      />,
+    ];
 
     if (fetchOrdersPending) {
       return (
@@ -103,10 +138,21 @@ class OrdersList extends Component {
                   orderNumber={order.order_number}
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}
+                  openModal={this.handleOpen}
+                  closeModal={this.handleClose}
+                  updateCustomer={this.updateCustomer}
                 />
               ))}
             </TableBody>
           </Table>
+          <Dialog
+            title="Send Email Confirmation"
+            actions={actions}
+            modal
+            open={this.state.open}
+          >
+            Are you sure you want to send an email to <strong>{this.state.customer}</strong>?
+          </Dialog>
         </div>
       );
     } else if (fetchOrdersRejected) {

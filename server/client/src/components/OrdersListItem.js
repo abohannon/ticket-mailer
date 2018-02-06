@@ -13,6 +13,11 @@ class OrdersListItem extends Component {
     customerEmail: PropTypes.string.isRequired,
   }
 
+  handleClick = (customerName) => {
+    this.props.openModal();
+    this.props.updateCustomer(customerName);
+  }
+
   render() {
     const { orderNumber, customerName, customerEmail, id } = this.props;
     const orderUrl = `https://dogdev.myshopify.com/admin/orders/${id}`;
@@ -22,7 +27,7 @@ class OrdersListItem extends Component {
           <Link to={orderUrl} target="_blank">#{orderNumber}</Link></TableRowColumn>
         <TableRowColumn>{customerName}</TableRowColumn>
         <TableRowColumn>{customerEmail}</TableRowColumn>
-        <TableRowColumn>Unsent. <a href="/">Send?</a></TableRowColumn>
+        <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName)}>Send Email</Link></TableRowColumn>
       </TableRow>
     );
   }
