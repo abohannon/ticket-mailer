@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import { updateTour } from '../actions';
 
 class OrdersListItem extends Component {
   static propTypes = {
@@ -18,8 +20,14 @@ class OrdersListItem extends Component {
     this.props.updateCustomer(customerName);
   }
 
+  sendTourInfo = (variantId) => {
+    const tourState = { variantId };
+    console.log('====VARIANT ID=====', variantId);
+    this.props.dispatch(updateTour({ ...tourState }));
+  }
+
   render() {
-    const { orderNumber, customerName, customerEmail, id, path } = this.props;
+    const { orderNumber, customerName, customerEmail, id, path, variantId } = this.props;
     const orderUrl = `https://dogdev.myshopify.com/admin/orders/${id}`;
     return (
       <TableRow hoverable>
@@ -28,7 +36,7 @@ class OrdersListItem extends Component {
         <TableRowColumn>{customerName}</TableRowColumn>
         <TableRowColumn>{customerEmail}</TableRowColumn>
         { path === '/all-orders'
-          ? <TableRowColumn><Link to="/orders">View Date</Link></TableRowColumn>
+          ? <TableRowColumn><Link to="/orders" onClick={() => this.sendTourInfo(variantId)}>View Date</Link></TableRowColumn>
           :
           <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName)}>Send Email</Link></TableRowColumn>
         }
@@ -37,4 +45,4 @@ class OrdersListItem extends Component {
   }
 }
 
-export default OrdersListItem;
+export default connect()(OrdersListItem);

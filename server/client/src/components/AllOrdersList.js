@@ -128,6 +128,8 @@ class AllOrdersList extends Component {
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}
                   path={this.props.match.path}
+                  tourData={this.props.tourData}
+                  variantId={order.line_items[0].variant_id}
                 />
               ))}
             </TableBody>

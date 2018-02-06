@@ -141,6 +141,7 @@ class OrdersList extends Component {
                   openModal={this.handleOpen}
                   closeModal={this.handleClose}
                   updateCustomer={this.updateCustomer}
+                  variantId={variantId}
                 />
               ))}
             </TableBody>
