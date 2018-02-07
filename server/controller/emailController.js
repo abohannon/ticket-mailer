@@ -33,11 +33,30 @@ module.exports = {
       };
     });
 
+    const {
+      checkin,
+      start,
+      eventNotes,
+      pickup,
+      shipping,
+      shippingDate,
+      digital,
+      digitalDate,
+    } = formValues;
+
     const emailData = new Email({
       tourName: currentTourData.tourTitle,
       showDate: currentTourData.dateTitle,
       vendor: currentTourData.vendor,
       bundleType: currentTourData.variantTitle,
+      checkin,
+      start,
+      eventNotes,
+      pickup,
+      shipping,
+      shippingDate,
+      digital,
+      digitalDate,
       recipients: emails.map(email => ({ email })),
       dateSent: Date.now(),
       _user: req.user.id,
