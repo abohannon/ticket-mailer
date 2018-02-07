@@ -101,6 +101,7 @@ class DatesList extends Component {
                   title={product.title}
                   id={product.product_id}
                   variants={product.variants}
+                  vendor={product.vendor}
                 />
               ))}
             </TableBody>

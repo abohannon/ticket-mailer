@@ -90,12 +90,10 @@ class Header extends Component {
   }
 
   renderDetails() {
-    const { tourName, vendorName, showDate } = this.props;
-    if (!tourName) return null;
+    const { vendorName, showDate } = this.props;
     return (
       <div className="header__details">
         <h3>{showDate}</h3>
-        <h3>{tourName}</h3>
         <h3>{vendorName}</h3>
       </div>
     );

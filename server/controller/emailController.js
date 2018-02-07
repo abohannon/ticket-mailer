@@ -36,7 +36,7 @@ module.exports = {
     const emailData = new Email({
       tourName: currentTourData.tourTitle,
       showDate: currentTourData.dateTitle,
-      vendor: userVars.vendor,
+      vendor: currentTourData.vendor,
       bundleType: currentTourData.variantTitle,
       recipients: emails.map(email => ({ email })),
       dateSent: Date.now(),

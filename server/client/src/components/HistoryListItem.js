@@ -10,17 +10,17 @@ class HistoryListItem extends Component {
     date: PropTypes.string.isRequired,
     show: PropTypes.string.isRequired,
     bundle: PropTypes.string.isRequired,
-    tour: PropTypes.string.isRequired,
+    vendor: PropTypes.string.isRequired,
   }
 
   render() {
-    const { date, show, bundle, tour } = this.props;
+    const { date, show, bundle, vendor } = this.props;
     return (
       <TableRow hoverable>
         <TableRowColumn>{date}</TableRowColumn>
         <TableRowColumn>{show}</TableRowColumn>
         <TableRowColumn>{bundle}</TableRowColumn>
-        <TableRowColumn>{tour}</TableRowColumn>
+        <TableRowColumn>{vendor}</TableRowColumn>
       </TableRow>
     );
   }

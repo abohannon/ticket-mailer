@@ -10,7 +10,9 @@ import {
   TableRow,
 } from 'material-ui/Table';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import { ACCENT_BLUE } from '../style/constants';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import { ACCENT_BLUE, WHITE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
 import ErrorMessage from './ErrorMessage';
@@ -34,11 +36,30 @@ const OrdersListStyles = () => ({
 });
 
 class OrdersList extends Component {
+  state = {
+    open: false,
+    customer: '',
+  };
+
   componentDidMount() {
     console.log('==== OrdersList mounted!');
     const variantId = this.props.user.currentTour.payload.variantId;
     this.props.dispatch(fetchOrders(variantId));
   }
+
+  updateCustomer = (name) => {
+    this.setState({
+      customer: name,
+    });
+  }
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   renderContent() {
     const { header, buttonContainer, refreshIndicator } = OrdersListStyles();
@@ -53,6 +74,21 @@ class OrdersList extends Component {
     let variantTitle = 'Bundle Orders';
     let vendorName = '';
     let showDate = '';
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary
+        onClick={this.handleClose}
+        labelStyle={{ color: ACCENT_BLUE }}
+      />,
+      <FlatButton
+        label="Submit"
+        primary
+        onClick={this.handleClose}
+        labelStyle={{ color: WHITE }}
+        backgroundColor={ACCENT_BLUE}
+      />,
+    ];
 
     if (fetchOrdersPending) {
       return (
@@ -73,10 +109,10 @@ class OrdersList extends Component {
       const ordersList = Array.from(fetchOrdersSuccess.payload);
       if (fetchOrdersSuccess.payload.length > 0) {
         variantTitle = `${
-          this.props.user.currentTour.payload.variantTitle
+          ordersList[0].line_items[0].variant_title
         } Orders`;
         vendorName = ordersList[0].line_items[0].vendor;
-        showDate = this.props.user.currentTour.payload.dateTitle;
+        showDate = ordersList[0].line_items[0].title;
       }
       return (
         <div>
@@ -92,7 +128,7 @@ class OrdersList extends Component {
                 <TableHeaderColumn>Order #</TableHeaderColumn>
                 <TableHeaderColumn>Name</TableHeaderColumn>
                 <TableHeaderColumn>Email</TableHeaderColumn>
-                <TableHeaderColumn>Status</TableHeaderColumn>
+                <TableHeaderColumn />
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -103,10 +139,22 @@ class OrdersList extends Component {
                   orderNumber={order.order_number}
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}
+                  openModal={this.handleOpen}
+                  closeModal={this.handleClose}
+                  updateCustomer={this.updateCustomer}
+                  variantId={variantId}
                 />
               ))}
             </TableBody>
           </Table>
+          <Dialog
+            title="Send Email Confirmation"
+            actions={actions}
+            modal
+            open={this.state.open}
+          >
+            Are you sure you want to send an email to <strong>{this.state.customer}</strong>?
+          </Dialog>
         </div>
       );
     } else if (fetchOrdersRejected) {
