@@ -12,8 +12,7 @@ import {
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import { ACCENT_BLUE } from '../style/constants';
+import { ACCENT_BLUE, WHITE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
 import ErrorMessage from './ErrorMessage';
@@ -80,12 +79,14 @@ class OrdersList extends Component {
         label="Cancel"
         primary
         onClick={this.handleClose}
+        labelStyle={{ color: ACCENT_BLUE }}
       />,
       <FlatButton
         label="Submit"
         primary
-        disabled
         onClick={this.handleClose}
+        labelStyle={{ color: WHITE }}
+        backgroundColor={ACCENT_BLUE}
       />,
     ];
 
@@ -108,10 +109,10 @@ class OrdersList extends Component {
       const ordersList = Array.from(fetchOrdersSuccess.payload);
       if (fetchOrdersSuccess.payload.length > 0) {
         variantTitle = `${
-          this.props.user.currentTour.payload.variantTitle
+          ordersList[0].line_items[0].variant_title
         } Orders`;
         vendorName = ordersList[0].line_items[0].vendor;
-        showDate = this.props.user.currentTour.payload.dateTitle;
+        showDate = ordersList[0].line_items[0].title;
       }
       return (
         <div>

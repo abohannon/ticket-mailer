@@ -128,8 +128,11 @@ class AllOrdersList extends Component {
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}
                   path={this.props.match.path}
-                  tourData={this.props.tourData}
                   variantId={order.line_items[0].variant_id}
+                  variantTitle={order.line_items[0].variant_title}
+                  dateTitle={order.line_items[0].title}
+                  vendor={order.line_items[0].vendor}
+                  user={this.props.user}
                 />
               ))}
             </TableBody>
@@ -155,6 +158,6 @@ class AllOrdersList extends Component {
   }
 }
 
-const mapStateToProps = state => ({ tourData: state.shopifyFetch });
+const mapStateToProps = state => ({ tourData: state.shopifyFetch, user: state.userAuth });
 
 export default connect(mapStateToProps)(AllOrdersList);

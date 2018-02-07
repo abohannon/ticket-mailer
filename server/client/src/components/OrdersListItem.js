@@ -20,14 +20,25 @@ class OrdersListItem extends Component {
     this.props.updateCustomer(customerName);
   }
 
-  sendTourInfo = (variantId) => {
-    const tourState = { variantId };
-    console.log('====VARIANT ID=====', variantId);
-    this.props.dispatch(updateTour({ ...tourState }));
+  sendTourInfo = (tourState) => {
+    const previousTourState = this.props.user.currentTour.payload;
+    this.props.dispatch(updateTour({ ...previousTourState, ...tourState }));
   }
 
   render() {
-    const { orderNumber, customerName, customerEmail, id, path, variantId } = this.props;
+    const {
+      orderNumber,
+      customerName,
+      customerEmail,
+      id,
+      path,
+      variantId,
+      variantTitle,
+      dateTitle,
+      vendor,
+    } = this.props;
+
+    const tourState = { variantId, variantTitle, dateTitle, vendor };
     const orderUrl = `https://dogdev.myshopify.com/admin/orders/${id}`;
     return (
       <TableRow hoverable>
@@ -36,7 +47,7 @@ class OrdersListItem extends Component {
         <TableRowColumn>{customerName}</TableRowColumn>
         <TableRowColumn>{customerEmail}</TableRowColumn>
         { path === '/all-orders'
-          ? <TableRowColumn><Link to="/orders" onClick={() => this.sendTourInfo(variantId)}>View Date</Link></TableRowColumn>
+          ? <TableRowColumn><Link to="/orders" onClick={() => this.sendTourInfo(tourState)}>View Date</Link></TableRowColumn>
           :
           <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName)}>Send Email</Link></TableRowColumn>
         }
