@@ -128,7 +128,7 @@ class OrdersList extends Component {
                 <TableHeaderColumn>Order #</TableHeaderColumn>
                 <TableHeaderColumn>Name</TableHeaderColumn>
                 <TableHeaderColumn>Email</TableHeaderColumn>
-                <TableHeaderColumn>Status</TableHeaderColumn>
+                <TableHeaderColumn />
               </TableRow>
             </TableHeader>
             <TableBody>

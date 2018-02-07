@@ -77,7 +77,7 @@ class HistoryList extends Component {
                   date={email.date}
                   show={email.show}
                   bundle={email.bundle}
-                  tour={email.tour}
+                  vendor={email.vendor}
                 />
               ))}
             </TableBody>

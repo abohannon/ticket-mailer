@@ -69,6 +69,7 @@ module.exports = {
             tour: email.tourName,
             show: email.showDate,
             bundle: email.bundleType,
+            vendor: email.vendor,
           }
           return emailList
         }, [])

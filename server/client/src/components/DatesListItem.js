@@ -5,7 +5,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import { fetchOrders, updateShowDate, updateTour } from '../actions';
+import { updateTour } from '../actions';
 
 class DatesListItem extends Component {
   componentDidMount() {
@@ -17,8 +17,9 @@ class DatesListItem extends Component {
     const dateId = this.props.id;
     const variantId = this.props.variants[index].id;
     const variantTitle = this.props.variants[index].title;
+    const vendor = this.props.vendor;
     const previousTourState = this.props.user.currentTour.payload;
-    const tourState = { dateTitle, dateId, variantId, variantTitle };
+    const tourState = { dateTitle, dateId, variantId, variantTitle, vendor };
     this.props.dispatch(updateTour({ ...previousTourState, ...tourState }));
   }
 
@@ -53,8 +54,6 @@ class DatesListItem extends Component {
   render() {
     const {
       title,
-      id,
-      variants,
     } = this.props;
 
     return (
