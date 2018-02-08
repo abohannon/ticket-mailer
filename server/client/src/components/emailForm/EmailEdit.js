@@ -59,7 +59,4 @@ const mapStateToProps = state => ({
   tourData: state.shopifyFetch,
 });
 
-export default reduxForm({
-  form: 'emailForm',
-  destroyOnUnmount: false,
-})(connect(mapStateToProps)(EmailEdit));
+export default connect(mapStateToProps)(EmailEdit);

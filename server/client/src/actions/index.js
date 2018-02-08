@@ -28,6 +28,9 @@ import {
   FETCH_EMAILS_SUCCESS,
   FETCH_EMAILS_PENDING,
   FETCH_EMAILS_REJECTED,
+  FETCH_EMAIL_SUCCESS,
+  FETCH_EMAIL_PENDING,
+  FETCH_EMAIL_REJECTED,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -203,7 +206,7 @@ export const sendEmail = (
     orderData,
     currentTourData,
   });
-  console.log('sendEmail', res.body);
+  history.push('/orders');
 };
 
 export const fetchEmails = () => async (dispatch) => {
@@ -214,7 +217,7 @@ export const fetchEmails = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/fetch_emails');
     const type = res.data !== '' ? FETCH_EMAILS_SUCCESS : FETCH_EMAILS_REJECTED;
-    console.log('fetchUser action', res);
+    console.log('fetchEmails action', res);
     dispatch({
       type,
       payload: res.data,
@@ -222,5 +225,24 @@ export const fetchEmails = () => async (dispatch) => {
   } catch (error) {
     dispatch({ type: FETCH_EMAILS_REJECTED, payload: error });
     console.log('Error fetching emails from database', error);
+  }
+};
+
+export const fetchEmail = showDate => async (dispatch) => {
+  const action = {
+    type: FETCH_EMAIL_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.get(`/api/fetch_email/${showDate}`);
+    const type = res.data !== '' ? FETCH_EMAIL_SUCCESS : FETCH_EMAIL_REJECTED;
+    console.log('fetchEmail action', res);
+    dispatch({
+      type,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({ type: FETCH_EMAIL_REJECTED, payload: error });
+    console.log('Error fetching email from database', error);
   }
 };
