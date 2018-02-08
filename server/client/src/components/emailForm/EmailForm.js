@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, reset } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Arrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
@@ -101,7 +101,7 @@ class EmailForm extends Component {
             <FlatButton
               label="Clear"
               style={{ marginRight: 'auto' }}
-              onClick={() => this.props.reset()}
+              onClick={() => this.props.dispatch(reset('emailForm'))}
             />
             <FlatButton
               label="Next"
@@ -117,7 +117,10 @@ class EmailForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({ tourData: state.shopifyFetch, user: state.userAuth });
+const mapStateToProps = state => ({
+  tourData: state.shopifyFetch,
+  user: state.userAuth,
+});
 
 EmailForm = connect(mapStateToProps)(EmailForm);
 

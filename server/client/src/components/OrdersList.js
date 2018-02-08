@@ -43,7 +43,7 @@ class OrdersList extends Component {
 
   componentDidMount() {
     console.log('==== OrdersList mounted!');
-    const variantId = this.props.user.currentTour.payload.variantId;
+    const { variantId } = this.props.user.currentTour.payload;
     this.props.dispatch(fetchOrders(variantId));
   }
 
