@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../Header';
 import EmailForm from './EmailForm';
 import EmailFormReview from './EmailFormReview';
+import { fetchEmail } from '../../actions';
 
 const EmailEditStyles = () => ({
   container: {
@@ -18,7 +19,21 @@ class EmailEdit extends Component {
 
   componentDidMount() {
     console.log('===== EmailEdit mounted!');
+    const showDate = this.props.user.currentTour.payload.dateTitle;
+    this.props.dispatch(fetchEmail(showDate));
   }
+
+  //   const {
+  //   checkin,
+  //   start,
+  //   eventNotes,
+  //   pickup,
+  //   shipping,
+  //   shippingDate,
+  //   digital,
+  //   digitalDate
+  // } = this.props.user.fetchEmailSuccess.payload
+
 
   renderContent() {
     if (this.state.showEmailReview) {
@@ -31,6 +46,7 @@ class EmailEdit extends Component {
     return (
       <EmailForm
         onFormSubmit={() => this.setState({ showEmailReview: true })}
+        initialValues={this.props.user.fetchEmailSuccess ? this.props.user.fetchEmailSuccess.payload : null}
       />
     );
   }

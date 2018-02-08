@@ -117,7 +117,7 @@ class EmailForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({ tourData: state.shopifyFetch });
+const mapStateToProps = state => ({ tourData: state.shopifyFetch, user: state.userAuth });
 
 EmailForm = connect(mapStateToProps)(EmailForm);
 
