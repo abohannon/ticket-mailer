@@ -206,7 +206,7 @@ export const sendEmail = (
     orderData,
     currentTourData,
   });
-  console.log('sendEmail', res.body);
+  history.push('/orders');
 };
 
 export const fetchEmails = () => async (dispatch) => {

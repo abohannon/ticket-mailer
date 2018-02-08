@@ -15,9 +15,10 @@ class OrdersListItem extends Component {
     customerEmail: PropTypes.string.isRequired,
   }
 
-  handleClick = (customerName) => {
+  handleClick = (customerName, index) => {
     this.props.openModal();
-    this.props.updateCustomer(customerName);
+    this.props.updateCustomer(customerName, index);
+    console.log(customerName, index);
   }
 
   sendTourInfo = (tourState) => {
@@ -36,6 +37,7 @@ class OrdersListItem extends Component {
       variantTitle,
       dateTitle,
       vendor,
+      index,
     } = this.props;
 
     const tourState = { variantId, variantTitle, dateTitle, vendor };
@@ -49,7 +51,7 @@ class OrdersListItem extends Component {
         { path === '/all-orders'
           ? <TableRowColumn><Link to="/orders" onClick={() => this.sendTourInfo(tourState)}>View Date</Link></TableRowColumn>
           :
-          <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName)}>Send Email</Link></TableRowColumn>
+          <TableRowColumn><Link to="#" onClick={() => this.handleClick(customerName, index)}>Send Email</Link></TableRowColumn>
         }
       </TableRow>
     );

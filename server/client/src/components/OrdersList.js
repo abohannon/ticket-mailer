@@ -16,7 +16,7 @@ import { ACCENT_BLUE, WHITE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
 import ErrorMessage from './ErrorMessage';
-import { fetchOrders } from '../actions';
+import { fetchOrders, fetchEmail, sendEmail } from '../actions';
 
 const OrdersListStyles = () => ({
   container: {
@@ -43,13 +43,15 @@ class OrdersList extends Component {
 
   componentDidMount() {
     console.log('==== OrdersList mounted!');
-    const { variantId } = this.props.user.currentTour.payload;
+    const { variantId, dateTitle } = this.props.user.currentTour.payload;
     this.props.dispatch(fetchOrders(variantId));
+    this.props.dispatch(fetchEmail(dateTitle));
   }
 
-  updateCustomer = (name) => {
+  updateCustomer = (name, index) => {
     this.setState({
       customer: name,
+      customerIndex: index,
     });
   }
 
@@ -60,6 +62,18 @@ class OrdersList extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  sendOneEmail = () => {
+    this.props.dispatch(
+      sendEmail(
+        this.props.user.fetchEmailSuccess.payload,
+        [this.props.tourData.fetchOrdersSuccess.payload[this.state.customerIndex]],
+        this.props.user.currentTour.payload,
+        this.props.history,
+      ),
+    );
+    this.handleClose();
+  }
 
   renderContent() {
     const { header, buttonContainer, refreshIndicator } = OrdersListStyles();
@@ -84,7 +98,7 @@ class OrdersList extends Component {
       <FlatButton
         label="Submit"
         primary
-        onClick={this.handleClose}
+        onClick={this.sendOneEmail}
         labelStyle={{ color: WHITE }}
         backgroundColor={ACCENT_BLUE}
       />,
@@ -132,7 +146,7 @@ class OrdersList extends Component {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {ordersList.map(order => (
+              {ordersList.map((order, index) => (
                 <OrdersListItem
                   key={order.id}
                   id={order.id}
@@ -143,6 +157,7 @@ class OrdersList extends Component {
                   closeModal={this.handleClose}
                   updateCustomer={this.updateCustomer}
                   variantId={variantId}
+                  index={index}
                 />
               ))}
             </TableBody>

@@ -43,7 +43,7 @@ class EmailFormReview extends Component {
       blue,
     } = EmailFormReviewStyles();
 
-    const { formValues, onCancel, tourData, user } = this.props;
+    const { formValues, onCancel, tourData, user, history } = this.props;
     const {
       checkIn,
       startTime,
@@ -83,6 +83,7 @@ class EmailFormReview extends Component {
                   formValues,
                   tourData.fetchOrdersSuccess.payload,
                   user.currentTour.payload,
+                  history,
                 ),
               );
             }}
@@ -98,4 +99,4 @@ const mapStateToProps = state => ({
   user: state.userAuth,
 });
 
-export default connect(mapStateToProps)(EmailFormReview);
+export default connect(mapStateToProps)(withRouter(EmailFormReview));
