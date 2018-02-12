@@ -1,10 +1,9 @@
-![Logo of the project](https://raw.githubusercontent.com/jehna/readme-best-practices/master/sample-logo.png)
+# Ticket Mailer
+> Custom Shopify app designed for SHOWstubs.com
 
-# Name of the project
-> Additional information or tagline
+Ticket Mailer is a custom MERN app designed specifically for SHOWstubs.com to send VIP concert tickets to customers after they purchase their VIP ticket bundles.
 
-A brief description of your project, what it is used for and how does life get
-awesome when someone starts to use it.
+The app is built with React, Node, mongoDB, mongoose, express
 
 ## Installing / Getting started
 
@@ -12,96 +11,78 @@ A quick introduction of the minimal setup you need to get a hello world up &
 running.
 
 ```shell
-packagemanager install awesome-project
-awesome-project start
-awesome-project "Do something!"  # prints "Nah."
+cd server
+npm run dev
 ```
 
-Here you should say what actually happens when you execute the code above.
+The above command will start the Node server as well as start react-scripts and launch the app on localhost:3000.
 
 ## Developing
 
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
+To install:
 
 ```shell
-git clone https://github.com/your/awesome-project.git
-cd awesome-project/
-packagemanager install
+https://github.com/abohannon/ticket-mailer.git
+cd ticket-mailer/
+npm install
 ```
+In order to successfully launch and develop the app, you will need the following in a dev.js file:
 
-And state what happens step-by-step.
+```
+module.exports = {
+  shopName: [shopifystorename],
+  apiKey: [shopifyappapikey],
+  password: [shopifyapppassword],
+  mongoURI:[mongodbURI],
+  cookieKey: [randomstring],
+  mailgunUser: [mailgunuseraddress],
+  mailgunPass: [mailgunpassword],
+  mailgunPrivateAPIKey: [mailgunprivateAPIkey],
+  mailgunDomain: [mailgunsandboxdomain],
+};
+```
+Shopify App Developer Program (https://developers.shopify.com/)
+mLab (https://mlab.com/)
+Mailgun (https://www.mailgun.com/)
 
 ### Building
 
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here:
+To build the project, change into the client directory and run npm run build.
 
 ```shell
-./configure
-make
-make install
+cd server/client
+npm run build
 ```
+React build script will run and save assets in the client/build directory.
 
-Here again you should state what actually happens when the code above gets
-executed.
+### Testing
 
-### Deploying / Publishing
-
-In case there's some step you have to take that publishes this project to a
-server, this is the right time to state it.
+To start the test, run the following command:
 
 ```shell
-packagemanager deploy awesome-project -s server.com -u username -p password
+cd server
+npm run test
 ```
-
-And again you'd need to tell what the previous code actually does.
 
 ## Features
 
-What's all the bells and whistles this project can perform?
-* What's the main functionality
-* You can also do another thing
-* If you get really randy, you can even do this
+* User can view current tours currently live in Shopify (collections)
+* User can click each tour and see the show dates available and their available bundles (products & variants)
+* User can click a bundle and see all orders and customer information
+* From this page, user can edit the email fields for that particular show date and bundle type. Once finished, they may review
+their inputs before sending to all customers who ordered that particular bundle.
+* After this email is sent, it is saved to the db and from here the user can now send the email to individuals if necessary or edit and re-send
+* Each order list page shows a 'last sent' status so the user knows if the email has been sent
+* A history page shows a record of all emails that have been sent and the date
+* An order page exists that shows all orders regardless of show date, variant, etc. User can use the search on this page to find a particular customer or order # and click through to the relevant show date and bundle page for that customer
+* User can login and logout and remain authenticated while their cookie is valid.
 
-## Configuration
+## Future Considerations
 
-Here you should write what are all of the configurations a user can enter when
-using the project.
-
-#### Argument 1
-Type: `String`  
-Default: `'default value'`
-
-State what an argument does and how you can use it. If needed, you can provide
-an example below.
-
-Example:
-```bash
-awesome-project "Some other value"  # Prints "You're nailing this readme!"
-```
-
-#### Argument 2
-Type: `Number|Boolean`  
-Default: 100
-
-Copy-paste as many of these as you need.
 
 ## Contributing
 
-When you publish something open source, one of the greatest motivations is that
-anyone can just jump in and start contributing to your project.
-
-These paragraphs are meant to welcome those kind souls to feel that they are
-needed. You should state something like:
-
-"If you'd like to contribute, please fork the repository and use a feature
-branch. Pull requests are warmly welcome."
-
-If there's anything else the developer needs to know (e.g. the code style
-guide), you should link it here. If there's a lot of things to take into
-consideration, it is common to separate this section to its own file called
-`CONTRIBUTING.md` (or similar). If so, you should say that it exists here.
+If you find this project helpful as a starting point for your own project, please feel free to clone. If you are interested in submitting improvements, PRs are welcome!
 
 ## Links
 
@@ -109,21 +90,12 @@ Even though this information can be found inside the project on machine-readable
 format like in a .json file, it's good to include a summary of most useful
 links to humans using your project. You can include links like:
 
-- Project homepage: https://your.github.com/awesome-project/
-- Repository: https://github.com/your/awesome-project/
-- Issue tracker: https://github.com/your/awesome-project/issues
+- Repository: https://github.com/abohannon/ticket-mailer
+- Issue tracker: https://github.com/abohannon/ticket-mailer/issues
   - In case of sensitive bugs like security vulnerabilities, please contact
-    my@email.com directly instead of using issue tracker. We value your effort
+    abo46n2@gmail.com directly instead of using issue tracker. We value your effort
     to improve the security and privacy of this project!
-- Related projects:
-  - Your other project: https://github.com/your/other-project/
-  - Someone else's project: https://github.com/someones/awesome-project/
-
 
 ## Licensing
 
-One really important part: Give your project a proper license. Here you should
-state what the license is and how to find the text version of the license.
-Something like:
-
-"The code in this project is licensed under MIT license."
+The code in this project is licensed under MIT license.
