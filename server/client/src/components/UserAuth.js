@@ -44,9 +44,9 @@ class UserAuth extends Component {
   }
 
   renderContent() {
-    const { fetchedUserRejected } = this.props.user;
+    const { fetchedUserRejected, isAuthorized } = this.props.user;
 
-    if (fetchedUserRejected) {
+    if (!isAuthorized) {
       switch (this.props.location.pathname) {
         case '/login':
           return <LoginForm />;
