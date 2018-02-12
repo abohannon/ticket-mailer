@@ -1,9 +1,11 @@
 # Ticket Mailer
 > Custom Shopify app designed for SHOWstubs.com
 
-Ticket Mailer is a custom MERN stack app designed specifically for SHOWstubs.com to send VIP concert tickets to customers after purchasing their VIP ticket bundles. 
+Ticket Mailer is a custom MERN app designed specifically for SHOWstubs.com to send VIP concert tickets to customers based on their order details.
 
 The primary stack for this app is React, Node, Express, and MongoDB.
+
+The UI is designed primarily using Material UI - http://www.material-ui.com/
 
 
 ## Installing / Getting started

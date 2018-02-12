@@ -40,6 +40,7 @@ class OrdersList extends Component {
   state = {
     open: false,
     customer: '',
+    customerIndex: '',
   };
 
   componentDidMount() {
@@ -134,6 +135,11 @@ class OrdersList extends Component {
         vendorName = ordersList[0].line_items[0].vendor;
         showDate = ordersList[0].line_items[0].title;
       }
+      const modalMessage = () => (
+        dateSent === 'never'
+          ? <p>This email has not been sent yet. Please send to all before emailing this customer.</p>
+          : <p>Are you sure you want to send an email to <strong>{this.state.customer}</strong>?</p>
+      );
       return (
         <div>
           <Header
@@ -171,11 +177,12 @@ class OrdersList extends Component {
           </Table>
           <Dialog
             title="Send Email Confirmation"
-            actions={actions}
-            modal
+            actions={dateSent === 'never' ? null : actions}
+            modal={false}
             open={this.state.open}
+            onRequestClose={this.handleClose}
           >
-            Are you sure you want to send an email to <strong>{this.state.customer}</strong>?
+            {modalMessage()}
           </Dialog>
         </div>
       );

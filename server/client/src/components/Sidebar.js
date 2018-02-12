@@ -71,7 +71,6 @@ class Sidebar extends Component {
   };
 
   render() {
-    console.log('Sidebar Props', this.props);
     const { sidebar, listStyleTop, listItemStyle, greeting } = SidebarStyles();
 
     const { history } = this.props;
