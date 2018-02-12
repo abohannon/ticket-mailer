@@ -25,7 +25,7 @@ https://github.com/abohannon/ticket-mailer.git
 cd ticket-mailer/
 npm install
 ```
-In order to successfully launch and develop the app, you will need the following in a dev.js file:
+In order to successfully launch and develop the app, you will need the following in a dev.js file in the server/config dir:
 
 ```
 module.exports = {
@@ -40,6 +40,8 @@ module.exports = {
   mailgunDomain: [mailgunsandboxdomain],
 };
 ```
+Relevant links:
+
 Shopify App Developer Program (https://developers.shopify.com/)
 mLab (https://mlab.com/)
 Mailgun (https://www.mailgun.com/)
