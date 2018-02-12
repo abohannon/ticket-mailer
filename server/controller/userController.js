@@ -42,5 +42,6 @@ module.exports = {
 
   currentUser(req, res, next) {
     res.send(req.user);
+    console.log('api/current_user', req.user);
   },
 };

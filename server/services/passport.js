@@ -34,23 +34,8 @@ passport.use(new LocalStrategy({
         console.log('invalid password')
         return done(null, false, { message: 'Invalid password' })
       }
-      console.log('Current User:', user)
+      console.log('Passport successfully found user', user)
       return done(null, user)
     })
-
-    // if (!user.validPassword(password)) {
-    //   return done(null, false, { message: 'Incorrect password' })
-    // }
-    //
-    // bcrypt.compare(password, user.password, (err, result) => {
-    //   console.log(password)
-    //   console.log(user.password)
-    //   if (err) return done(err)
-    //   if (!result) {
-    //     return done(null, false)
-    //   } else {
-    //     return done(null, user)
-    //   }
-    // })
   })
 }))
