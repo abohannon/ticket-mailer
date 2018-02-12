@@ -109,7 +109,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('header props', this.props);
     const { header, headerTitle } = HeaderStyles(this.props);
     const { pageTitle } = this.props;
 
