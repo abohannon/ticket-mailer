@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { List, ListItem } from 'material-ui/List';
-import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import ListIcon from 'material-ui/svg-icons/action/list';
 import HistoryIcon from 'material-ui/svg-icons/action/restore';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
-import { LIGHT_BLUE, DARK_BLUE, WHITE } from '../style/constants';
+import { LIGHT_BLUE, DARK_BLUE } from '../style/constants';
 import { logoutUser } from '../actions';
 
 const SidebarStyles = () => ({
@@ -107,11 +106,6 @@ class Sidebar extends Component {
           />
         </List>
         <List>
-          <ListItem
-            primaryText="Settings"
-            style={listItemStyle}
-            leftIcon={<SettingsIcon color={LIGHT_BLUE} />}
-          />
           <ListItem
             primaryText="Log out"
             style={listItemStyle}
