@@ -8,6 +8,7 @@ import {
   LIGHT_BLUE,
   ACCENT_BLUE,
   WHITE,
+  LIGHT_GREY,
 } from '../style/constants';
 
 const HeaderStyles = () => ({
@@ -37,8 +38,15 @@ const HeaderStyles = () => ({
     borderColor: ACCENT_BLUE,
   },
   buttonContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     paddingLeft: 24,
     minWidth: 134,
+  },
+  sentStatus: {
+    fontSize: 11,
+    color: LIGHT_GREY,
   },
 });
 
@@ -70,8 +78,8 @@ class Header extends Component {
   }
 
   renderButton() {
-    const { buttonContainer, blue } = HeaderStyles();
-    const { match } = this.props;
+    const { buttonContainer, blue, sentStatus } = HeaderStyles();
+    const { match, dateSent } = this.props;
     if (match.path === '/orders') {
       return (
         <div className="button" style={buttonContainer}>
@@ -83,6 +91,7 @@ class Header extends Component {
               icon={<EditIcon />}
             />
           </Link>
+          <span style={sentStatus}>Last sent: {dateSent} </span>
         </div>
       );
     }

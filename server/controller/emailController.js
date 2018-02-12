@@ -110,7 +110,7 @@ module.exports = {
 
   fetchEmail(req, res) {
     try {
-      Email.findOne({ showDate: req.params.id }, (err, email) => {
+      Email.findOne({ showDate: req.params.id }).sort({ dateSent: -1 }).exec((err, email) => {
         if (err) console.log(err)
         res.send(email)
       })

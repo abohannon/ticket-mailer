@@ -17,6 +17,7 @@ import Header from './Header';
 import OrdersListItem from './OrdersListItem';
 import ErrorMessage from './ErrorMessage';
 import { fetchOrders, fetchEmail, sendEmail } from '../actions';
+import { formatDate } from '../helpers/formatDate';
 
 const OrdersListStyles = () => ({
   container: {
@@ -83,11 +84,13 @@ class OrdersList extends Component {
       fetchOrdersRejected,
       fetchOrdersPending,
     } = this.props.tourData;
+    const { fetchEmailSuccess } = this.props.user;
     const variantId = this.props.user.currentTour.payload.variantId;
     const tourName = this.props.user.currentTour.payload.tourTitle;
     let variantTitle = 'Bundle Orders';
     let vendorName = '';
     let showDate = '';
+    let dateSent = 'never';
     const actions = [
       <FlatButton
         label="Cancel"
@@ -120,6 +123,9 @@ class OrdersList extends Component {
         </div>
       );
     } else if (fetchOrdersSuccess) {
+      if (fetchEmailSuccess) {
+        dateSent = formatDate(new Date(this.props.user.fetchEmailSuccess.payload.dateSent));
+      }
       const ordersList = Array.from(fetchOrdersSuccess.payload);
       if (fetchOrdersSuccess.payload.length > 0) {
         variantTitle = `${
@@ -135,6 +141,7 @@ class OrdersList extends Component {
             showDate={showDate}
             tourName={tourName}
             vendorName={vendorName}
+            dateSent={dateSent}
           />
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
