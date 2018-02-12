@@ -1,9 +1,10 @@
 # Ticket Mailer
 > Custom Shopify app designed for SHOWstubs.com
 
-Ticket Mailer is a custom MERN app designed specifically for SHOWstubs.com to send VIP concert tickets to customers after they purchase their VIP ticket bundles.
+Ticket Mailer is a custom MERN stack app designed specifically for SHOWstubs.com to send VIP concert tickets to customers after purchasing their VIP ticket bundles. 
 
-The app is built with React, Node, mongoDB, mongoose, express
+The primary stack for this app is React, Node, Express, and MongoDB.
+
 
 ## Installing / Getting started
 
@@ -15,6 +16,7 @@ npm run dev
 ```
 
 The above command will start the Node server as well as start react-scripts and launch the app on localhost:3000.
+
 
 ## Developing
 
@@ -42,9 +44,9 @@ module.exports = {
 ```
 Relevant links:
 
-Shopify App Developer Program (https://developers.shopify.com/)
-mLab (https://mlab.com/)
-Mailgun (https://www.mailgun.com/)
+* Shopify App Developer Program - https://developers.shopify.com/
+* mLab - https://mlab.com/
+* Mailgun - https://www.mailgun.com/
 
 ### Building
 
@@ -58,7 +60,7 @@ React build script will run and save assets in the client/build directory.
 
 ### Testing
 
-To start the test, run the following command:
+To start the tests, run the following command:
 
 ```shell
 cd server
@@ -78,6 +80,7 @@ their inputs before sending to all customers who ordered that particular bundle.
 * An order page exists that shows all orders regardless of show date, variant, etc. User can use the search on this page to find a particular customer or order # and click through to the relevant show date and bundle page for that customer
 * User can login and logout and remain authenticated while their cookie is valid.
 
+
 ## Future Considerations
 
 
@@ -85,11 +88,8 @@ their inputs before sending to all customers who ordered that particular bundle.
 
 If you find this project helpful as a starting point for your own project, please feel free to clone. If you are interested in submitting improvements, PRs are welcome!
 
-## Links
 
-Even though this information can be found inside the project on machine-readable
-format like in a .json file, it's good to include a summary of most useful
-links to humans using your project. You can include links like:
+## Links
 
 - Repository: https://github.com/abohannon/ticket-mailer
 - Issue tracker: https://github.com/abohannon/ticket-mailer/issues
