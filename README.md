@@ -7,8 +7,7 @@ The app is built with React, Node, mongoDB, mongoose, express
 
 ## Installing / Getting started
 
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
+To get up and running:
 
 ```shell
 cd server
