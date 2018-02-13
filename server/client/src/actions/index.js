@@ -175,7 +175,7 @@ export const fetchUser = () => async (dispatch) => {
   };
   dispatch(action);
   try {
-    const res = await axios.get('/api/current_user');
+    const res = await axios.get('/api/current_user', { withCredentials: true });
     const type = res.data !== '' ? FETCHED_USER_SUCCESS : FETCHED_USER_REJECTED;
     console.log('fetchUser action', res);
     dispatch({
