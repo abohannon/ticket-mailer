@@ -13,6 +13,10 @@ const LoginFormStyles = () => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  formStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   fieldStyle: {
     marginTop: 24,
   },
@@ -34,6 +38,9 @@ const LoginFormStyles = () => ({
   },
   bottomText: {
     textAlign: 'right',
+  },
+  errorText: {
+    color: 'rgb(195, 0, 0)',
   },
 });
 
@@ -63,7 +70,8 @@ class LoginForm extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     this.props.dispatch(loginUser(this.state));
 
     this.setState({
@@ -75,48 +83,52 @@ class LoginForm extends Component {
   render() {
     const {
       container,
+      formStyle,
       fieldStyle,
       hintStyle,
       inputStyle,
       underlineStyle,
       buttonStyle,
       topText,
-      bottomText,
+      errorText,
     } = LoginFormStyles();
 
     return (
       <div style={container}>
         <p style={topText}>Please login</p>
-        <TextField
-          name="email"
-          style={fieldStyle}
-          hintText="Email"
-          hintStyle={hintStyle}
-          inputStyle={inputStyle}
-          underlineFocusStyle={underlineStyle}
-          value={this.state.email}
-          onChange={event => this.handleInputChange(event)}
-        />
-        <TextField
-          name="password"
-          style={fieldStyle}
-          type="password"
-          hintText="Password"
-          hintStyle={hintStyle}
-          inputStyle={inputStyle}
-          underlineFocusStyle={underlineStyle}
-          value={this.state.password}
-          onChange={event => this.handleInputChange(event)}
-        />
-        <RaisedButton
-          style={buttonStyle}
-          label="Login"
-          backgroundColor={ACCENT_BLUE}
-          labelColor={WHITE}
-          onClick={this.handleSubmit}
-        />
-        <a href="/login" style={bottomText}><p><small>forgot?</small></p></a>
-
+        <form onSubmit={this.handleSubmit} style={formStyle}>
+          <TextField
+            name="email"
+            style={fieldStyle}
+            hintText="Email"
+            hintStyle={hintStyle}
+            inputStyle={inputStyle}
+            underlineFocusStyle={underlineStyle}
+            value={this.state.email}
+            onChange={event => this.handleInputChange(event)}
+          />
+          <TextField
+            name="password"
+            style={fieldStyle}
+            type="password"
+            hintText="Password"
+            hintStyle={hintStyle}
+            inputStyle={inputStyle}
+            underlineFocusStyle={underlineStyle}
+            value={this.state.password}
+            onChange={event => this.handleInputChange(event)}
+          />
+          { this.props.user.loginUserRejected &&
+            <p style={errorText}>Incorrect Login Info</p>
+          }
+          <RaisedButton
+            type="submit"
+            style={buttonStyle}
+            label="Login"
+            backgroundColor={ACCENT_BLUE}
+            labelColor={WHITE}
+          />
+        </form>
       </div>
     );
   }
