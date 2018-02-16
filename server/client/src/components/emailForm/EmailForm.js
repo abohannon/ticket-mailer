@@ -35,6 +35,10 @@ const EmailFormStyles = () => ({
     backgroundColor: ACCENT_BLUE,
     color: WHITE,
   },
+  fieldStyle: {
+    marginLeft: 24,
+    height: 'inherit',
+  },
 });
 
 const validate = (values) => {
@@ -59,21 +63,20 @@ class EmailForm extends Component {
     const {
       formContainer,
       formStyle,
-      flexRow,
       buttonContainer,
       blue,
     } = EmailFormStyles();
 
-    const {
-      checkIn,
-      startTime,
-      eventNotes,
-      pickup,
-      shipping,
-      shippingDate,
-      digital,
-      digitalDate,
-    } = formFields;
+    // const {
+    //   checkIn,
+    //   startTime,
+    //   eventNotes,
+    //   pickup,
+    //   shipping,
+    //   shippingDate,
+    //   digital,
+    //   digitalDate,
+    // } = formFields;
 
     const { history } = this.props;
 
