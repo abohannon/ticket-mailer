@@ -11,7 +11,10 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   User.findById(id)
     .then((user) => {
-      done(null, user)
+      // remove hashed password from user object for added security
+      const editedUser = { ...user._doc }
+      delete editedUser.password
+      done(null, editedUser)
     })
 })
 

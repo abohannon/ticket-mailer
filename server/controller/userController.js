@@ -35,13 +35,17 @@ module.exports = {
     })(req, res, next);
   },
 
-  logoutUser(req, res, next) {
+  logoutUser(req, res) {
     req.logout();
     return res.json({ success: true, message: 'Logout successful' });
   },
 
-  currentUser(req, res, next) {
-    res.send(req.user);
-    console.log('api/current_user', req.user);
+  currentUser(req, res) {
+    try {
+      res.send(req.user);
+      console.log('api/current_user', req.user);
+    } catch (err) {
+      if (err) console.log('Error fetching current user', err)
+    }
   },
 };
