@@ -25,12 +25,16 @@ import {
   LOGOUT_USER_PENDING,
   LOGOUT_USER_REJECTED,
   CURRENT_TOUR,
+  SEND_EMAIL_SUCCESS,
+  SEND_EMAIL_PENDING,
+  SEND_EMAIL_REJECTED,
   FETCH_EMAILS_SUCCESS,
   FETCH_EMAILS_PENDING,
   FETCH_EMAILS_REJECTED,
   FETCH_EMAIL_SUCCESS,
   FETCH_EMAIL_PENDING,
   FETCH_EMAIL_REJECTED,
+  CLEAR_EMAIL_SEND_STATE,
 } from './types';
 
 // SHOPIFY ACTIONS
@@ -205,12 +209,32 @@ export const sendEmail = (
   currentTourData,
   history,
 ) => async (dispatch) => {
-  const res = await axios.post('/api/email', {
-    formValues,
-    orderData,
-    currentTourData,
+  const action = {
+    type: SEND_EMAIL_PENDING,
+  };
+  dispatch(action);
+  try {
+    const res = await axios.post('/api/email', {
+      formValues,
+      orderData,
+      currentTourData,
+    });
+    const type = SEND_EMAIL_SUCCESS;
+    dispatch({
+      type,
+      payload: res.data,
+    });
+    history.push('/orders');
+  } catch (error) {
+    dispatch({ type: SEND_EMAIL_REJECTED, payload: error });
+    console.log('Error sending email', error);
+  }
+};
+
+export const clearEmailSendState = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_EMAIL_SEND_STATE,
   });
-  history.push('/orders');
 };
 
 export const fetchEmails = () => async (dispatch) => {

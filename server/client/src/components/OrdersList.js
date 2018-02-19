@@ -12,11 +12,12 @@ import {
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 import { ACCENT_BLUE, WHITE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
 import ErrorMessage from './ErrorMessage';
-import { fetchOrders, fetchEmail, sendEmail } from '../actions';
+import { fetchOrders, fetchEmail, sendEmail, clearEmailSendState } from '../actions';
 import { formatDate } from '../helpers/formatDate';
 
 const OrdersListStyles = () => ({
@@ -38,7 +39,8 @@ const OrdersListStyles = () => ({
 
 class OrdersList extends Component {
   state = {
-    open: false,
+    modalOpen: false,
+    alertOpen: false,
     customer: '',
     customerIndex: '',
   };
@@ -50,6 +52,14 @@ class OrdersList extends Component {
     this.props.dispatch(fetchEmail(dateTitle));
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.sendEmailSuccess) this.handleAlertOpen();
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearEmailSendState());
+  }
+
   updateCustomer = (name, index) => {
     this.setState({
       customer: name,
@@ -57,13 +67,21 @@ class OrdersList extends Component {
     });
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
+  handleModalOpen = () => {
+    this.setState({ modalOpen: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleModalClose = () => {
+    this.setState({ modalOpen: false });
   };
+
+  handleAlertOpen = () => {
+    this.setState({ alertOpen: true });
+  }
+
+  handleAlertClose = () => {
+    this.setState({ alertOpen: false });
+  }
 
   sendOneEmail = () => {
     this.props.dispatch(
@@ -74,7 +92,7 @@ class OrdersList extends Component {
         this.props.history,
       ),
     );
-    this.handleClose();
+    this.handleModalClose();
   }
 
   renderContent() {
@@ -96,7 +114,7 @@ class OrdersList extends Component {
       <FlatButton
         label="Cancel"
         primary
-        onClick={this.handleClose}
+        onClick={this.handleModalClose}
         labelStyle={{ color: ACCENT_BLUE }}
       />,
       <FlatButton
@@ -166,8 +184,8 @@ class OrdersList extends Component {
                   orderNumber={order.order_number}
                   customerName={order.shipping_address.name}
                   customerEmail={order.email}
-                  openModal={this.handleOpen}
-                  closeModal={this.handleClose}
+                  openModal={this.handleModalOpen}
+                  closeModal={this.handleModalClose}
                   updateCustomer={this.updateCustomer}
                   variantId={variantId}
                   index={index}
@@ -179,8 +197,8 @@ class OrdersList extends Component {
             title="Send Email Confirmation"
             actions={dateSent === 'never' ? null : actions}
             modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
+            open={this.state.modalOpen}
+            onRequestClose={this.handleModalClose}
           >
             {modalMessage()}
           </Dialog>
@@ -202,6 +220,14 @@ class OrdersList extends Component {
     return (
       <div className="ordersList__container" style={container}>
         {this.renderContent()}
+        <Snackbar
+          open={this.state.alertOpen}
+          message="Email Sent Successfully"
+          autoHideDuration={4000}
+          onRequestClose={this.handleAlertClose}
+          bodyStyle={{ backgroundColor: ACCENT_BLUE }}
+          contentStyle={{ color: 'white' }}
+        />
       </div>
     );
   }
