@@ -7,19 +7,14 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Header from './Header';
 import HistoryListItem from './HistoryListItem';
+import Spinner from './Spinner';
 import { fetchEmails } from '../actions';
-import { ACCENT_BLUE } from '../style/constants';
 
 const HistoryListStyles = () => ({
   container: {
     marginLeft: 180,
-  },
-  refreshIndicator: {
-    position: 'relative',
-    display: 'inline-block',
   },
 });
 
@@ -29,7 +24,6 @@ class HistoryList extends Component {
   }
 
   renderContent() {
-    const { refreshIndicator } = HistoryListStyles();
     console.log('HistoryList Props', this.props);
 
     const {
@@ -40,18 +34,7 @@ class HistoryList extends Component {
 
     if (fetchEmailsPending) {
       return (
-        <div
-          className="refresh-indicator"
-          style={refreshIndicator}
-        >
-          <RefreshIndicator
-            size={50}
-            top={20}
-            left={50}
-            status="loading"
-            loadingColor={ACCENT_BLUE}
-          />
-        </div>
+        <Spinner />
       );
     } else if (fetchEmailsSuccess) {
       const emailList = fetchEmailsSuccess.payload;

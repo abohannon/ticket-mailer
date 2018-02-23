@@ -9,14 +9,11 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
-import RaisedButton from 'material-ui/RaisedButton';
-import EditIcon from 'material-ui/svg-icons/content/create';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
-import { ACCENT_BLUE } from '../style/constants';
 import { fetchProducts } from '../actions';
 import Header from './Header';
 import DatesListItem from './DatesListItem';
 import ErrorMessage from './ErrorMessage';
+import Spinner from './Spinner';
 
 const DatesListStyles = () => ({
   container: {
@@ -65,15 +62,7 @@ class DatesList extends Component {
     console.log('DatesList props:', this.props);
     if (fetchProductsPending) {
       return (
-        <div className="dates-list__refresh-indicator" style={refreshIndicator}>
-          <RefreshIndicator
-            size={50}
-            top={20}
-            left={50}
-            status="loading"
-            loadingColor={ACCENT_BLUE}
-          />
-        </div>
+        <Spinner />
       );
     } else if (fetchProductsSuccess) {
       const productList = Array.from(fetchProductsSuccess.payload);

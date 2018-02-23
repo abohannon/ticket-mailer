@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 import './style/index.css';
-import App from './components/App';
+import App from './App';
 import reducers from './reducers';
 import { loadUser, saveUser } from './helpers/localStorage';
 import registerServiceWorker from './registerServiceWorker';

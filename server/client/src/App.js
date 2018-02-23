@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../style/App.css';
-import Dashboard from '../components/Dashboard';
-import UserAuth from '../components/UserAuth';
-import PrivateRoute from '../components/PrivateRoute';
+import './style/App.css';
+import Dashboard from './components/Dashboard';
+import UserAuth from './components/UserAuth';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
   static propTypes = {

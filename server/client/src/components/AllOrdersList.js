@@ -8,10 +8,9 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
-import TextField from 'material-ui/TextField';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
+import Spinner from './Spinner';
 import { fetchAllOrders } from '../actions';
 import { ACCENT_BLUE, LIGHT_BLUE } from '../style/constants';
 
@@ -34,10 +33,6 @@ const AllOrdersListStyles = () => ({
   },
   underlineStyle: {
     borderColor: ACCENT_BLUE,
-  },
-  refreshIndicator: {
-    position: 'relative',
-    display: 'inline-block',
   },
 });
 
@@ -78,18 +73,7 @@ class AllOrdersList extends Component {
 
     if (fetchAllOrdersPending) {
       return (
-        <div
-          className="all-orders-list__refresh-indicator"
-          style={refreshIndicator}
-        >
-          <RefreshIndicator
-            size={50}
-            top={20}
-            left={50}
-            status="loading"
-            loadingColor={ACCENT_BLUE}
-          />
-        </div>
+        <Spinner />
       );
     } else if (fetchAllOrdersSuccess) {
       const ordersList = Array.from(fetchAllOrdersSuccess.payload);

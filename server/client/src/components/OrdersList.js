@@ -17,6 +17,7 @@ import { ACCENT_BLUE, WHITE } from '../style/constants';
 import Header from './Header';
 import OrdersListItem from './OrdersListItem';
 import ErrorMessage from './ErrorMessage';
+import Spinner from './Spinner';
 import { fetchOrders, fetchEmail, sendEmail, clearEmailSendState } from '../actions';
 import { formatDate } from '../helpers/formatDate';
 
@@ -30,10 +31,6 @@ const OrdersListStyles = () => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: '0px 24px 0px 24px',
-  },
-  refreshIndicator: {
-    position: 'relative',
-    display: 'inline-block',
   },
 });
 
@@ -96,7 +93,6 @@ class OrdersList extends Component {
   }
 
   renderContent() {
-    const { header, buttonContainer, refreshIndicator } = OrdersListStyles();
     const { history } = this.props;
     const {
       fetchOrdersSuccess,
@@ -128,18 +124,7 @@ class OrdersList extends Component {
 
     if (fetchOrdersPending) {
       return (
-        <div
-          className="orders-list__refresh-indicator"
-          style={refreshIndicator}
-        >
-          <RefreshIndicator
-            size={50}
-            top={20}
-            left={50}
-            status="loading"
-            loadingColor={ACCENT_BLUE}
-          />
-        </div>
+        <Spinner />
       );
     } else if (fetchOrdersSuccess) {
       if (fetchEmailSuccess) {

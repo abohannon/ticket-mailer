@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Radium from 'radium';
 import {
   Table,
   TableBody,
@@ -9,11 +8,10 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
-import { ACCENT_BLUE } from '../style/constants';
 import { fetchCollections } from '../actions';
 import Header from './Header';
 import TourListItem from './TourListItem';
+import Spinner from './Spinner';
 
 const TourListStyles = () => ({
   container: {
@@ -39,7 +37,7 @@ class TourList extends Component {
     fetchCollectionsSuccess: undefined,
   };
 
-  componentDidMount() {
+  componentWillMount() {
     console.log('==== TourList mounted!');
     this.props.dispatch(fetchCollections());
   }
@@ -68,18 +66,7 @@ class TourList extends Component {
     if (!fetchCollectionsSuccess) {
       return (
         <div className="tour-list__container" style={container}>
-          <div
-            className="tour-list__refresh-indicator"
-            style={refreshIndicator}
-          >
-            <RefreshIndicator
-              size={50}
-              top={20}
-              left={50}
-              status="loading"
-              loadingColor={ACCENT_BLUE}
-            />
-          </div>
+          <Spinner />
         </div>
       );
     }
@@ -102,4 +89,4 @@ class TourList extends Component {
 
 const mapStateToProps = state => ({ tourData: state.shopifyFetch });
 
-export default Radium(connect(mapStateToProps)(TourList));
+export default connect(mapStateToProps)(TourList);
