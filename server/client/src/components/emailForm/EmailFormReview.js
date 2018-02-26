@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
 import { sendEmail, fetchOrders } from '../../actions';
 import formFields from './formFields';
 import { ACCENT_BLUE, WHITE } from '../../style/constants';
@@ -10,7 +11,10 @@ const EmailFormReviewStyles = () => ({
   formContainer: {
     width: 600,
     minWidth: 350,
-    paddingLeft: 16,
+    padding: 16,
+    margin: 48,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   inputsContainer: {
     display: 'flex',
@@ -44,15 +48,6 @@ class EmailFormReview extends Component {
     } = EmailFormReviewStyles();
 
     const { formValues, onCancel, tourData, user, history } = this.props;
-    const {
-      checkIn,
-      startTime,
-      pickup,
-      shipping,
-      shippingDate,
-      digital,
-      digitalDate,
-    } = formFields;
 
     const reviewForm = formFields.map(field => (
       <div
@@ -68,7 +63,7 @@ class EmailFormReview extends Component {
     ));
 
     return (
-      <div style={formContainer}>
+      <Paper style={formContainer}>
         <div className="review-form__inputs" style={inputsContainer}>
           {reviewForm}
         </div>
@@ -89,7 +84,7 @@ class EmailFormReview extends Component {
             }}
           />
         </div>
-      </div>
+      </Paper>
     );
   }
 }

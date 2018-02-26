@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, reset } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
 import Arrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
 import EmailTextField from './EmailTextField';
 import formFields from './formFields';
@@ -13,7 +14,10 @@ const EmailFormStyles = () => ({
     display: 'flex',
     width: 600,
     minWidth: 350,
-    paddingLeft: 16,
+    padding: 16,
+    margin: 48,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   formStyle: {
     display: 'flex',
@@ -29,7 +33,7 @@ const EmailFormStyles = () => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    paddingTop: 16,
+    paddingTop: 32,
   },
   blue: {
     backgroundColor: ACCENT_BLUE,
@@ -67,17 +71,6 @@ class EmailForm extends Component {
       blue,
     } = EmailFormStyles();
 
-    // const {
-    //   checkIn,
-    //   startTime,
-    //   eventNotes,
-    //   pickup,
-    //   shipping,
-    //   shippingDate,
-    //   digital,
-    //   digitalDate,
-    // } = formFields;
-
     const { history } = this.props;
 
     const formInputs = formFields.map(field => (
@@ -93,7 +86,7 @@ class EmailForm extends Component {
     ));
 
     return (
-      <div className="email-form__container" style={formContainer}>
+      <Paper className="email-form__container" style={formContainer} zDepth={1}>
         <form
           onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}
           style={formStyle}
@@ -115,7 +108,7 @@ class EmailForm extends Component {
             />
           </div>
         </form>
-      </div>
+      </Paper>
     );
   }
 }

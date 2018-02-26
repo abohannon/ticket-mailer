@@ -6,9 +6,6 @@ const styles = {
   hintStyle: {
     color: LIGHT_BLUE,
   },
-  inputStyle: {
-    color: LIGHT_BLUE,
-  },
   underlineStyle: {
     borderColor: ACCENT_BLUE,
   },
