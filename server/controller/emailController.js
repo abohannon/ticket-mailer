@@ -101,7 +101,7 @@ module.exports = {
           return emailList
         }, [])
 
-        res.send(recentEmails.reverse())
+        res.send(recentEmails)
       })
     } catch (err) {
       if (err) console.log('error fetching emails', err)
