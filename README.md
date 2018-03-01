@@ -90,6 +90,11 @@ their inputs before sending to all customers who ordered that particular bundle.
 
 ![Orders Page](https://github.com/abohannon/ticket-mailer/blob/develop/screenshots/Screen%20Shot%202018-02-26%20at%2011.53.17%20AM.png?raw=true) 
 
+![Email Edit Page](https://github.com/abohannon/ticket-mailer/blob/develop/screenshots/Screen%20Shot%202018-02-26%20at%2011.55.40%20AM.png?raw=true) 
+
+![Email Confirm Page](https://github.com/abohannon/ticket-mailer/blob/develop/screenshots/Screen%20Shot%202018-02-26%20at%2011.55.57%20AM.png) 
+
+More screenshots here: https://www.behance.net/gallery/62558537/Ticket-Mailer-App
 
 ## Future Considerations
 
