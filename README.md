@@ -64,6 +64,8 @@ React build script will run and save assets in the client/build directory.
 
 ### Testing
 
+(In progress. Currently,  not all tests are implemented.)
+
 To start the tests, run the following command:
 
 ```shell
