@@ -24,6 +24,12 @@ npm run dev
 
 The above command will start the Node server as well as start react-scripts and launch the app on localhost:3000.
 
+### Create user account
+
+Since you'll be using your own db, no user accounts will exist initially.
+
+Once the app is running, navigate to `/signup` and create an account. Then `/login` and login with your credentials.
+
 ## Developing
 
 To install:
