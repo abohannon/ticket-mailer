@@ -9,6 +9,9 @@ The primary stack for this app is React, Node, Express, and MongoDB.
 
 The UI is designed primarily using Material UI - http://www.material-ui.com/
 
+## Caveats
+
+This is my first large app so I apologize in advance if the code or project structure isn't optimal for open source consumption. I do appreciate any feedback, issues, and PRs. Over time I plan to refactor a lot of the code and improve it's open source presence in general. Thank you for your understanding!
 
 ## Installing / Getting started
 
@@ -20,7 +23,6 @@ npm run dev
 ```
 
 The above command will start the Node server as well as start react-scripts and launch the app on localhost:3000.
-
 
 ## Developing
 
@@ -51,6 +53,18 @@ Relevant links:
 * Shopify App Developer Program - https://developers.shopify.com/
 * mLab - https://mlab.com/
 * Mailgun - https://www.mailgun.com/
+
+### Shopify Settings
+
+Once you've created your custom Shopify app, you'll need to set the following options in the settings section to "Read Access"
+
+* Store content like articles, blogs, comments, pages, and redirects
+* Customer details and customer groups
+* Orders, transactions and fulfillments
+* Product information
+* Products, variants and collections
+
+Also make sure the box is checked next to "Allow this app to access your storefront data using the Storefront API" at the bottom of this admin page.
 
 ### Building
 
